@@ -47,8 +47,6 @@ export class App extends Component {
           <button form='form1'>parse XML file</button>
           {this.state.formError && <p style={{color: 'red', fontSize: '24px', fontWeight: 'bold'}}>{this.state.formError.message}</p>}
         </form>
-        <p>&nbsp;</p>
-
         <Students/>
       </div>
     );
