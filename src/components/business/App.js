@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withXML } from "../contexts/XML";
 import Students from './Students';
+import StudentActivity from './StudentActivity';
 import './App.css';
 
 export class App extends Component {
@@ -24,10 +25,8 @@ export class App extends Component {
       const readerData = evt.target.result;
       const parser = new DOMParser();
       const xml = parser.parseFromString(readerData, 'text/xml');
-      const output = xml.querySelector('school');
-      // console.log(output.children[1].children);
-      this.setState({ output });
-      this.props.updateStudents(Array.from(output.children[1].children));
+      const school = xml.querySelector('school');
+      this.props.updateSchool(school);
     };
   };
 
@@ -39,15 +38,24 @@ export class App extends Component {
   };
 
   render() {
+    let yearStart, yearEnd;
+    if (this.props.year) {
+      yearStart = new Date(this.props.year.querySelector('start').innerHTML);
+      yearEnd = new Date(this.props.year.querySelector('end').innerHTML);
+    }
+
     return (
       <div className="App">
-        <h1>Parsing school archiv</h1>
         <form onSubmit={this.handleSubmit} id='form1'>
+          <h1>Parsing school archiv</h1>
           <input type="file" name="file" onChange={this.handleChange}/>
           <button form='form1'>parse XML file</button>
           {this.state.formError && <p style={{color: 'red', fontSize: '24px', fontWeight: 'bold'}}>{this.state.formError.message}</p>}
+          <h3>Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}</h3>
         </form>
-        <Students/>
+        <p></p>
+        <Students />
+        <StudentActivity/>
       </div>
     );
   }

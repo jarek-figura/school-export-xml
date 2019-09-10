@@ -13,8 +13,6 @@ body {
 
 tr {
   text-align: left;
-  border-bottom: 1px solid lightgrey;
-  border-top: 1px solid lightgrey;
 }
 
 td, th {
@@ -22,7 +20,10 @@ td, th {
 }
 
 th {
-  background-color: #eee;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+  background-color: antiquewhite;
+  padding: 10px;
 }
 
 .student:hover {
@@ -32,4 +33,41 @@ th {
 
 .student:active {
   background-color: #cde;
+}
+
+.students, .school, .semester {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top;
+}
+
+.students {
+  padding-right: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.school {
+  padding-left: 10px;
+  border-left: 1px solid #ddd;
+}
+
+.school div {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 10px;
+}
+
+.semester {
+  display: inline-block;
+  background-color: antiquewhite;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+}
+
+.clasa {
+  background-color: #eee;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
 }

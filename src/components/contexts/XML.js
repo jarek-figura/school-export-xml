@@ -6,18 +6,38 @@ export const XMLConsumer = XMLContext.Consumer;
 
 export class XMLProvider extends Component {
   state = {
+    school: null,
+    year: null,
+    semester: null,
     students: [],
-    teachers: [],
+    studentId: null,
+    // teachers: [],
     classess: [],
     subjects: [],
     behaviors: [],
     grades: [],
-    presences: [],
-    lessons_entries: [],
+    // presences: [],
+    // lessons_entries: [],
     searchPhrase: '',
+    studentClickedId: null,
 
-    updateStudents: students => this.setState({ students }),
-    updateSearchPhrase: searchPhrase => this.setState({ searchPhrase })
+    updateSchool: school => {
+      this.setState({ school: school })
+      const year = school.querySelector('year');
+      this.setState({ year: year });
+      const semester = year.querySelectorAll('semester');
+      this.setState({ semester: semester });
+      const students = Array.from(school.children[1].children);
+      this.setState({ students: students });
+      let studentId = {};
+      for (let student of students) {
+        studentId[student.firstChild.innerHTML] = student.getElementsByTagName('username')[0].innerHTML;
+      }
+      this.setState({ studentId: studentId });
+    },
+
+    handleStudentClick: id => this.setState({ studentClickedId: id }),
+    updateSearchPhrase: searchPhrase => this.setState({ searchPhrase: searchPhrase })
   };
 
   render() {
