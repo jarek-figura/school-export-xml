@@ -10,7 +10,7 @@ export class XMLProvider extends Component {
     year: null,
     semester: null,
     students: [],
-    studentId: null,
+    studentId: {},
     // teachers: [],
     classess: [],
     subjects: [],

@@ -12,7 +12,7 @@ const composeProviders = (children, ...providers) => providers.reduce(
 
 ReactDOM.render(
   composeProviders(
-    <App />,
+    <App/>,
     XMLProvider
   ),
   document.getElementById('root')

@@ -4,11 +4,10 @@ import './Students.css';
 import Semester from './Semester';
 
 export class StudentActivity extends Component {
-  handleClick = () => { };
 
   render() {
     const clickedId = this.props.studentClickedId;
-    const userName = clickedId ? this.props.studentId[clickedId] : 0;
+    const userName = clickedId ? this.props.studentId[clickedId] : '';
     const semester = this.props.semester && Array.from(this.props.semester);
     let semId = 0;
 

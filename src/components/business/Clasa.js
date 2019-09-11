@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
-import { Grade } from './Grade';
+import Grade from './Grade';
 
 export class Clasa extends Component {
 

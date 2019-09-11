@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 
 export class Grade extends Component {
   render() {
     const clickedId = this.props.studentClickedId;
-    const userName = clickedId ? this.props.studentId[clickedId] : 0;
-    console.log(userName);
+    // console.log(clickedId);
+    // const userName = clickedId ? this.props.studentId[clickedId] : 0;
+    // console.log(userName);
 
     const grade = this.props.subject.querySelector('columns');
     const grades = grade && JSON.parse(grade.innerHTML);
@@ -13,6 +14,7 @@ export class Grade extends Component {
     studentData = grade && JSON.parse(studentData.innerHTML);
     console.log(studentData);
 
+    let keyId = 0;
     return (
       <ul>
         {
@@ -25,7 +27,18 @@ export class Grade extends Component {
         {
           studentData && studentData.map(
             student => (
-              student.grades.length !== 0 && <li>{userName[student.student_id]}</li>
+              <Fragment>
+                {console.log(clickedId)}
+                {console.log(student.student_id.toString())}
+                {student.student_id.toString() === clickedId
+                  ?
+                    < li key = {keyId++}>
+                      {this.props.studentId[student.student_id]}
+                    </li>
+                  :
+                    null
+                }
+              </Fragment>
             )
           )
         }
