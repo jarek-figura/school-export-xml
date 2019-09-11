@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import Grade from './Grade';
 
@@ -15,8 +15,13 @@ export class Clasa extends Component {
           subjects.map(
             subject => (
               <span key={subjectId++}>
-                <h4>subject: {subject.querySelector('name').innerHTML}</h4>
-                <Grade subject={subject}/>
+                {subject.querySelector('grades').innerHTML.length
+                  ? <Fragment>
+                      <h4>{subject.querySelector('name').innerHTML}</h4>
+                      <Grade subject={subject} />
+                    </Fragment>
+                  : <h5>no grades - {subject.querySelector('name').innerHTML}</h5>
+                }
               </span>
             )
           )
