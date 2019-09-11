@@ -31,7 +31,7 @@ export class XMLProvider extends Component {
       this.setState({ students: students });
       let studentId = {};
       for (let student of students) {
-        studentId[student.firstChild.innerHTML] = student.getElementsByTagName('username')[0].innerHTML;
+        studentId[student.firstChild.innerHTML] = student.querySelector('username').innerHTML;
       }
       this.setState({ studentId: studentId });
     },

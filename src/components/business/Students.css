@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap'); */
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
   margin-left: 10px;
 }
 
 .student-data {
-  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
   border-collapse: collapse;
   margin-bottom: 10px;
 }
@@ -26,12 +26,12 @@ th {
   padding: 10px;
 }
 
-.student:hover {
+.student:hover, .user-name:hover {
   cursor: pointer;
   background-color: #def;
 }
 
-.student:active {
+.student:active, .user-name:active {
   background-color: #cde;
 }
 
@@ -43,7 +43,6 @@ th {
 
 .students {
   padding-right: 10px;
-  border-right: 1px solid #ddd;
 }
 
 .school {
@@ -70,4 +69,9 @@ th {
   border-top: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
   padding: 10px;
+}
+
+p {
+  padding: 0;
+  margin: 0;
 }

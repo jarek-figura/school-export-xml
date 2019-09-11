@@ -3,12 +3,19 @@ import { withXML } from '../contexts/XML';
 import StudentSearch from './StudentSearch';
 import organizeStudents from "./organizeStudents";
 import './Students.css';
-import StudentActivity from './StudentActivity';
 
 export class Students extends Component {
+  state = {
+    students: this.props.students
+  };
+
   handleClick = (id) => {
     this.props.handleStudentClick(id);
   };
+
+  handleSortUserName = () => { };
+
+  handleSortNameSurname = () => { };
 
   render() {
     const students = organizeStudents.apply(this);
@@ -22,23 +29,17 @@ export class Students extends Component {
             <tbody>
               {this.props.students.length !== 0 &&
                 <tr>
-                  <th rowSpan='2'>user name</th>
-                  <th rowSpan='2'>user id</th>
-                  <th colSpan='2'>student data</th>
+                  <th className='user-name' onClick={this.handleSortUserName}>user name</th>
+                  <th className='user-name' onClick={this.handleSortNameSurname}>name & surname</th>
                 </tr>
               }
-              {this.props.students.length !== 0 && <tr><th>name</th><th>surname</th></tr>}
               {
                 students.map(
                   student => (
                     <tr key={student.firstChild.innerHTML} onClick={() => this.handleClick(student.firstChild.innerHTML)} className='student'>
-                      <td>{student.getElementsByTagName('username')[0].innerHTML}</td>
-                      <td>{student.getElementsByTagName('id')[0].innerHTML}</td>
+                      <td>{student.querySelector('username').innerHTML}</td>
                       <td>
-                        {student.getElementsByTagName('personal_data')[0].innerHTML && JSON.parse(student.getElementsByTagName('personal_data')[0].innerHTML).adres.name}
-                      </td>
-                      <td>
-                        {student.getElementsByTagName('personal_data')[0].innerHTML && JSON.parse(student.getElementsByTagName('personal_data')[0].innerHTML).adres.surname}
+                        {student.querySelector('personal_data').innerHTML && JSON.parse(student.querySelector('personal_data').innerHTML).adres.name} {student.querySelector('personal_data').innerHTML && JSON.parse(student.querySelector('personal_data').innerHTML).adres.surname}
                       </td>
                     </tr>
                   )
@@ -47,7 +48,6 @@ export class Students extends Component {
             </tbody>
           </table>
         </div>
-        {this.props.studentClickedId && <StudentActivity/>}
       </Fragment>
     )
   }

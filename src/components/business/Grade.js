@@ -4,40 +4,57 @@ import { withXML } from '../contexts/XML';
 export class Grade extends Component {
   render() {
     const clickedId = this.props.studentClickedId;
-    // console.log(clickedId);
-    // const userName = clickedId ? this.props.studentId[clickedId] : 0;
-    // console.log(userName);
-
     const grade = this.props.subject.querySelector('columns');
     const grades = grade && JSON.parse(grade.innerHTML);
+    // console.log(grades);
     let studentData = this.props.subject.querySelector('students');
     studentData = grade && JSON.parse(studentData.innerHTML);
-    console.log(studentData);
 
-    let keyId = 0;
+    let gradesDescr = {};
+    let gradesLabel = {};
+    let gradesLen = grades && grades.length;
+    if (gradesLen) {
+      for (let i = 0; i < gradesLen; i++) {
+        gradesDescr[grades[i].id] = grades[i].description;
+        gradesLabel[grades[i].id] = grades[i].label;
+      }
+    }
+
+    let stId = 0;
     return (
       <ul>
-        {
+        {/* {
           grades && grades.map(
             grade => (
-              <li key={grade.id}>{grade.label} - {grade.description}</li>
+              <li key={grade.id}>{grade.id} - {grade.label} - {grade.description}</li>
             )
           )
-        }
+        } */}
         {
           studentData && studentData.map(
             student => (
-              <Fragment>
-                {console.log(clickedId)}
-                {console.log(student.student_id.toString())}
-                {student.student_id.toString() === clickedId
-                  ?
-                    < li key = {keyId++}>
+              <Fragment key = {stId++}>
+                {/* {student.student_id.toString() === clickedId
+                  ? */}
+                    <li>
                       {this.props.studentId[student.student_id]}
+                      <ul>
+                        {
+                          student.grades.map(
+                            grade => (
+                              <li key = {stId++}>
+                                <p>{gradesLabel[grade.column_id]} - {gradesDescr[grade.column_id]}</p>
+                                <p>label: {grade.label}</p>
+                                <p>precentage: {grade.percentage}</p>
+                              </li>
+                            )
+                          )
+                        }
+                      </ul>
                     </li>
-                  :
-                    null
-                }
+                  {/* :
+                    null */}
+                {/* } */}
               </Fragment>
             )
           )
