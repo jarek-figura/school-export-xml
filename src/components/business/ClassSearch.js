@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import { withXML } from "../contexts/XML";
 
-class StudentSearch extends Component {
+class ClassSearch extends Component {
 
-  handleChange = event => this.props.updateSearchPhrase(event.target.value);
+  handleChange = event => this.props.updateSearchClass(event.target.value);
 
   render(){
     return(
       <span style={{ paddingRight: '10px' }}>
         <input
-          placeholder='search user name'
-          value={this.props.searchPhrase}
+          placeholder='search class'
+          value={this.props.searchClass}
           onChange={this.handleChange}
         />
       </span>
@@ -18,4 +18,4 @@ class StudentSearch extends Component {
   }
 }
 
-export default withXML(StudentSearch);
+export default withXML(ClassSearch);

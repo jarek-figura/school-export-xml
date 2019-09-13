@@ -65,7 +65,6 @@ export class App extends Component {
           <form onSubmit={this.handleSubmit} id='form1'>
             <h2>Parsing school archiv</h2>
             <input type="file" name="file" onChange={this.handleChange}/>
-            {/* <button form='form1'>parse XML file</button> */}
             {this.state.formError && <p style={{color: 'red', fontSize: '24px', fontWeight: 'bold'}}>{this.state.formError.message}</p>}
             <h3>Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}</h3>
           </form>

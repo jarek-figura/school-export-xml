@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import StudentSearch from './StudentSearch';
-import organizeStudents from "./organizeStudents";
 import './Students.css';
 
 export class Students extends Component {
@@ -16,7 +15,12 @@ export class Students extends Component {
 
   render() {
     const clickedId = this.props.studentClickedId;
-    const students = organizeStudents.apply(this);
+    // filter searched students
+    const students = this.props.students.filter(
+      student => student.querySelector('username').innerHTML.toLowerCase().includes(
+        this.props.searchPhrase.toLowerCase()
+      )
+    );
 
     return (
       <Fragment>

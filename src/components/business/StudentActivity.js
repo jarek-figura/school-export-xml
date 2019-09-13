@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import './Students.css';
 import Semester from './Semester';
+import ClassSearch from './ClassSearch';
+
 
 export class StudentActivity extends Component {
 
@@ -17,7 +19,11 @@ export class StudentActivity extends Component {
           <span>
             <h2 style={{ textAlign: 'left' }}>Student Activity</h2>
             <h3 style={{ textAlign: 'left' }}>user name: {userName}</h3>
+            <div>
+              <ClassSearch/>
+            </div>
           </span>
+          <div>
           {
             semester && semester.map(
               semester => (
@@ -27,6 +33,7 @@ export class StudentActivity extends Component {
               )
             )
           }
+          </div>
         </div>
       </Fragment>
     )

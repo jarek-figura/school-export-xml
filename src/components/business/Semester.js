@@ -7,7 +7,7 @@ export class Semester extends Component {
   render() {
     const semId = this.props.semesterId;
     const semesters = this.props.semester;
-    const classes = Array.from(semesters[semId].querySelectorAll('class'));
+    let classes = Array.from(semesters[semId].querySelectorAll('class'));
     const semester = Array.from(semesters)[semId];
     let semStart, semEnd, semLabel;
     if (semester) {
@@ -15,6 +15,13 @@ export class Semester extends Component {
       semEnd = new Date(semester.querySelector('end').innerHTML);
       semLabel = semester.querySelector('label').innerHTML;
     }
+
+    // filter searched classes
+    classes = classes.filter(
+      clasa => clasa.querySelector('name').innerHTML.toLowerCase().includes(
+        this.props.searchClass.toLowerCase()
+      )
+    );
 
     let classId = 0;
     return (
