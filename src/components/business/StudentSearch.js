@@ -7,13 +7,13 @@ class StudentSearch extends Component {
 
   render(){
     return(
-      <div>
+      <span style={{ paddingRight: '10px' }}>
         <input
-          placeholder='students user name'
+          placeholder='user name'
           value={this.props.searchPhrase}
           onChange={this.handleChange}
         />
-      </div>
+      </span>
     );
   }
 }

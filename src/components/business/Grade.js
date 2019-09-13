@@ -23,38 +23,32 @@ export class Grade extends Component {
     let stId = 0;
     return (
       <ul>
-        {/* {
-          grades && grades.map(
-            grade => (
-              <li key={grade.id}>{grade.id} - {grade.label} - {grade.description}</li>
-            )
-          )
-        } */}
         {
           studentData && studentData.map(
             student => (
               <Fragment key = {stId++}>
-                {/* {student.student_id.toString() === clickedId
-                  ? */}
-                    <li>
-                      {this.props.studentId[student.student_id]}
-                      <ul>
-                        {
-                          student.grades.map(
-                            grade => (
-                              <li key = {stId++}>
-                                <p>{gradesLabel[grade.column_id]} - {gradesDescr[grade.column_id]}</p>
-                                <p>label: {grade.label}</p>
-                                <p>precentage: {grade.percentage}</p>
-                              </li>
-                            )
+                {/* {(student.grades.length && clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId) */}
+                {(clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
+                  ?
+                  <li>
+                    {this.props.studentId[student.student_id]}
+                    <ul>
+                      {
+                        student.grades.map(
+                          grade => (
+                            <li key={stId++}>
+                              <p>{gradesLabel[grade.column_id]} - {gradesDescr[grade.column_id]}</p>
+                              <p>label: {grade.label}</p>
+                              <p>precentage: {grade.percentage}</p>
+                            </li>
                           )
-                        }
-                      </ul>
-                    </li>
-                  {/* :
-                    null */}
-                {/* } */}
+                        )
+                      }
+                    </ul>
+                  </li>
+                  :
+                  null
+                }
               </Fragment>
             )
           )

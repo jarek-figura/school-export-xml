@@ -30,8 +30,8 @@ export class XMLProvider extends Component {
       const students = Array.from(school.children[1].children);
       this.setState({ students: students });
       let studentId = {};
-      for (let student of students) {
-        studentId[student.firstChild.innerHTML] = student.querySelector('username').innerHTML;
+      for (let std of students) {
+        studentId[std.firstChild.innerHTML] = std.querySelector('username').innerHTML;
       }
       this.setState({ studentId: studentId });
     },

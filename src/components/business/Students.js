@@ -9,22 +9,26 @@ export class Students extends Component {
     students: this.props.students
   };
 
-  handleClick = (id) => {
-    this.props.handleStudentClick(id);
-  };
-
+  handleClick = (id) => { this.props.handleStudentClick(id) };
+  handleResetStudent = () => { this.props.handleStudentClick(null) };
   handleSortUserName = () => { };
-
   handleSortNameSurname = () => { };
 
   render() {
+    const clickedId = this.props.studentClickedId;
     const students = organizeStudents.apply(this);
 
     return (
       <Fragment>
         <div className='students'>
           <h2 style={{ textAlign: 'left' }}>Students found: {students.length}</h2>
-          <h3 style={{ textAlign: 'left' }}>Search students by user name: <StudentSearch /></h3>
+          <h3 style={{ textAlign: 'left' }}>Search students by user name:</h3>
+          <div><StudentSearch />
+            {clickedId
+              ? <button onClick={this.handleResetStudent}>Reset student</button>
+              : null
+            }
+          </div>
           <table className='student-data'>
             <tbody>
               {this.props.students.length !== 0 &&
