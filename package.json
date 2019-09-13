@@ -32,6 +32,8 @@
   },
   "homepage": "https://jarek-figura.github.io/school-export-xml",
   "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-plugin-react": "^7.14.3",
     "gh-pages": "^2.1.1"
   }
 }
