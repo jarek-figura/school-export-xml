@@ -1,14 +1,7 @@
-/* @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap'); */
-
-body {
-  /* font-family: 'Open Sans', sans-serif; */
-  margin-left: 10px;
-}
-
 .student-data {
-  /* font-family: 'Open Sans', sans-serif; */
   border-collapse: collapse;
   margin: 10px 0;
+  width: 100%;
 }
 
 tr {
@@ -16,7 +9,7 @@ tr {
 }
 
 td, th {
-  padding: 5px;
+  padding: 5px 10px;
 }
 
 th {
@@ -39,24 +32,44 @@ th {
   background-color: #bcd;
 }
 
-.students, .school, .semester {
+.school, .semester {
   display: inline-block;
-  padding: 5px;
+  padding: 10px;
   vertical-align: top;
 }
 
-.students {
-  padding-right: 10px;
+.students h2, .students h3, .student-search {
+  padding: 0 10px;
 }
 
 .school {
-  padding-left: 10px;
-  border-left: 1px solid #ddd;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
-.school div {
-  display: inline-block;
+.school > div {
   vertical-align: top;
+  padding: 0 10px;
+}
+
+.school > div h2, .school > div h3 {
+  padding: 0 10px;
+}
+
+.semester-column {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.semester-column > div:first-child {
+  margin-right: 20px;
+}
+
+.semester-column > div > span > div {
   padding: 0 10px;
 }
 

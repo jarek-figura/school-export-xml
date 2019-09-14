@@ -7,7 +7,7 @@ class ClassSearch extends Component {
 
   render(){
     return(
-      <span style={{ paddingRight: '10px' }}>
+      <span style={{ padding: '0 10px' }}>
         <input
           placeholder='search class'
           value={this.props.searchClass}

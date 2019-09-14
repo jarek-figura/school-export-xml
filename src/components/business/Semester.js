@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
 
@@ -25,7 +25,7 @@ export class Semester extends Component {
 
     let classId = 0;
     return (
-      <div>
+      <Fragment>
         <h4 className='semester'>{`${semLabel}: ${semStart.toLocaleDateString('pl-PL')} - ${semEnd.toLocaleDateString('pl-PL')}`}</h4>
         {
           classes.map(
@@ -37,7 +37,7 @@ export class Semester extends Component {
             )
           )
         }
-      </div>
+      </Fragment>
     );
   }
 }

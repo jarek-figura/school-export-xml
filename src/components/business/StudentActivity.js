@@ -16,20 +16,20 @@ export class StudentActivity extends Component {
     return (
       <Fragment>
         <div className='school'>
-          <span>
+          <div>
             <h2 style={{ textAlign: 'left' }}>Student Activity</h2>
             <h3 style={{ textAlign: 'left' }}>user name: {userName}</h3>
             <div>
               <ClassSearch/>
             </div>
-          </span>
-          <div>
+          </div>
+          <div className='semester-column'>
           {
             semester && semester.map(
               semester => (
-                <span key={semId++}>
+                <div key={semId++}>
                   <Semester semesterId={semId - 1} />
-                </span>
+                </div>
               )
             )
           }
