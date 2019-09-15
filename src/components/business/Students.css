@@ -1,22 +1,35 @@
-.student-data {
+.student-data, .grades-table {
   border-collapse: collapse;
   margin: 10px 0;
   width: 100%;
 }
 
-tr {
+.student-data tr {
   text-align: left;
 }
 
-td, th {
+.student-data td, .student-data th, .grades-table th, .grades-table td {
   padding: 5px 10px;
 }
 
-th {
+.student-data th {
   border-bottom: 1px solid lightgrey;
   border-top: 1px solid lightgrey;
   background-color: antiquewhite;
   padding: 10px;
+}
+
+.grades-table th {
+  border-bottom: 1px solid lightgrey;
+  background-color: #eeffee;
+}
+
+.grades-table td {
+  text-align: center;
+}
+
+.grades-table tr:nth-child(2n-1) {
+  background-color: #eee;
 }
 
 .student:hover, .user-name:hover {
@@ -69,6 +82,10 @@ th {
   margin-right: 20px;
 }
 
+/* .semester-column > div {
+  width: calc(50% - 12px);
+} */
+
 .semester-column > div > span > div {
   padding: 0 10px;
 }
@@ -82,7 +99,7 @@ th {
 }
 
 .clasa {
-  background-color: #eee;
+  background-color: #ddd;
   border-top: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
   padding: 10px;

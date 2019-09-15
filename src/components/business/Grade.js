@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
 
 export class Grade extends Component {
@@ -6,7 +6,7 @@ export class Grade extends Component {
     const clickedId = this.props.studentClickedId;
     const grade = this.props.subject.querySelector('columns');
     const grades = grade && JSON.parse(grade.innerHTML);
-    // console.log(grades);
+    // console.log(grades.length);
     let studentData = this.props.subject.querySelector('students');
     studentData = grade && JSON.parse(studentData.innerHTML);
 
@@ -20,41 +20,53 @@ export class Grade extends Component {
       }
     }
 
-    let stId = 0;
+    let stdGrdObj = {}
+
     return (
-      <ul>
-        {
-          studentData && studentData.map(
-            student => (
-              <Fragment key = {stId++}>
-                {/* {(student.grades.length && clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId) */}
-                {(clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
-                  ?
-                  <li>
-                    {this.props.studentId[student.student_id]}
-                    <ul>
-                      {
-                        student.grades.map(
-                          grade => (
-                            <li key={stId++}>
-                              <p>{gradesLabel[grade.column_id]} - {gradesDescr[grade.column_id]}</p>
-                              <p>label: {grade.label}</p>
-                              <p>precentage: {grade.percentage}</p>
-                            </li>
-                          )
+      <table className='grades-table'>
+        <tbody>
+          <tr>
+            <th>Student</th>
+            {
+              grades && grades.map(
+                grade => (
+                  <th key={grade.id}>{grade.label.length ? grade.label : '———'}</th>
+                )
+              )
+            }
+          </tr>
+          {
+            studentData && studentData.map(
+              student => (
+                (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
+                ?
+                  <tr key={student.student_id}>
+                    <td>{this.props.studentId[student.student_id]}</td>
+                    {
+                      Object.keys(gradesLabel).map(
+                        gradeId => (
+                          <td key={gradeId}>
+                            {
+                              student.grades.length
+                                ? (stdGrdObj = student.grades.filter(
+                                    stdGrade => (
+                                      stdGrade.column_id === Number(gradeId)
+                                    )
+                                  )[0], stdGrdObj ? `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%` : '—')
+                                : '—'
+                            }
+                          </td>
                         )
-                      }
-                    </ul>
-                  </li>
-                  :
-                  null
-                }
-              </Fragment>
+                      )
+                    }
+                  </tr>
+                : null
+              )
             )
-          )
-        }
-      </ul>
-    );
+          }
+        </tbody>
+      </table>
+    )
   }
 }
 
