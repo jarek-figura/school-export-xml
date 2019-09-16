@@ -10,7 +10,9 @@ export class XMLProvider extends Component {
     year: null,
     semester: null,
     students: [],
-    studentId: {},
+    studentUserName: {},
+    studentName: {},
+    studentSurname: {},
     // teachers: [],
     classess: [],
     subjects: [],
@@ -31,10 +33,16 @@ export class XMLProvider extends Component {
       const students = Array.from(school.children[1].children);
       this.setState({ students: students });
       let studentId = {};
+      let studentNm = {};
+      let studentSn = {};
       for (let std of students) {
         studentId[std.firstChild.innerHTML] = std.querySelector('username').innerHTML;
+        studentNm[std.firstChild.innerHTML] = std.querySelector('personal_data').innerHTML ? JSON.parse(std.querySelector('personal_data').innerHTML).adres.name : 'John';
+        studentSn[std.firstChild.innerHTML] = std.querySelector('personal_data').innerHTML ? JSON.parse(std.querySelector('personal_data').innerHTML).adres.surname : 'Doe';
       }
-      this.setState({ studentId: studentId });
+      this.setState({ studentUserName: studentId });
+      this.setState({ studentName: studentNm });
+      this.setState({ studentSurname: studentSn });
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),

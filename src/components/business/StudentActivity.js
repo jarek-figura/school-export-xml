@@ -9,7 +9,7 @@ export class StudentActivity extends Component {
 
   render() {
     const clickedId = this.props.studentClickedId;
-    const userName = clickedId ? this.props.studentId[clickedId] : 'All students';
+    const userName = clickedId ? this.props.studentUserName[clickedId] : 'All students';
     const semester = this.props.semester && Array.from(this.props.semester);
     let semId = 0;
 

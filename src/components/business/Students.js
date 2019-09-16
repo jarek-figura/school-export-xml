@@ -37,7 +37,7 @@ export class Students extends Component {
             {this.props.students.length !== 0 &&
               <tr>
                 <th className='user-name' onClick={this.handleSortUserName}>user name</th>
-                <th className='user-name' onClick={this.handleSortNameSurname}>name & surname</th>
+                <th className='user-name' onClick={this.handleSortNameSurname}>name surname</th>
               </tr>
             }
             {

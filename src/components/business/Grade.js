@@ -26,7 +26,7 @@ export class Grade extends Component {
       <table className='grades-table'>
         <tbody>
           <tr>
-            <th>Student</th>
+            <th>Student name - user name</th>
             {
               grades && grades.map(
                 grade => (
@@ -41,7 +41,7 @@ export class Grade extends Component {
                 (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
                 ?
                   <tr key={student.student_id}>
-                    <td>{this.props.studentId[student.student_id]}</td>
+                    <td>{this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]} - {this.props.studentUserName[student.student_id]}</td>
                     {
                       Object.keys(gradesLabel).map(
                         gradeId => (

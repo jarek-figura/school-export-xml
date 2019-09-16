@@ -1,7 +1,12 @@
-.student-data, .grades-table {
+.student-data {
   border-collapse: collapse;
   margin: 10px 0;
   width: 100%;
+}
+
+.grades-table {
+  border-collapse: collapse;
+  margin: 10px 0;
 }
 
 .student-data tr {
