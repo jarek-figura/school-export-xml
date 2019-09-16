@@ -13,16 +13,19 @@ export class XMLProvider extends Component {
     studentUserName: {},
     studentName: {},
     studentSurname: {},
-    // teachers: [],
-    classess: [],
-    subjects: [],
-    behaviors: [],
+    teachers: [],
+    teacherUserName: {},
+    teacherName: {},
+    teacherSurname: {},
     grades: [],
-    // presences: [],
-    // lessons_entries: [],
     searchPhrase: '',
     searchClass: '',
     studentClickedId: null,
+    // classes: [],
+    // subjects: [],
+    // behaviors: [],
+    // presences: [],
+    // lessons_entries: [],
 
     updateSchool: school => {
       this.setState({ school: school })
@@ -30,6 +33,7 @@ export class XMLProvider extends Component {
       this.setState({ year: year });
       const semester = year.querySelectorAll('semester');
       this.setState({ semester: semester });
+
       const students = Array.from(school.children[1].children);
       this.setState({ students: students });
       let studentId = {};
@@ -43,6 +47,20 @@ export class XMLProvider extends Component {
       this.setState({ studentUserName: studentId });
       this.setState({ studentName: studentNm });
       this.setState({ studentSurname: studentSn });
+
+      const teachers = Array.from(school.children[2].children);
+      this.setState({ teachers: teachers });
+      let teacherId = {};
+      let teacherNm = {};
+      let teacherSn = {};
+      for (let std of teachers) {
+        teacherId[std.firstChild.innerHTML] = std.querySelector('username').innerHTML;
+        teacherNm[std.firstChild.innerHTML] = std.querySelector('first_name').innerHTML;
+        teacherSn[std.firstChild.innerHTML] = std.querySelector('last_name').innerHTML;
+      }
+      this.setState({ teacherUserName: teacherId });
+      this.setState({ teacherName: teacherNm });
+      this.setState({ teacherSurname: teacherSn });
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),
