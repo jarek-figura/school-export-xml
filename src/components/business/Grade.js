@@ -50,7 +50,7 @@ export class Grade extends Component {
                     {
                       Object.keys(gradesLabel).map(
                         gradeId => (
-                          <td key={gradeId}>
+                          <td key={gradeId} style={{ whiteSpace: 'nowrap' }}>
                             {
                               student.grades.length
                                 ? (stdGrdObj = student.grades.filter(
