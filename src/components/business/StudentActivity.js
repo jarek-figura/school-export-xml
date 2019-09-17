@@ -7,9 +7,11 @@ import ClassSearch from './ClassSearch';
 
 export class StudentActivity extends Component {
 
+  handleResetStudent = () => { this.props.handleStudentClick(null) };
+
   render() {
     const clickedId = this.props.studentClickedId;
-    const userName = clickedId ? this.props.studentUserName[clickedId] : 'All students';
+    const userName = clickedId ? `${this.props.studentName[clickedId]} ${this.props.studentSurname[clickedId]} - ${this.props.studentUserName[clickedId]}` : 'All students';
     const semester = this.props.semester && Array.from(this.props.semester);
     let semId = 0;
 
@@ -18,9 +20,13 @@ export class StudentActivity extends Component {
         <div className='school'>
           <div>
             <h2 style={{ textAlign: 'left' }}>Student Activity</h2>
-            <h3 style={{ textAlign: 'left' }}>user name: {userName}</h3>
+            <h3 style={{ textAlign: 'left' }}>student: {userName}</h3>
             <div>
               <ClassSearch/>
+              {clickedId
+                ? <button onClick={this.handleResetStudent}>Reset student</button>
+                : null
+              }
             </div>
           </div>
           <div className='semester-column'>

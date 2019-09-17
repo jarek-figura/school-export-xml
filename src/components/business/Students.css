@@ -37,12 +37,12 @@
   background-color: #eee;
 }
 
-.student:hover, .user-name:hover {
+.student:hover {
   cursor: pointer;
   background-color: #def;
 }
 
-.student:active, .user-name:active {
+.student:active {
   background-color: #cde;
 }
 

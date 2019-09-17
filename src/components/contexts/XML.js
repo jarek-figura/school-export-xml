@@ -18,7 +18,9 @@ export class XMLProvider extends Component {
     teacherName: {},
     teacherSurname: {},
     grades: [],
-    searchPhrase: '',
+    searchUserName: '',
+    searchName: '',
+    searchSurname: '',
     searchClass: '',
     studentClickedId: null,
     // classes: [],
@@ -64,7 +66,9 @@ export class XMLProvider extends Component {
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),
-    updateSearchPhrase: text => this.setState({ searchPhrase: text }),
+    updateSearchUserName: text => this.setState({ searchUserName: text }),
+    updateSearchName: text => this.setState({ searchName: text }),
+    updateSearchSurname: text => this.setState({ searchSurname: text }),
     updateSearchClass: text => this.setState({ searchClass: text })
   };
 

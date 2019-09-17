@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
 
+// TODO: OK - Do przedmiotów dodać imię i nazwisko nauczyciela prowadzącego
+// TODO: OK - Dodać imię i nazwisko ucznia obok 'user name' przy ocenach
+// TODO: Dodać ocenę końcową/semestralną
+// TODO: Dodać frekwencję - tylko info o statusie innym niż "obecny" + data + godzina lekcyjna
+
 export class Grade extends Component {
   render() {
     const clickedId = this.props.studentClickedId;
@@ -20,7 +25,7 @@ export class Grade extends Component {
       }
     }
 
-    let stdGrdObj = {}
+    let stdGrdObj = {};
 
     return (
       <table className='grades-table'>

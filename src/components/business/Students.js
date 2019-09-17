@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
 import StudentSearch from './StudentSearch';
+import filterStudents from './StudentsFilter';
 import './Students.css';
+
+// TODO: OK - Wyszukiwanie ucznia po imieniu i nazwisku
 
 export class Students extends Component {
   state = {
@@ -9,28 +12,19 @@ export class Students extends Component {
   };
 
   handleClick = (id) => { this.props.handleStudentClick(id) };
-  handleResetStudent = () => { this.props.handleStudentClick(null) };
   handleSortUserName = () => { };
   handleSortNameSurname = () => { };
 
   render() {
-    const clickedId = this.props.studentClickedId;
-    // filter searched students
-    const students = this.props.students.filter(
-      student => student.querySelector('username').innerHTML.toLowerCase().includes(
-        this.props.searchPhrase.toLowerCase()
-      )
-    );
+
+    const students = filterStudents.apply(this);
 
     return (
       <div className='students'>
         <h2 style={{ textAlign: 'left' }}>Students found: {students.length}</h2>
-        <h3 style={{ textAlign: 'left' }}>Search students by user name:</h3>
-        <div className='student-search'><StudentSearch />
-          {clickedId
-            ? <button onClick={this.handleResetStudent}>Reset student</button>
-            : null
-          }
+        <h3 style={{ textAlign: 'left' }}>Search students by:</h3>
+        <div className='student-search'>
+          <StudentSearch />
         </div>
         <table className='student-data'>
           <tbody>
