@@ -12,7 +12,6 @@ export class Grade extends Component {
     const clickedId = this.props.studentClickedId;
     const grade = this.props.subject.querySelector('columns');
     const grades = grade && JSON.parse(grade.innerHTML);
-    // console.log(grades.length);
     let studentData = this.props.subject.querySelector('students');
     studentData = grade && JSON.parse(studentData.innerHTML);
 
@@ -32,7 +31,8 @@ export class Grade extends Component {
       <table className='grades-table'>
         <tbody>
           <tr>
-            <th>Student name - user name</th>
+            <th>Student</th>
+            <th style={{borderRight: '1px solid #bbb'}}>User name</th>
             {
               grades && grades.map(
                 grade => (
@@ -47,7 +47,8 @@ export class Grade extends Component {
                 (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
                 ?
                   <tr key={student.student_id}>
-                    <td>{this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]} - {this.props.studentUserName[student.student_id]}</td>
+                    <td>{this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]}</td>
+                    <td style={{borderRight: '1px solid #bbb'}}>{this.props.studentUserName[student.student_id]}</td>
                     {
                       Object.keys(gradesLabel).map(
                         gradeId => (

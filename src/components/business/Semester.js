@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
+import filterClass from './ClassFilter';
 
 export class Semester extends Component {
 
   render() {
     const semId = this.props.semesterId;
     const semesters = this.props.semester;
-    let classes = Array.from(semesters[semId].querySelectorAll('class'));
     const semester = Array.from(semesters)[semId];
     let semStart, semEnd, semLabel;
     if (semester) {
@@ -16,12 +16,7 @@ export class Semester extends Component {
       semLabel = semester.querySelector('label').innerHTML;
     }
 
-    // filter searched classes
-    classes = classes.filter(
-      clasa => clasa.querySelector('name').innerHTML.toLowerCase().includes(
-        this.props.searchClass.toLowerCase()
-      )
-    );
+    const classes = filterClass(semId, semesters, this.props.searchClass.toLowerCase());
 
     let classId = 0;
     return (
