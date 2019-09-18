@@ -3,6 +3,7 @@ import { withXML } from '../contexts/XML';
 
 // TODO: OK - Do przedmiotów dodać imię i nazwisko nauczyciela prowadzącego
 // TODO: OK - Dodać imię i nazwisko ucznia obok 'user name' przy ocenach
+// TODO: Kliknięcie ucznia powinno pokazać tylko te klasy, w któych miał oceny (w obu semestrach); wszystko inne ukryte, bo teraz jest nieintuicyjnie
 // TODO: Dodać ocenę końcową/semestralną
 // TODO: Dodać frekwencję - tylko info o statusie innym niż "obecny" + data + godzina lekcyjna
 
