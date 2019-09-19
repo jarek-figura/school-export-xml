@@ -7,7 +7,9 @@ import ClassSearch from './ClassSearch';
 
 export class StudentActivity extends Component {
 
-  handleResetStudent = () => { this.props.handleStudentClick(null) };
+  handleResetStudent = () => {
+    this.props.handleStudentClick(null);
+  };
 
   render() {
     const clickedId = this.props.studentClickedId;
@@ -20,11 +22,11 @@ export class StudentActivity extends Component {
         <div className='school'>
           <div>
             <h2 style={{ textAlign: 'left' }}>Student Activity</h2>
-            <h3 style={{ textAlign: 'left' }}>student: {userName}</h3>
+            <h3 style={{ textAlign: 'left' }}>student: <span style={{ color: 'blue' }}>{userName}</span></h3>
             <div>
               <ClassSearch/>
               {clickedId
-                ? <button onClick={this.handleResetStudent}>Reset student</button>
+                ? <button onClick={this.handleResetStudent} style={{ color: 'blue' }}>Reset student</button>
                 : null
               }
             </div>

@@ -50,6 +50,14 @@
   background-color: #bcd;
 }
 
+.student-clicked-id {
+  color: blue;
+  font-weight: bold;
+}
+.student-not-clicked {
+  color: black;
+}
+
 .school, .semester {
   display: inline-block;
   padding: 10px;

@@ -23,6 +23,7 @@ export class XMLProvider extends Component {
     searchSurname: '',
     searchClass: '',
     studentClickedId: null,
+    parsingTxt: '',
     // classes: [],
     // subjects: [],
     // behaviors: [],
@@ -69,7 +70,8 @@ export class XMLProvider extends Component {
     updateSearchUserName: text => this.setState({ searchUserName: text }),
     updateSearchName: text => this.setState({ searchName: text }),
     updateSearchSurname: text => this.setState({ searchSurname: text }),
-    updateSearchClass: text => this.setState({ searchClass: text })
+    updateSearchClass: text => this.setState({ searchClass: text }),
+    updateParsingTxt: text => this.setState({ parsingTxt: text })
   };
 
   render() {

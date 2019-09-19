@@ -17,6 +17,7 @@ export class App extends Component {
       this.setState({ formError: new Error('Please choose XML file') });
       return;
     }
+    this.props.updateParsingTxt('Parsing XML ...');
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onloadend = evt => {
@@ -49,6 +50,7 @@ export class App extends Component {
               <input type="file" name="file" onChange={this.handleChange}/>
               {this.state.formError && <p style={{color: 'red', fontSize: '24px', fontWeight: 'bold'}}>{this.state.formError.message}</p>}
               <h3>Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}</h3>
+              <p style={{ color: 'red' }}>{this.props.parsingTxt}</p>
             </form>
           </div>
           <Students/>
