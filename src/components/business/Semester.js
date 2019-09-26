@@ -3,6 +3,8 @@ import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
 import filterClass from './ClassFilter';
 
+// TODO: dodać wychowawcę klasy
+
 const isStudentInClass = (clickedId, clasa) => {
   const students = Array.from(clasa.querySelector('students').querySelectorAll('student'));
   for (let student of students) {

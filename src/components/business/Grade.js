@@ -8,7 +8,7 @@ import { withXML } from '../contexts/XML';
 // TODO: line 82 - dlaczego działa z console.log, a bez tego nie działa dobrze?
 // TODO: Dodać frekwencję - tylko info o statusie innym niż "obecny" + data + godzina lekcyjna
 // TODO: Dodać tekst 'Parsing XML ...' na zmianę stanu komponentów
-// TODO: Dodać filtrowanie przedmiotów?
+// TODO: OK - Dodać filtrowanie przedmiotów
 
 // INFO: ocena średnia (Average) zakomentowana tymczasowo; dodatkowo powinny być w niej uwzględniane wagi
 

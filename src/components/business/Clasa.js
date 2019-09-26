@@ -3,11 +3,13 @@ import { withXML } from '../contexts/XML';
 import Grade from './Grade';
 import filterSubjects from './SubjectFilter';
 
+// TODO: dodać więcej, niż jednego nauczyciela do przedmiotu
+// TODO: dodać filtrowanie nauczycieli danych przedmiotów, wychowawców nie filtrować
+
 export class Clasa extends Component {
 
   render() {
     const clasa = this.props.clasa;
-    // const subjects = Array.from(clasa.querySelectorAll('subject'));
 
     const subjects = filterSubjects(clasa, this.props.searchSubject);
 
