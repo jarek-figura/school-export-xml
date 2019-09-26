@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import './Students.css';
 import Semester from './Semester';
+import SubjectSearch from './SubjectSearch';
 import ClassSearch from './ClassSearch';
 
 
@@ -29,6 +30,9 @@ export class StudentActivity extends Component {
                 ? <button onClick={this.handleResetStudent} style={{ color: 'blue' }}>Reset student</button>
                 : null
               }
+            </div>
+            <div>
+              <SubjectSearch/>
             </div>
           </div>
           <div className='semester-column'>

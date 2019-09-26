@@ -1,14 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import Grade from './Grade';
+import filterSubjects from './SubjectFilter';
 
 export class Clasa extends Component {
 
   render() {
     const clasa = this.props.clasa;
-    const subjects = Array.from(clasa.querySelectorAll('subject'));
-    let subjectId = 0;
+    // const subjects = Array.from(clasa.querySelectorAll('subject'));
 
+    const subjects = filterSubjects(clasa, this.props.searchSubject);
+
+    let subjectId = 0;
     return (
       <div>
         {
