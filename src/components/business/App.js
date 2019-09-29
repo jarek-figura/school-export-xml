@@ -45,7 +45,7 @@ export class App extends Component {
       <table>
         <tbody>
           <tr>
-            <td style={{verticalAlign: 'top'}}>
+            <td style={{verticalAlign: 'top', minWidth: '300px'}}>
               <div className='App'>
                 <form id='form1'>
                   <h2>Parsing school archiv</h2>

@@ -65,18 +65,24 @@
 }
 
 .students {
-  background-color: #eeffff;
+  background-color: #ddffff;
+  margin-top: 10px;
+  padding-top: 1px;
 }
 
 .students h2, .students h3, .student-search {
   padding: 0 10px;
 }
 
-.span-inline {
-  display: inline;
+.school-top {
+  background-color: #ffddff;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  min-width: 300px;
 }
 
 .school {
+  padding-top: 0;
   display: flex;
   flex-flow: column wrap;
   align-items: flex-start;
@@ -85,7 +91,7 @@
 
 .school > div {
   vertical-align: top;
-  padding: 0 10px;
+  padding: 0;
 }
 
 .school > div h2, .school > div h3 {
@@ -103,15 +109,12 @@
   margin-right: 20px;
 }
 
-/* .semester-column > div {
-  width: calc(50% - 12px);
-} */
-
 .semester-column > div > span > div {
   padding: 0 10px;
 }
 
 .semester {
+  min-width: 280px;
   display: inline-block;
   background-color: antiquewhite;
   border-top: 1px solid lightgrey;

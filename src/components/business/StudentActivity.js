@@ -20,16 +20,17 @@ export class StudentActivity extends Component {
     let semId = 0;
 
     return (
-      <span className='span-inline school'>
-        <div>
+      <span className='school'>
+        <div className='school-top'>
           <h2 style={{ textAlign: 'left' }}>Student Activity</h2>
-          <h3 style={{ textAlign: 'left' }}>student: <span style={{ color: 'blue' }}>{userName}</span></h3>
-          <div>
-            <ClassSearch/>
-            {clickedId
-              ? <button onClick={this.handleResetStudent} style={{ color: 'blue' }}>Reset student</button>
+          <h3 style={{ textAlign: 'left' }}>
+            student: <span style={{ color: 'blue' }}>{userName}</span> {clickedId
+              ? <button onClick={this.handleResetStudent} style={{ color: 'red' }}>Reset student</button>
               : null
             }
+          </h3>
+          <div>
+            <ClassSearch/>
           </div>
           <div>
             <SubjectSearch/>
@@ -37,6 +38,7 @@ export class StudentActivity extends Component {
           <div>
             <TeacherSearch/>
           </div>
+          <p>&nbsp;</p>
         </div>
         <div className='semester-column'>
         {

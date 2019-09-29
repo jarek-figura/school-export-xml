@@ -9,8 +9,8 @@ class TeacherSearch extends Component {
   render(){
     return(
       <span style={{ padding: '0 10px' }}>
-        <input style={{ maxWidth: '80px', marginRight: '5px' }}
-          placeholder='teacher name'
+        teacher: <input style={{ maxWidth: '80px', marginRight: '5px' }}
+          placeholder='name'
           value={this.props.searchTeacherName}
           onChange={this.handleSearchName}
         />

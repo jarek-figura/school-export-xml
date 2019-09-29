@@ -8,8 +8,9 @@ class SubjectSearch extends Component {
   render(){
     return(
       <span style={{ padding: '0 10px' }}>
-        <input
-          placeholder='search subject'
+        subject: <input
+          style={{maxWidth: '80px'}}
+          placeholder='search'
           value={this.props.searchSubject}
           onChange={this.handleChange}
         />
