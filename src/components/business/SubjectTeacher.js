@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
 
-export class ClasaTeacher extends Component {
+export class SubjectTeacher extends Component {
 
   render() {
     const subject = this.props.subject;
@@ -24,4 +24,4 @@ export class ClasaTeacher extends Component {
   }
 }
 
-export default withXML(ClasaTeacher);
+export default withXML(SubjectTeacher);

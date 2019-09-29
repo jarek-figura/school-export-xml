@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
 import filterClass from './ClassFilter';
+import ClasaTutor from './ClasaTutor';
 
-// TODO: dodać wychowawcę klasy
+// TODO: OK - dodać wychowawcę klasy
 
 const isStudentInClass = (clickedId, clasa) => {
   const students = Array.from(clasa.querySelector('students').querySelectorAll('student'));
@@ -34,13 +35,17 @@ export class Semester extends Component {
     let classId = 0;
     return (
       <Fragment>
-        <h4 className='semester'>{`${semLabel}: ${semStart.toLocaleDateString('pl-PL')} - ${semEnd.toLocaleDateString('pl-PL')}`}</h4>
+        <h4 className='semester'>
+          {`${semLabel}: ${semStart.toLocaleDateString('pl-PL')} - ${semEnd.toLocaleDateString('pl-PL')}`}
+        </h4>
         {
           classes.map(
             clasa => (
               clickedId === null || isStudentInClass(clickedId, clasa)
               ? <span key={classId++}>
-                  <h4 className='clasa'>klasa: {clasa.querySelector('name').innerHTML}</h4>
+                  <h4 className='clasa'>
+                    klasa: <ClasaTutor clasa={clasa} color='black' />
+                  </h4>
                   <Clasa clasa={clasa}/>
                 </span>
               : null

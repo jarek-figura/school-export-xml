@@ -3,7 +3,7 @@ import { withXML } from '../contexts/XML';
 import Grade from './Grade';
 import filterSubjects from './SubjectFilter';
 import filterTeachers from './TeacherFilter';
-import ClasaTeacher from './ClasaTeacher';
+import SubjectTeacher from './SubjectTeacher';
 
 // TODO: OK - dodać więcej, niż jednego nauczyciela do przedmiotu
 // TODO: OK - dodać filtrowanie nauczycieli danych przedmiotów, wychowawców nie filtrować
@@ -25,10 +25,10 @@ export class Clasa extends Component {
             <span key={subjectId++}>
               {subject.querySelector('grades').innerHTML.length
                 ? <Fragment>
-                    <ClasaTeacher subject={subject} color='#666'/>
+                    <SubjectTeacher subject={subject} color='#666'/>
                     <Grade subject={subject} />
                   </Fragment>
-                : <ClasaTeacher subject={subject} color='silver'/>
+                : <SubjectTeacher subject={subject} color='silver'/>
               }
             </span>
           )
