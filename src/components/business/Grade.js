@@ -10,7 +10,7 @@ import { withXML } from '../contexts/XML';
 // TODO: Dodać tekst 'Parsing XML ...' na zmianę stanu komponentów
 // TODO: OK - Dodać filtrowanie przedmiotów
 
-// INFO: ocena średnia (Average) zakomentowana tymczasowo; dodatkowo powinny być w niej uwzględniane wagi
+// TODO: INFO - ocena średnia (Average) zakomentowana tymczasowo; dodatkowo powinny być w niej uwzględniane wagi
 
 export class Grade extends Component {
 

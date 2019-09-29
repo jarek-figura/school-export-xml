@@ -78,7 +78,7 @@
   background-color: #ffddff;
   margin-bottom: 10px;
   padding-bottom: 10px;
-  min-width: 300px;
+  min-width: 320px;
 }
 
 .school {
@@ -114,7 +114,7 @@
 }
 
 .semester {
-  min-width: 280px;
+  min-width: 300px;
   display: inline-block;
   background-color: antiquewhite;
   border-top: 1px solid lightgrey;

@@ -27,8 +27,6 @@ export class XMLProvider extends Component {
     searchClass: '',
     studentClickedId: null,
     parsingTxt: '',
-    // classes: [],
-    // subjects: [],
     // behaviors: [],
     // presences: [],
     // lessons_entries: [],

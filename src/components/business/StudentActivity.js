@@ -6,7 +6,6 @@ import SubjectSearch from './SubjectSearch';
 import ClassSearch from './ClassSearch';
 import TeacherSearch from './TeacherSearch';
 
-
 export class StudentActivity extends Component {
 
   handleResetStudent = () => {
