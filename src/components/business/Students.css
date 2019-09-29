@@ -64,8 +64,16 @@
   vertical-align: top;
 }
 
+.students {
+  background-color: #eeffff;
+}
+
 .students h2, .students h3, .student-search {
   padding: 0 10px;
+}
+
+.span-inline {
+  display: inline;
 }
 
 .school {

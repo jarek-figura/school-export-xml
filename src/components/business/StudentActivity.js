@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
 import './Students.css';
 import Semester from './Semester';
 import SubjectSearch from './SubjectSearch';
 import ClassSearch from './ClassSearch';
+import TeacherSearch from './TeacherSearch';
 
 
 export class StudentActivity extends Component {
@@ -19,35 +20,36 @@ export class StudentActivity extends Component {
     let semId = 0;
 
     return (
-      <Fragment>
-        <div className='school'>
+      <span className='span-inline school'>
+        <div>
+          <h2 style={{ textAlign: 'left' }}>Student Activity</h2>
+          <h3 style={{ textAlign: 'left' }}>student: <span style={{ color: 'blue' }}>{userName}</span></h3>
           <div>
-            <h2 style={{ textAlign: 'left' }}>Student Activity</h2>
-            <h3 style={{ textAlign: 'left' }}>student: <span style={{ color: 'blue' }}>{userName}</span></h3>
-            <div>
-              <ClassSearch/>
-              {clickedId
-                ? <button onClick={this.handleResetStudent} style={{ color: 'blue' }}>Reset student</button>
-                : null
-              }
-            </div>
-            <div>
-              <SubjectSearch/>
-            </div>
+            <ClassSearch/>
+            {clickedId
+              ? <button onClick={this.handleResetStudent} style={{ color: 'blue' }}>Reset student</button>
+              : null
+            }
           </div>
-          <div className='semester-column'>
-          {
-            semester && semester.map(
-              semester => (
-                <div key={semId++}>
-                  <Semester semesterId={semId - 1} />
-                </div>
-              )
-            )
-          }
+          <div>
+            <SubjectSearch/>
+          </div>
+          <div>
+            <TeacherSearch/>
           </div>
         </div>
-      </Fragment>
+        <div className='semester-column'>
+        {
+          semester && semester.map(
+            semester => (
+              <div key={semId++}>
+                <Semester semesterId={semId - 1} />
+              </div>
+            )
+          )
+        }
+        </div>
+      </span>
     )
   }
 }
