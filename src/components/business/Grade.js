@@ -12,6 +12,11 @@ import { withXML } from '../contexts/XML';
 
 // TODO: INFO - ocena średnia (Average) zakomentowana tymczasowo; dodatkowo powinny być w niej uwzględniane wagi
 
+const parsePresence = data => {
+  data = data && data.length && data.replace(/u'/g, '\'');
+  return data && data.length && data.replace(/'/g, '"');
+};
+
 export class Grade extends Component {
 
   componentDidMount() {
@@ -24,6 +29,19 @@ export class Grade extends Component {
     const grades = grade && JSON.parse(grade.innerHTML);
     let studentData = this.props.subject.querySelector('students');
     studentData = grade && JSON.parse(studentData.innerHTML);
+
+    // PRESENCES START
+    let prezence = this.props.subject.querySelector('presences').querySelectorAll('presence');
+    console.log(prezence);
+    let prezData = prezence.length && Array.from(prezence)[0].querySelectorAll('data');
+    let data = prezData.length && Array.from(prezData)[0];
+    let innerData = data && data.innerHTML;
+    innerData = parsePresence(innerData);
+    innerData = innerData && innerData.length && JSON.parse(innerData);
+    // console.log(innerData && innerData.length && new Date(innerData[0].date).toLocaleDateString('pl-PL'));
+    // console.log(innerData && innerData.length && this.props.presencesTypes[innerData[0].students[2].presence]);
+    // console.log(innerData && innerData.length && this.props.studentUserName[innerData[0].students[2].student_id]);
+    // PRESENCES END
 
     let gradesDescr = {};
     let gradesLabel = {};

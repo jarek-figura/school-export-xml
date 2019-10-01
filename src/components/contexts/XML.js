@@ -27,8 +27,8 @@ export class XMLProvider extends Component {
     searchClass: '',
     studentClickedId: null,
     parsingTxt: '',
+    presencesTypes: [],
     // behaviors: [],
-    // presences: [],
     // lessons_entries: [],
 
     updateSchool: school => {
@@ -65,6 +65,13 @@ export class XMLProvider extends Component {
       this.setState({ teacherUserName: teacherId });
       this.setState({ teacherName: teacherNm });
       this.setState({ teacherSurname: teacherSn });
+
+      let presencesTypes = [];
+      let presType = Array.from(school.querySelector('presences_types').children);
+      for (let value of presType) {
+        presencesTypes.push(value.firstChild.innerHTML);
+      }
+      this.setState({ presencesTypes: presencesTypes });
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),
