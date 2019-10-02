@@ -30,7 +30,8 @@ export class Grade extends Component {
     let studentData = this.props.subject.querySelector('students');
     studentData = grade && JSON.parse(studentData.innerHTML);
 
-    // PRESENCES START
+    // PRESENCES START ##########################
+
     let prezence = this.props.subject.querySelector('presences').querySelectorAll('presence');
     console.log(prezence);
     let prezData = prezence.length && Array.from(prezence)[0].querySelectorAll('data');
@@ -38,10 +39,12 @@ export class Grade extends Component {
     let innerData = data && data.innerHTML;
     innerData = parsePresence(innerData);
     innerData = innerData && innerData.length && JSON.parse(innerData);
+    // console.log('pokaż obecności = ' + this.props.showStudentPresences);
     // console.log(innerData && innerData.length && new Date(innerData[0].date).toLocaleDateString('pl-PL'));
     // console.log(innerData && innerData.length && this.props.presencesTypes[innerData[0].students[2].presence]);
     // console.log(innerData && innerData.length && this.props.studentUserName[innerData[0].students[2].student_id]);
-    // PRESENCES END
+
+    // PRESENCES END ##########################
 
     let gradesDescr = {};
     let gradesLabel = {};
@@ -89,7 +92,7 @@ export class Grade extends Component {
                 (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
                 ?
                   <tr key={student.student_id}>
-                    {stdFinalGrade = ''}
+                    {stdFinalGrade = null}
                     {/* {stdSummaryGrade = []} */}
                     <td className={`${tmpClassName[clickedId]}`}>{this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]}</td>
                     <td style={{borderRight: '1px solid #bbb'}} className={`${tmpClassName[clickedId]}`}>{this.props.studentUserName[student.student_id]}</td>

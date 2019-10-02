@@ -13,11 +13,13 @@ export class App extends Component {
 
   handleChange = event => {
     let file = event.target.files[0];
-    if (file.name.slice(-3) !== 'xml') {
+    if (!file || file.name.slice(-3) !== 'xml') {
       this.setState({ formError: new Error('Please choose XML file') });
       return;
     }
+    this.props.resetSchool();
     this.props.updateParsingTxt('Parsing XML ...');
+    this.props.handleShowStudentPresences(false);
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onloadend = evt => {
@@ -50,15 +52,15 @@ export class App extends Component {
                 <form id='form1'>
                   <h2>Parsing school archiv</h2>
                   <input type='file' name='file' onChange={this.handleChange}/>
-                  {this.state.formError && <p style={{color: 'red', fontSize: '24px', fontWeight: 'bold'}}>{this.state.formError.message}</p>}
+                  {this.state.formError && <p style={{color: 'red', fontSize: '22px', fontWeight: 'bold'}}>{this.state.formError.message}</p>}
                   <h3>Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}</h3>
                   <p style={{ color: 'red' }}>{this.props.parsingTxt}</p>
                 </form>
               </div>
-              <Students/>
+              { this.props.school && <Students /> }
             </td>
             <td style={{verticalAlign: 'top'}}>
-              <StudentActivity />
+              { this.props.school && <StudentActivity /> }
             </td>
           </tr>
         </tbody>

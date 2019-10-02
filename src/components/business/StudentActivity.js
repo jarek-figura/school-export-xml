@@ -8,9 +8,9 @@ import TeacherSearch from './TeacherSearch';
 
 export class StudentActivity extends Component {
 
-  handleResetStudent = () => {
-    this.props.handleStudentClick(null);
-  };
+  handleResetStudent = () => { this.props.handleStudentClick(null) };
+
+  handleClick = () => { this.props.handleShowStudentPresences(true) };
 
   render() {
     const clickedId = this.props.studentClickedId;
@@ -28,16 +28,10 @@ export class StudentActivity extends Component {
               : null
             }
           </h3>
-          <div>
-            <ClassSearch/>
-          </div>
-          <div>
-            <SubjectSearch/>
-          </div>
-          <div>
-            <TeacherSearch/>
-          </div>
-          <p>&nbsp;</p>
+          <div><ClassSearch/></div>
+          <div><SubjectSearch/></div>
+          <div><TeacherSearch/></div>
+          <h3><button onClick={this.handleClick}>show student presences</button></h3>
         </div>
         <div className='semester-column'>
         {

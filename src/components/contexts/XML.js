@@ -28,9 +28,11 @@ export class XMLProvider extends Component {
     studentClickedId: null,
     parsingTxt: '',
     presencesTypes: [],
+    showStudentPresences: false,
     // behaviors: [],
     // lessons_entries: [],
 
+    resetSchool: () => this.setState({ school: null }),
     updateSchool: school => {
       this.setState({ school: school })
       const year = school.querySelector('year');
@@ -82,7 +84,8 @@ export class XMLProvider extends Component {
     updateSearchClass: text => this.setState({ searchClass: text }),
     updateSearchTeacherName: text => this.setState({ searchTeacherName: text }),
     updateSearchTeacherSurname: text => this.setState({ searchTeacherSurname: text }),
-    updateParsingTxt: text => this.setState({ parsingTxt: text })
+    updateParsingTxt: text => this.setState({ parsingTxt: text }),
+    handleShowStudentPresences: flag => this.setState({ showStudentPresences: flag })
   };
 
   render() {
