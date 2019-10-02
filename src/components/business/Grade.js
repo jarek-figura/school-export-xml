@@ -32,17 +32,26 @@ export class Grade extends Component {
 
     // PRESENCES START ##########################
 
-    let prezence = this.props.subject.querySelector('presences').querySelectorAll('presence');
-    console.log(prezence);
-    let prezData = prezence.length && Array.from(prezence)[0].querySelectorAll('data');
-    let data = prezData.length && Array.from(prezData)[0];
-    let innerData = data && data.innerHTML;
-    innerData = parsePresence(innerData);
-    innerData = innerData && innerData.length && JSON.parse(innerData);
-    // console.log('pokaż obecności = ' + this.props.showStudentPresences);
-    // console.log(innerData && innerData.length && new Date(innerData[0].date).toLocaleDateString('pl-PL'));
-    // console.log(innerData && innerData.length && this.props.presencesTypes[innerData[0].students[2].presence]);
-    // console.log(innerData && innerData.length && this.props.studentUserName[innerData[0].students[2].student_id]);
+    let presenceData;
+    let presence = this.props.subject.querySelector('presences').querySelector('presence');
+    if (presence) {
+      presenceData = presence.querySelector('data').innerHTML;
+      presenceData = parsePresence(presenceData);
+      if (presenceData.length > 2) {
+        presenceData = JSON.parse(presenceData);
+        /////////////////////////////////////////
+        // console.log('\n==================\ntablica dł = ' + presenceData.length);
+        // for (let obj of presenceData) {
+        //   console.log(new Date(obj.date).toLocaleDateString('pl-PL'));
+        //   console.log('----------');
+        //   for (let std of obj.students) {
+        //     console.log(this.props.studentUserName[std.student_id]);
+        //     console.log(this.props.presencesTypes[std.presence]);
+        //   }
+        // }
+        /////////////////////////////////////////
+      }
+    }
 
     // PRESENCES END ##########################
 
@@ -73,8 +82,8 @@ export class Grade extends Component {
       <table className='grades-table'>
         <tbody>
           <tr style={{ color: '#444' }}>
-            <th>Student</th>
-            <th style={{borderRight: '1px solid #bbb'}}>User name</th>
+            <th style={{ backgroundColor: '#ddffff' }}>Student</th>
+            <th style={{ backgroundColor: '#ddffff', borderRight: '1px solid #bbb' }}>User name</th>
             {
               grades && grades.map(
                 grade => (
@@ -84,7 +93,15 @@ export class Grade extends Component {
               )
             }
             {/* <th style={{ borderLeft: '1px solid #bbb' }}>Average</th> */}
-            <th style={{ borderLeft: '1px solid #bbb', color: 'maroon' }}>Final</th>
+            <th style={{ borderLeft: '1px solid #bbb', borderRight: '1px solid #bbb', color: 'maroon' }}>Final</th>
+            {
+              this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
+                obj => (
+                  obj.date &&
+                  <th style={{ backgroundColor: '#def' }}>{new Date(obj.date).toLocaleDateString('pl-PL')}</th>
+                )
+              )
+            }
           </tr>
           {
             studentData && studentData.map(
@@ -120,9 +137,22 @@ export class Grade extends Component {
                     {/* <td style={{ borderLeft: '1px solid #bbb', fontWeight: 'bold', color: '#444' }}>
                       {stdSummaryGrade.length ? (stdSummaryGrade.reduce((a, b) => a + b, 0) / stdSummaryGrade.length).toLocaleString('en-EN', { maximumFractionDigits: 1 }) : 0}%
                     </td> */}
-                    <td style={{ borderLeft: '1px solid #bbb', fontWeight: 'bold', color: 'maroon', whiteSpace: 'nowrap' }}>
+                    <td style={{ borderLeft: '1px solid #bbb', borderRight: '1px solid #bbb', fontWeight: 'bold', color: 'maroon', whiteSpace: 'nowrap' }}>
                       {stdFinalGrade ? stdFinalGrade : '—'}
                     </td>
+                    {
+                      this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
+                        obj => (
+                          obj.students && obj.students.map(
+                            std => (
+                              // this.props.studentUserName[std.student_id] - student.student_id
+                              student.student_id === std.student_id &&
+                              <td>{this.props.presencesTypes[std.presence]}</td>
+                            )
+                          )
+                        )
+                      )
+                    }
                   </tr>
                 : null
               )
