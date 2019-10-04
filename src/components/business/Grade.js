@@ -78,6 +78,7 @@ export class Grade extends Component {
     // let stdSummaryGrade = [];
     let stdFinalGrade = '';
 
+    let keyId = 0;
     return (
       <table className='grades-table'>
         <tbody>
@@ -98,7 +99,7 @@ export class Grade extends Component {
               this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
                 obj => (
                   obj.date &&
-                  <th style={{ backgroundColor: '#def' }}>{new Date(obj.date).toLocaleDateString('pl-PL')}</th>
+                  <th key={keyId++} style={{ backgroundColor: '#def' }}>{new Date(obj.date).toLocaleDateString('pl-PL')}</th>
                 )
               )
             }
@@ -107,7 +108,7 @@ export class Grade extends Component {
             studentData && studentData.map(
               student => (
                 (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
-                ?
+                  ?
                   <tr key={student.student_id}>
                     {stdFinalGrade = null}
                     {/* {stdSummaryGrade = []} */}

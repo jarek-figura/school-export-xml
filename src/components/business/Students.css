@@ -75,18 +75,27 @@
 }
 
 .school-top {
+  position: sticky;
+  top: 0;
   background-color: #ffddff;
   margin-bottom: 10px;
   padding-bottom: 10px;
   min-width: 320px;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  border-bottom: 1px solid silver;
+}
+
+.school-top > span:nth-child(2) {
+  margin: 30px;
 }
 
 .school {
   padding-top: 0;
-  display: flex;
+  display: inline-flex;
   flex-flow: column wrap;
-  align-items: flex-start;
-  align-content: flex-start;
 }
 
 .school > div {

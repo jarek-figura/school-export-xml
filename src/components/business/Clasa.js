@@ -14,7 +14,7 @@ export class Clasa extends Component {
     const clasa = this.props.clasa;
 
     let subjects = filterSubjects(clasa, this.props.searchSubject);
-    // subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
+    subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
 
     let subjectId = 0;
     return (
