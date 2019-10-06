@@ -10,5 +10,5 @@ form {
 .App {
   position: sticky;
   top: 0;
-  border-bottom: 1px solid silver;
+  border-bottom: 3px solid silver;
 }

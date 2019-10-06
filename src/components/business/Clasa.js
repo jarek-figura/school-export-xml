@@ -16,13 +16,12 @@ export class Clasa extends Component {
     let subjects = filterSubjects(clasa, this.props.searchSubject);
     subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
 
-    let subjectId = 0;
     return (
       <div>
       {
         subjects.map(
-          subject => (
-            <span key={subjectId++}>
+          (subject, idx) => (
+            <span key={idx}>
               {subject.querySelector('grades').innerHTML.length
                 ? <Fragment>
                     <SubjectTeacher subject={subject} color='#666'/>

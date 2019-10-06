@@ -6,7 +6,6 @@ export const XMLConsumer = XMLContext.Consumer;
 
 export class XMLProvider extends Component {
   state = {
-    school: null,
     year: null,
     semester: null,
     students: [],
@@ -32,9 +31,8 @@ export class XMLProvider extends Component {
     // behaviors: [],
     // lessons_entries: [],
 
-    resetSchool: () => this.setState({ school: null }),
+    resetSchool: () => this.setState({ year: null }),
     updateSchool: school => {
-      this.setState({ school: school })
       const year = school.querySelector('year');
       this.setState({ year: year });
       const semester = year.querySelectorAll('semester');
@@ -45,10 +43,13 @@ export class XMLProvider extends Component {
       let studentId = {};
       let studentNm = {};
       let studentSn = {};
-      for (let std of students) {
+      let personalData = '';
+      let std;
+      for (std of students) {
+        personalData = std.querySelector('personal_data').innerHTML;
         studentId[std.firstChild.innerHTML] = std.querySelector('username').innerHTML;
-        studentNm[std.firstChild.innerHTML] = std.querySelector('personal_data').innerHTML ? JSON.parse(std.querySelector('personal_data').innerHTML).adres.name : 'John';
-        studentSn[std.firstChild.innerHTML] = std.querySelector('personal_data').innerHTML ? JSON.parse(std.querySelector('personal_data').innerHTML).adres.surname : 'Doe';
+        studentNm[std.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : 'John';
+        studentSn[std.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : 'Doe';
       }
       this.setState({ studentUserName: studentId });
       this.setState({ studentName: studentNm });
@@ -59,7 +60,7 @@ export class XMLProvider extends Component {
       let teacherId = {};
       let teacherNm = {};
       let teacherSn = {};
-      for (let std of teachers) {
+      for (std of teachers) {
         teacherId[std.firstChild.innerHTML] = std.querySelector('username').innerHTML;
         teacherNm[std.firstChild.innerHTML] = std.querySelector('first_name').innerHTML;
         teacherSn[std.firstChild.innerHTML] = std.querySelector('last_name').innerHTML;
@@ -70,8 +71,8 @@ export class XMLProvider extends Component {
 
       let presencesTypes = [];
       let presType = Array.from(school.querySelector('presences_types').children);
-      for (let value of presType) {
-        presencesTypes.push(value.firstChild.innerHTML);
+      for (std of presType) {
+        presencesTypes.push(std.firstChild.innerHTML);
       }
       this.setState({ presencesTypes: presencesTypes });
     },

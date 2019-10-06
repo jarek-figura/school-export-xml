@@ -5,11 +5,7 @@ import StudentActivity from './StudentActivity';
 import './App.css';
 
 export class App extends Component {
-  state = {
-    xml: {},
-    output: [],
-    formError: null
-  };
+  state = { formError: null };
 
   handleChange = event => {
     let file = event.target.files[0];
@@ -17,6 +13,7 @@ export class App extends Component {
       this.setState({ formError: new Error('Please choose XML file') });
       return;
     }
+
     this.props.resetSchool();
     this.props.updateParsingTxt('Parsing XML ...');
     this.props.handleShowStudentPresences(false);
@@ -29,11 +26,7 @@ export class App extends Component {
       const school = xml.querySelector('school');
       this.props.updateSchool(school);
     };
-
-    this.setState({
-      xml: event.target.files[0],
-      formError: null
-    })
+    this.setState({ formError: null })
   };
 
   render() {
@@ -57,10 +50,10 @@ export class App extends Component {
                   <p style={{ color: 'red' }}>{this.props.parsingTxt}</p>
                 </form>
               </div>
-              { this.props.school && <Students /> }
+              { this.props.year && <Students /> }
             </td>
             <td style={{verticalAlign: 'top'}}>
-              { this.props.school && <StudentActivity /> }
+              { this.props.year && <StudentActivity /> }
             </td>
           </tr>
         </tbody>

@@ -5,9 +5,9 @@ import { withXML } from '../contexts/XML';
 // TODO: OK - Dodać imię i nazwisko ucznia obok 'user name' przy ocenach
 // TODO: OK - Kliknięcie ucznia powinno pokazać tylko te klasy, w któych miał oceny (w obu semestrach); wszystko inne ukryte, bo teraz jest nieintuicyjnie
 // TODO: OK - Dodać ocenę końcową/semestralną
-// TODO: line 82 - dlaczego działa z console.log, a bez tego nie działa dobrze?
-// TODO: Dodać frekwencję - tylko info o statusie innym niż "obecny" + data + godzina lekcyjna
-// TODO: Dodać tekst 'Parsing XML ...' na zmianę stanu komponentów
+// TODO: line 111 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
+// TODO: OK - Dodać frekwencję + data + godzina lekcyjna
+// TODO: OK - Dodać tekst 'Parsing XML ...' na zmianę stanu komponentów
 // TODO: OK - Dodać filtrowanie przedmiotów
 
 // TODO: INFO - ocena średnia (Average) zakomentowana tymczasowo; dodatkowo powinny być w niej uwzględniane wagi
@@ -31,7 +31,6 @@ export class Grade extends Component {
     studentData = grade && JSON.parse(studentData.innerHTML);
 
     // PRESENCES START ##########################
-
     let presenceData;
     let presence = this.props.subject.querySelector('presences').querySelector('presence');
     if (presence) {
@@ -39,20 +38,8 @@ export class Grade extends Component {
       presenceData = parsePresence(presenceData);
       if (presenceData.length > 2) {
         presenceData = JSON.parse(presenceData);
-        /////////////////////////////////////////
-        // console.log('\n==================\ntablica dł = ' + presenceData.length);
-        // for (let obj of presenceData) {
-        //   console.log(new Date(obj.date).toLocaleDateString('pl-PL'));
-        //   console.log('----------');
-        //   for (let std of obj.students) {
-        //     console.log(this.props.studentUserName[std.student_id]);
-        //     console.log(this.props.presencesTypes[std.presence]);
-        //   }
-        // }
-        /////////////////////////////////////////
       }
     }
-
     // PRESENCES END ##########################
 
     let gradesDescr = {};
@@ -78,7 +65,6 @@ export class Grade extends Component {
     // let stdSummaryGrade = [];
     let stdFinalGrade = '';
 
-    let keyId = 0;
     return (
       <table className='grades-table'>
         <tbody>
@@ -97,19 +83,19 @@ export class Grade extends Component {
             <th style={{ borderLeft: '1px solid #bbb', borderRight: '1px solid #bbb', color: 'maroon' }}>Final</th>
             {
               this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
-                obj => (
+                (obj, idx) => (
                   obj.date &&
-                  <th key={keyId++} style={{ backgroundColor: '#def' }}>{new Date(obj.date).toLocaleDateString('pl-PL')}</th>
+                  <th key={idx} style={{ backgroundColor: '#def' }}>{new Date(obj.date).toLocaleDateString('pl-PL')}</th>
                 )
               )
             }
           </tr>
           {
             studentData && studentData.map(
-              student => (
+              (student, idx) => (
                 (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
                   ?
-                  <tr key={student.student_id}>
+                  <tr key={idx}>
                     {stdFinalGrade = null}
                     {/* {stdSummaryGrade = []} */}
                     <td className={`${tmpClassName[clickedId]}`}>{this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]}</td>
@@ -119,6 +105,7 @@ export class Grade extends Component {
                         gradeId => (
                           stdGrdObj = student.grades.filter(
                             stdGrade => (stdGrade.column_id === Number(gradeId))
+                            // eslint-disable-next-line
                           )[0],
                           gradesType && gradesType[gradeId] === 2
                           ? (stdGrdObj && (stdFinalGrade = `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%`), console.log())
@@ -145,10 +132,10 @@ export class Grade extends Component {
                       this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
                         obj => (
                           obj.students && obj.students.map(
-                            std => (
+                            (std, idx) => (
                               // this.props.studentUserName[std.student_id] - student.student_id
                               student.student_id === std.student_id &&
-                              <td>{this.props.presencesTypes[std.presence]}</td>
+                              <td key={idx}>{this.props.presencesTypes[std.presence]}</td>
                             )
                           )
                         )

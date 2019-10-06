@@ -19,7 +19,6 @@ export class StudentActivity extends Component {
 
     let showPresencesText = !this.props.showStudentPresences ? 'show student presences' : 'hide student presences';
 
-    let semId = 0;
     return (
       <span className='school'>
         <div className='school-top'>
@@ -44,9 +43,9 @@ export class StudentActivity extends Component {
         <div className='semester-column'>
         {
           semester && semester.map(
-            semester => (
-              <div key={semId++}>
-                <Semester semesterId={semId - 1} />
+            (sem, idx) => (
+              <div key={idx}>
+                <Semester sem={sem} />
               </div>
             )
           )

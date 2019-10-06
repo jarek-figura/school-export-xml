@@ -7,9 +7,6 @@ import './Students.css';
 // TODO: OK - Wyszukiwanie ucznia po imieniu i nazwisku
 
 export class Students extends Component {
-  state = {
-    students: this.props.students
-  };
 
   handleClick = (id) => { this.props.handleStudentClick(id) };
   handleSortUserName = () => { };
@@ -19,6 +16,8 @@ export class Students extends Component {
 
     const students = filterStudents.apply(this);
 
+    let adres;
+    let personalData;
     return (
       <div className='students'>
         <h2 style={{ textAlign: 'left' }}>Students found: {students.length}</h2>
@@ -36,11 +35,14 @@ export class Students extends Component {
             }
             {
               students.map(
-                student => (
-                  <tr key={student.firstChild.innerHTML} onClick={() => this.handleClick(student.firstChild.innerHTML)} className='student'>
+                (student, idx) => (
+                  // eslint-disable-next-line
+                  personalData = student.querySelector('personal_data').innerHTML,
+                  adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
+                  <tr key={idx} onClick={() => this.handleClick(student.firstChild.innerHTML)} className='student'>
                     <td>{student.querySelector('username').innerHTML}</td>
                     <td>
-                      {student.querySelector('personal_data').innerHTML && JSON.parse(student.querySelector('personal_data').innerHTML).adres.name} {student.querySelector('personal_data').innerHTML && JSON.parse(student.querySelector('personal_data').innerHTML).adres.surname}
+                      {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
                     </td>
                   </tr>
                 )

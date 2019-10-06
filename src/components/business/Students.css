@@ -85,7 +85,7 @@
   flex-flow: row wrap;
   align-items: flex-start;
   align-content: flex-start;
-  border-bottom: 1px solid silver;
+  border-bottom: 3px solid silver;
 }
 
 .school-top > span:nth-child(2) {

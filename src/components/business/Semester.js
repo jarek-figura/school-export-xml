@@ -8,8 +8,9 @@ import ClasaTutor from './ClasaTutor';
 
 const isStudentInClass = (clickedId, clasa) => {
   const students = Array.from(clasa.querySelector('students').querySelectorAll('student'));
-  for (let student of students) {
-    if (student.firstChild.innerHTML === clickedId) {
+  let std;
+  for (std of students) {
+    if (std.firstChild.innerHTML === clickedId) {
       return true;
     }
   }
@@ -20,9 +21,7 @@ export class Semester extends Component {
 
   render() {
     const clickedId = this.props.studentClickedId;
-    const semId = this.props.semesterId;
-    const semesters = this.props.semester;
-    const semester = Array.from(semesters)[semId];
+    const semester = this.props.sem;
     let semStart, semEnd, semLabel;
     if (semester) {
       semStart = new Date(semester.querySelector('start').innerHTML);
@@ -30,9 +29,8 @@ export class Semester extends Component {
       semLabel = semester.querySelector('label').innerHTML;
     }
 
-    const classes = filterClass(semId, semesters, this.props.searchClass.toLowerCase());
+    const classes = filterClass(semester, this.props.searchClass.toLowerCase());
 
-    let classId = 0;
     return (
       <Fragment>
         <h4 className='semester'>
@@ -40,9 +38,9 @@ export class Semester extends Component {
         </h4>
         {
           classes.map(
-            clasa => (
+            (clasa, idx) => (
               clickedId === null || isStudentInClass(clickedId, clasa)
-              ? <span key={classId++}>
+              ? <span key={idx}>
                   <h4 className='clasa'>
                     klasa: <ClasaTutor clasa={clasa} color='black' />
                   </h4>

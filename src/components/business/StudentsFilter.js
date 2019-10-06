@@ -1,5 +1,7 @@
 export default function filterStudents() {
 
+  let adres;
+  let personalData;
   const students = this.props.students.filter(
     student => student.querySelector('username').innerHTML.toLowerCase().includes(
       this.props.searchUserName.toLowerCase()
@@ -8,8 +10,9 @@ export default function filterStudents() {
     student => {
       return (
         this.props.searchName === '' || (
-          student.querySelector('personal_data').innerHTML !== '' &&
-          JSON.parse(student.querySelector('personal_data').innerHTML).adres.name.toLowerCase().includes(
+          personalData = student.querySelector('personal_data').innerHTML,
+          adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
+          adres && 'name' in adres && adres.name.toLowerCase().includes(
             this.props.searchName.toLowerCase()
           )
         )
@@ -19,8 +22,9 @@ export default function filterStudents() {
     student => {
       return (
         this.props.searchSurname === '' || (
-          student.querySelector('personal_data').innerHTML !== '' &&
-          JSON.parse(student.querySelector('personal_data').innerHTML).adres.surname.toLowerCase().includes(
+          personalData = student.querySelector('personal_data').innerHTML,
+          adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
+          adres && 'surname' in adres && adres.surname.toLowerCase().includes(
             this.props.searchSurname.toLowerCase()
           )
         )
