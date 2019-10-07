@@ -85,7 +85,7 @@ export class Grade extends Component {
               this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
                 (obj, idx) => (
                   obj.date &&
-                  <th key={idx} style={{ backgroundColor: '#def' }}>{new Date(obj.date).toLocaleDateString('pl-PL')}</th>
+                  <th key={idx} style={{ backgroundColor: '#def' }}>{new Date(obj.date * 1000).toLocaleDateString('pl-PL')}</th>
                 )
               )
             }
