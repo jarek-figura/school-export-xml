@@ -4,6 +4,13 @@ import Students from './Students';
 import StudentActivity from './StudentActivity';
 import './App.css';
 
+import Button from '@material-ui/core/Button';
+import AddCircle from '@material-ui/icons/AddCircle';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
 export class App extends Component {
   state = { formError: null };
 
@@ -30,6 +37,7 @@ export class App extends Component {
   };
 
   render() {
+
     let yearStart, yearEnd;
     if (this.props.year) {
       yearStart = new Date(this.props.year.querySelector('start').innerHTML);
@@ -40,20 +48,39 @@ export class App extends Component {
       <table>
         <tbody>
           <tr>
-            <td style={{verticalAlign: 'top', minWidth: '300px'}}>
-              <div className='App'>
-                <form id='form1'>
-                  <h2>Parsing school archiv</h2>
-                  <input type='file' name='file' onChange={this.handleChange}/>
-                  {this.state.formError && <p style={{color: 'red', fontSize: '22px', fontWeight: 'bold'}}>{this.state.formError.message}</p>}
-                  <h3>Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}</h3>
-                  <p style={{ color: 'red' }}>{this.props.parsingTxt}</p>
-                </form>
-              </div>
+            <td style={{ verticalAlign: 'top' }}>
+              <Card className='App'>
+                <CardContent>
+                  <Typography>
+                    <Box fontSize='h5.fontSize' fontWeight='fontWeightBold' mb={1.4}>Parsing school archiv</Box>
+                    <input
+                      color="primary"
+                      type="file"
+                      id="icon-button-file"
+                      onChange={this.handleChange}
+                      hidden
+                    />
+                    <label htmlFor="icon-button-file">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        component="span"
+                      >
+                        <AddCircle />&nbsp;Choose XML
+                      </Button>
+                    </label>
+                  </Typography>
+                  {this.state.formError && <Typography color='secondary'>{this.state.formError.message}</Typography>}
+                  <Box fontSize={18} mt={2}>
+                    Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}
+                  </Box>
+                  <Typography color='secondary'>{this.props.parsingTxt}</Typography>
+                </CardContent>
+              </Card>
               { this.props.year && <Students /> }
             </td>
-            <td style={{verticalAlign: 'top'}}>
-              { this.props.year && <StudentActivity /> }
+            <td style={{ verticalAlign: 'top' }}>
+              {this.props.year && <StudentActivity />}
             </td>
           </tr>
         </tbody>

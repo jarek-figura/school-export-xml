@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { withXML } from "../contexts/XML";
 
+import Input from '@material-ui/core/Input';
+import Box from '@material-ui/core/Box';
+
 class TeacherSearch extends Component {
 
   handleSearchName = event => this.props.updateSearchTeacherName(event.target.value);
@@ -8,18 +11,18 @@ class TeacherSearch extends Component {
 
   render(){
     return(
-      <span style={{ padding: '0 10px' }}>
-        teacher: <input style={{ maxWidth: '80px', marginRight: '5px' }}
+      <Box mb={3}>
+        teacher: <Input style={{ maxWidth: '80px', marginRight: '8px' }}
           placeholder='name'
           value={this.props.searchTeacherName}
           onChange={this.handleSearchName}
         />
-        <input style={{ maxWidth: '80px' }}
+        <Input style={{ maxWidth: '80px' }}
           placeholder='surname'
           value={this.props.searchTeacherSurname}
           onChange={this.handleSearchSurname}
         />
-      </span>
+      </Box>
     );
   }
 }
