@@ -42,9 +42,9 @@ export class Semester extends Component {
               clickedId === null || isStudentInClass(clickedId, clasa)
               ? <span key={idx}>
                   <h4 className='clasa'>
-                    klasa: <ClasaTutor clasa={clasa} color='black' />
+                    klasa: <ClasaTutor clasa={clasa} />
                   </h4>
-                  <Clasa clasa={clasa}/>
+                  <Clasa clasa={clasa} lessonsHours={semester.querySelector('lessons_hours')} />
                 </span>
               : null
             )

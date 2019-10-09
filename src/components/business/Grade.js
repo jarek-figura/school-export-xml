@@ -31,6 +31,12 @@ export class Grade extends Component {
     studentData = grade && JSON.parse(studentData.innerHTML);
 
     // PRESENCES START ##########################
+    let lessonsHours = {};
+    let lessHours = Array.from(this.props.lessonsHours.querySelectorAll('lesson_hour'));
+    let hour;
+    for (hour of lessHours) {
+      lessonsHours[hour.querySelector('id').innerHTML] = hour.querySelector('label').innerHTML;
+    }
     let presenceData;
     let presence = this.props.subject.querySelector('presences').querySelector('presence');
     if (presence) {
@@ -85,7 +91,9 @@ export class Grade extends Component {
               this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
                 (obj, idx) => (
                   obj.date &&
-                  <th key={idx} style={{ backgroundColor: '#def' }}>{new Date(obj.date * 1000).toLocaleDateString('pl-PL')}</th>
+                  <th key={idx} style={{ backgroundColor: '#def' }}>
+                    {new Date(obj.date * 1000).toLocaleDateString('pl-PL')}<br />{lessonsHours[obj.school_lesson_hour_id]} 
+                  </th>
                 )
               )
             }
