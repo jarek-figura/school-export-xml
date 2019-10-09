@@ -13,6 +13,13 @@ export class Students extends Component {
   handleSortNameSurname = () => { };
 
   render() {
+    const clickedId = this.props.studentClickedId;
+    let tmpClassName = {};
+    if (clickedId) {
+      tmpClassName[clickedId] = 'student-clicked-id';
+    } else {
+      tmpClassName[clickedId] = 'student-not-clicked';
+    }
 
     const students = filterStudents.apply(this);
 
@@ -39,7 +46,11 @@ export class Students extends Component {
                   // eslint-disable-next-line
                   personalData = student.querySelector('personal_data').innerHTML,
                   adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
-                  <tr key={idx} onClick={() => this.handleClick(student.firstChild.innerHTML)} className='student'>
+                  <tr
+                    key={idx}
+                    onClick={() => this.handleClick(student.firstChild.innerHTML)}
+                    className={`student ${student.querySelector('id').innerHTML === clickedId && tmpClassName[clickedId]}`}
+                  >
                     <td>{student.querySelector('username').innerHTML}</td>
                     <td>
                       {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
