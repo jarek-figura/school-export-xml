@@ -1,28 +1,23 @@
-.grades-table {
-  border-collapse: collapse;
-  margin: 10px 0;
-}
-
-.grades-table th, .grades-table td {
-  padding: 5px 10px;
-}
-
 .grades-table th {
-  border-bottom: 1px solid lightgrey;
   background-color: #eeffee;
+  text-align: center;
 }
 
 .grades-table td {
   text-align: center;
 }
 
-.grades-table tr:nth-child(2n-1) {
-  background-color: #eee;
+.grades-table tr:nth-child(2n) {
+  background-color: #fafafa;
+}
+
+.student-data tr:nth-child(2n) {
+  background-color: #fafafa;
 }
 
 .student:hover {
   cursor: pointer;
-  background-color: #def;
+  background-color: #def !important;
 }
 
 .student:active {
@@ -49,16 +44,12 @@
   background-color: #ffddff;
   margin-bottom: 10px;
   padding-bottom: 10px;
-  min-width: 320px;
+  min-width: 650px;
   max-width: 1000px;
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
   align-content: flex-start;
-}
-
-.school-top > span:nth-child(2) {
-  margin: 30px;
 }
 
 .school {
@@ -84,27 +75,26 @@
 }
 
 .semester-column > div:first-child {
-  margin-right: 20px;
-}
-
-.semester-column > div > span > div {
-  padding: 0 10px;
+  margin-right: 14px;
 }
 
 .semester {
-  min-width: 300px;
+  min-width: 330px;
   display: inline-block;
   background-color: antiquewhite;
   border-top: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
   padding: 10px;
+  margin: 20px 0 10px 0;
 }
 
 .clasa {
   background-color: #ddd;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
   padding: 10px;
+  max-width: 980px;
+  margin: 10px 0;
 }
 
 p {

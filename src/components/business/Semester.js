@@ -4,6 +4,8 @@ import Clasa from './Clasa';
 import filterClass from './ClassFilter';
 import ClasaTutor from './ClasaTutor';
 
+import Box from '@material-ui/core/Box';
+
 // TODO: OK - dodać wychowawcę klasy
 
 const isStudentInClass = (clickedId, clasa) => {
@@ -33,17 +35,17 @@ export class Semester extends Component {
 
     return (
       <Fragment>
-        <h4 className='semester'>
+        <Box fontSize={22} className='semester'>
           {`${semLabel}: ${semStart.toLocaleDateString('pl-PL')} - ${semEnd.toLocaleDateString('pl-PL')}`}
-        </h4>
+        </Box>
         {
           classes.map(
             (clasa, idx) => (
               clickedId === null || isStudentInClass(clickedId, clasa)
               ? <span key={idx}>
-                  <h4 className='clasa'>
+                  <Box fontSize={18} className='clasa'>
                     klasa: <ClasaTutor clasa={clasa} />
-                  </h4>
+                  </Box>
                   <Clasa clasa={clasa} lessonsHours={semester.querySelector('lessons_hours')} />
                 </span>
               : null

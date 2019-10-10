@@ -24,7 +24,7 @@ export class Clasa extends Component {
             <span key={idx}>
               {subject.querySelector('grades').innerHTML.length
                 ? <Fragment>
-                    <SubjectTeacher subject={subject} color='#666' />
+                    <SubjectTeacher subject={subject} color='black' />
                     <Grade subject={subject} lessonsHours={this.props.lessonsHours} />
                   </Fragment>
                 : <SubjectTeacher subject={subject} color='silver' />

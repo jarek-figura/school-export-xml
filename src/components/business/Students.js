@@ -48,7 +48,7 @@ export class Students extends Component {
         </Card>
         <Card elevation={0} style={{ border: '1px solid #e0e0e0', marginTop: '9px' }}>
           <Table className='student-data' size='small'>
-            <TableHead style={{ backgroundColor: '#eee' }}>
+            <TableHead style={{ backgroundColor: '#eeffff' }}>
               {this.props.students.length !== 0 &&
                 <TableRow>
                   <TableCell onClick={this.handleSortUserName}><Typography>Username</Typography></TableCell>
