@@ -7,10 +7,9 @@ import ClassSearch from './ClassSearch';
 import TeacherSearch from './TeacherSearch';
 
 import Button from '@material-ui/core/Button';
-import Close from '@material-ui/icons/Close';
-import Search from '@material-ui/icons/Search';
+import Remove from '@material-ui/icons/Remove';
+import Add from '@material-ui/icons/Add';
 import Undo from '@material-ui/icons/Undo';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -31,24 +30,26 @@ export class StudentActivity extends Component {
 
     return (
       <span className='school'>
-        <Card className='school-top'>
+        <Card className='school-top' style={{ backgroundColor: '#ffeeff' }}>
           <CardContent>
-            <Typography><Box fontSize='h5.fontSize' fontWeight='fontWeightBold' mb={2}>Student Activities</Box></Typography>
-            <Box fontSize='h6.fontSize' mb={2}>Student: <span style={{ color: 'blue' }}>{userName}</span></Box>
+            <Box fontSize='h5.fontSize' mb={2}>Student Activities</Box>
+            <Box fontSize='h6.fontSize' mb={2}>Student: <span style={{ color: `${clickedId ? '#F2105A' : '#4054B2'}` }}>{userName}</span></Box>
             <Button
               variant="contained"
               color="primary"
               component="span"
               onClick={this.handleClick}
             >
-              {!this.props.showStudentPresences ? <Search /> : <Close />}&nbsp;{`${showPresencesText}`}
+              {!this.props.showStudentPresences ? <Add /> : <Remove />}&nbsp;{`${showPresencesText}`}
             </Button> {clickedId 
               ? <Button
+                  style={{ marginLeft: '10px' }}
                   variant="contained"
                   color="secondary"
                   component="span"
                   onClick={this.handleResetStudent}
-                ><Undo />&nbsp;Reset student
+                >
+                  <Undo />&nbsp;Reset student
                 </Button>
               : null
             }

@@ -5,14 +5,17 @@ import StudentActivity from './StudentActivity';
 import './App.css';
 
 import Button from '@material-ui/core/Button';
-import AddCircle from '@material-ui/icons/AddCircle';
+import Folder from '@material-ui/icons/Folder';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 export class App extends Component {
-  state = { formError: null };
+  state = {
+    formError: null,
+    fileName: null
+  };
 
   handleChange = event => {
     let file = event.target.files[0];
@@ -20,6 +23,7 @@ export class App extends Component {
       this.setState({ formError: new Error('Please choose XML file') });
       return;
     }
+    this.setState({ fileName: file.name })
 
     this.props.resetSchool();
     this.props.updateParsingTxt('Parsing XML ...');
@@ -33,7 +37,7 @@ export class App extends Component {
       const school = xml.querySelector('school');
       this.props.updateSchool(school);
     };
-    this.setState({ formError: null })
+    this.setState({ formError: null });
   };
 
   render() {
@@ -49,27 +53,25 @@ export class App extends Component {
         <tbody>
           <tr>
             <td style={{ verticalAlign: 'top' }}>
-              <Card className='App'>
+              <Card className='App' style={{ backgroundColor: '#ffffee', zIndex: 10 }}>
                 <CardContent>
-                  <Typography>
-                    <Box fontSize='h5.fontSize' fontWeight='fontWeightBold' mb={1.4}>Parsing school archiv</Box>
-                    <input
+                  <Box fontSize='h5.fontSize' fontWeight='fontWeightBold' mb={1.4}>School archiv parser</Box>
+                  <input
+                    color="primary"
+                    type="file"
+                    id="icon-button-file"
+                    onChange={this.handleChange}
+                    hidden
+                  />
+                  <label htmlFor="icon-button-file">
+                    <Button
+                      variant="contained"
                       color="primary"
-                      type="file"
-                      id="icon-button-file"
-                      onChange={this.handleChange}
-                      hidden
-                    />
-                    <label htmlFor="icon-button-file">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        component="span"
-                      >
-                        <AddCircle />&nbsp;Choose XML
-                      </Button>
-                    </label>
-                  </Typography>
+                      component="span"
+                    >
+                      <Folder />&nbsp;Choose XML
+                      </Button> {this.state.fileName}
+                  </label>
                   {this.state.formError && <Typography color='secondary'>{this.state.formError.message}</Typography>}
                   <Box fontSize={18} mt={2}>
                     Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}
@@ -77,7 +79,7 @@ export class App extends Component {
                   <Typography color='secondary'>{this.props.parsingTxt}</Typography>
                 </CardContent>
               </Card>
-              { this.props.year && <Students /> }
+              {this.props.year && <Students />}
             </td>
             <td style={{ verticalAlign: 'top' }}>
               {this.props.year && <StudentActivity />}

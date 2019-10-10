@@ -4,6 +4,16 @@ import StudentSearch from './StudentSearch';
 import filterStudents from './StudentsFilter';
 import './Students.css';
 
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 // TODO: OK - Wyszukiwanie ucznia po imieniu i nazwisku
 
 export class Students extends Component {
@@ -14,11 +24,11 @@ export class Students extends Component {
 
   render() {
     const clickedId = this.props.studentClickedId;
-    let tmpClassName = {};
+    let colorName = {};
     if (clickedId) {
-      tmpClassName[clickedId] = 'student-clicked-id';
+      colorName[clickedId] = 'secondary';
     } else {
-      tmpClassName[clickedId] = 'student-not-clicked';
+      colorName[clickedId] = 'initial';
     }
 
     const students = filterStudents.apply(this);
@@ -27,40 +37,54 @@ export class Students extends Component {
     let personalData;
     return (
       <div className='students'>
-        <h2 style={{ textAlign: 'left' }}>Students found: {students.length}</h2>
-        <h3 style={{ textAlign: 'left' }}>Search students by:</h3>
-        <div className='student-search'>
-          <StudentSearch />
-        </div>
-        <table className='student-data'>
-          <tbody>
-            {this.props.students.length !== 0 &&
-              <tr>
-                <th className='user-name' onClick={this.handleSortUserName}>user name</th>
-                <th className='user-name' onClick={this.handleSortNameSurname}>name surname</th>
-              </tr>
-            }
-            {
-              students.map(
-                (student, idx) => (
-                  // eslint-disable-next-line
-                  personalData = student.querySelector('personal_data').innerHTML,
-                  adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
-                  <tr
-                    key={idx}
-                    onClick={() => this.handleClick(student.firstChild.innerHTML)}
-                    className={`student ${student.querySelector('id').innerHTML === clickedId && tmpClassName[clickedId]}`}
-                  >
-                    <td>{student.querySelector('username').innerHTML}</td>
-                    <td>
-                      {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
-                    </td>
-                  </tr>
+        <Card elevation={0} style={{ border: '1px solid #e0e0e0' }}>
+          <CardContent>
+            <Box fontSize='h5.fontSize'>Students found: {students.length}</Box>
+            <Box fontSize='h6.fontSize' mt={2} mb={2}>Search students by:</Box>
+            <div className='student-search'>
+              <StudentSearch />
+            </div>
+          </CardContent>
+        </Card>
+        <Card elevation={0} style={{ border: '1px solid #e0e0e0', marginTop: '9px' }}>
+          <Table className='student-data' size='small'>
+            <TableHead style={{ backgroundColor: '#eee' }}>
+              {this.props.students.length !== 0 &&
+                <TableRow>
+                  <TableCell onClick={this.handleSortUserName}><Typography>Username</Typography></TableCell>
+                  <TableCell onClick={this.handleSortNameSurname}><Typography>Name Surname</Typography></TableCell>
+                </TableRow>
+              }
+            </TableHead>
+            <TableBody>
+              {
+                students.map(
+                  (student, idx) => (
+                    // eslint-disable-next-line
+                    personalData = student.querySelector('personal_data').innerHTML,
+                    adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
+                    <TableRow
+                      key={idx}
+                      onClick={() => this.handleClick(student.firstChild.innerHTML)}
+                      className='student'
+                    >
+                      <TableCell>
+                        <Typography color={`${student.querySelector('id').innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
+                          {student.querySelector('username').innerHTML}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography color={`${student.querySelector('id').innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
+                          {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  )
                 )
-              )
-            }
-          </tbody>
-        </table>
+              }
+            </TableBody>
+          </Table>
+        </Card>
       </div>
     )
   }

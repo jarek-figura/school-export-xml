@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { withXML } from "../contexts/XML";
+
+import Input from '@material-ui/core/Input';
 
 class StudentSearch extends Component {
 
@@ -8,19 +10,19 @@ class StudentSearch extends Component {
   handleSearchSurname = event => this.props.updateSearchSurname(event.target.value);
 
   render(){
-    return(
+    return (
       <span>
-        <input style={{ maxWidth: '80px', marginRight: '5px' }}
+        <Input style={{ maxWidth: '100px', marginRight: '10px' }}
           placeholder='user name'
           value={this.props.searchUserName}
           onChange={this.handleSearchUserName}
         />
-        <input style={{ maxWidth: '80px', marginRight: '5px' }}
+        <Input style={{ maxWidth: '80px', marginRight: '10px' }}
           placeholder='name'
           value={this.props.searchName}
           onChange={this.handleSearchName}
         />
-        <input style={{ maxWidth: '80px' }}
+        <Input style={{ maxWidth: '120px' }}
           placeholder='surname'
           value={this.props.searchSurname}
           onChange={this.handleSearchSurname}

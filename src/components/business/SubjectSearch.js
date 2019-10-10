@@ -12,6 +12,7 @@ class SubjectSearch extends Component {
     return(
       <Box ml={0.3} mt={1} mb={1}>
         subject: <Input
+          style={{ maxWidth: '100px' }}
           placeholder='search'
           value={this.props.searchSubject}
           onChange={this.handleChange}

@@ -1,27 +1,10 @@
-.student-data {
-  border-collapse: collapse;
-  margin: 10px 0;
-  width: 100%;
-}
-
 .grades-table {
   border-collapse: collapse;
   margin: 10px 0;
 }
 
-.student-data tr {
-  text-align: left;
-}
-
-.student-data td, .student-data th, .grades-table th, .grades-table td {
+.grades-table th, .grades-table td {
   padding: 5px 10px;
-}
-
-.student-data th {
-  border-bottom: 1px solid lightgrey;
-  border-top: 1px solid lightgrey;
-  background-color: antiquewhite;
-  padding: 10px;
 }
 
 .grades-table th {
@@ -50,14 +33,6 @@
   background-color: #bcd;
 }
 
-.student-clicked-id {
-  color: blue;
-  font-weight: bold;
-}
-.student-not-clicked {
-  color: black;
-}
-
 .school, .semester {
   display: inline-block;
   padding: 10px;
@@ -65,13 +40,7 @@
 }
 
 .students {
-  background-color: #ddffff;
   margin-top: 10px;
-  padding-top: 1px;
-}
-
-.students h2, .students h3, .student-search {
-  padding: 0 10px;
 }
 
 .school-top {
@@ -81,6 +50,7 @@
   margin-bottom: 10px;
   padding-bottom: 10px;
   min-width: 320px;
+  max-width: 1000px;
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;

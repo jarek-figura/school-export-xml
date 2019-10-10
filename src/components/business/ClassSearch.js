@@ -10,8 +10,9 @@ class ClassSearch extends Component {
 
   render(){
     return(
-      <Box ml={2.4} mt={3}>
+      <Box ml={2.4} mt={2.4}>
         class: <Input
+          style={{ maxWidth: '100px' }}
           placeholder='search'
           value={this.props.searchClass}
           onChange={this.handleChange}

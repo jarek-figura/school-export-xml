@@ -11,13 +11,15 @@ class TeacherSearch extends Component {
 
   render(){
     return(
-      <Box mb={3}>
-        teacher: <Input style={{ maxWidth: '80px', marginRight: '8px' }}
+      <Box mb={2.6}>
+        teacher: <Input
+          style={{ maxWidth: '100px', marginRight: '10px' }}
           placeholder='name'
           value={this.props.searchTeacherName}
           onChange={this.handleSearchName}
         />
-        <Input style={{ maxWidth: '80px' }}
+        <Input
+          style={{ maxWidth: '120px' }}
           placeholder='surname'
           value={this.props.searchTeacherSurname}
           onChange={this.handleSearchSurname}
