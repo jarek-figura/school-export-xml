@@ -9,6 +9,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // TODO: OK - Do przedmiotów dodać imię i nazwisko nauczyciela prowadzącego
 // TODO: OK - Dodać imię i nazwisko ucznia obok 'user name' przy ocenach
@@ -55,6 +56,15 @@ export class Grade extends Component {
         presenceData = JSON.parse(presenceData);
       }
     }
+    const presTypeTransl = {
+      'present': 'obecny(a)',
+      'absent': 'nieobecny(a)',
+      'late': 'spóźniony(a)',
+      'absence_excused': 'nieobecność usprawiedliwiona',
+      'being_late_excused': 'spóźnienie usprawiedliwione',
+      'none': 'none',
+      'released': 'zwolniony(a)'
+    };
     // PRESENCES END ##########################
 
     let gradesDescr = {};
@@ -86,20 +96,25 @@ export class Grade extends Component {
         <Table className='grades-table' size='small' style={{ width: 'auto' }}>
           <TableHead>
             <TableRow style={{ color: '#444' }}>
-              <TableCell style={{ backgroundColor: '#eeffff' }}><Box fontSize={16}>Student</Box></TableCell>
-              <TableCell style={{ backgroundColor: '#eeffff', borderRight: '1px solid #e0e0e0' }}><Box fontSize={16}>Username</Box></TableCell>
+              <TableCell style={{ backgroundColor: '#eeffff' }}><Box fontSize={16}>Uczeń</Box></TableCell>
+              <TableCell style={{ backgroundColor: '#eeffff', borderRight: '1px solid #e0e0e0' }}><Box fontSize={16}>Nazwa użytk.</Box></TableCell>
               {
                 grades && grades.map(
                   grade => (
                     grade.type !== 2 &&
-                    <TableCell key={grade.id} title={grade.label.length ? grade.description : '———'}>
-                      <Box fontSize={16}>{grade.label.length ? grade.label : '———'}</Box>
+                    <TableCell key={grade.id}>
+                      <Tooltip
+                        title={grade.label.length ? grade.description : '———'}
+                        placement='top'
+                      >
+                        <Box fontSize={16}>{grade.label.length ? grade.label : '———'}</Box>
+                      </Tooltip>
                     </TableCell>
                   )
                 )
               }
               {/* <th style={{ borderLeft: '1px solid #bbb' }}>Average</th> */}
-              <TableCell style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0', color: 'maroon' }}><Box fontSize={16}>Final</Box></TableCell>
+              <TableCell style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0', color: 'maroon' }}><Box fontSize={16}>Ocena<br />semestralna</Box></TableCell>
               {
                 this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
                   (obj, idx) => (
@@ -140,7 +155,7 @@ export class Grade extends Component {
                             )[0],
                             gradesType && gradesType[gradeId] === 2
                             ? (stdGrdObj && (stdFinalGrade = `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%`), console.log())
-                            : <TableCell key={gradeId} style={{ whiteSpace: 'nowrap' }}>
+                            : <TableCell key={gradeId}>
                               {
                                 stdGrdObj && gradesType && gradesType[gradeId] !== 2
                                 ? (
@@ -166,7 +181,7 @@ export class Grade extends Component {
                               (std, idx) => (
                                 // this.props.studentUserName[std.student_id] - student.student_id
                                 student.student_id === std.student_id &&
-                                <TableCell key={idx}>{this.props.presencesTypes[std.presence]}</TableCell>
+                                <TableCell key={idx}>{presTypeTransl[this.props.presencesTypes[std.presence]]}</TableCell>
                               )
                             )
                           )

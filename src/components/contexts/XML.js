@@ -48,8 +48,8 @@ export class XMLProvider extends Component {
       for (el of students) {
         personalData = el.querySelector('personal_data').innerHTML;
         studentId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
-        studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : 'John';
-        studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : 'Doe';
+        studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
+        studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
       }
       this.setState({ studentUserName: studentId });
       this.setState({ studentName: studentNm });

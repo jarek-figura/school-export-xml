@@ -20,25 +20,12 @@ class StudentSearch extends Component {
     return (
       <Box style={{ whiteSpace: 'nowrap' }}>
         <TextField
-          style={{ maxWidth: '126px', margin: '0 8px 0 0' }}
+          style={{ maxWidth: '80px', margin: '0 8px 0 0' }}
+          id="filled-adornment-extra-dense"
           variant="outlined"
           margin="dense"
-          hiddenLabel
-          placeholder='Username'
-          value={this.props.searchUserName}
-          onChange={this.handleSearchUserName}
-          InputProps={{
-            endAdornment: <InputAdornment position="end" style={{ margin: '0 -8px' }}>
-              <IconButton edge="end" onClick={this.handleClickUserName}><ClearIcon /></IconButton>
-            </InputAdornment>
-          }}
-        />
-        <TextField
-          style={{ maxWidth: '100px', margin: '0 8px 0 0' }}
-          variant="outlined"
-          margin="dense"
-          hiddenLabel
-          placeholder='Name'
+          label="Imię"
+          placeholder='Imię'
           value={this.props.searchName}
           onChange={this.handleSearchName}
           InputProps={{
@@ -48,16 +35,32 @@ class StudentSearch extends Component {
           }}
         />
         <TextField
-          style={{ maxWidth: '120px', margin: '0' }}
+          style={{ maxWidth: '120px', margin: '0 8px 0 0' }}
+          id="filled-adornment-extra-dense"
           variant="outlined"
           margin="dense"
-          hiddenLabel
-          placeholder='Surname'
+          label="Nazwisko"
+          placeholder='Nazwisko'
           value={this.props.searchSurname}
           onChange={this.handleSearchSurname}
           InputProps={{
             endAdornment: <InputAdornment position="end" style={{ margin: '0 -8px' }}>
               <IconButton edge="end" onClick={this.handleClickSurname}><ClearIcon /></IconButton>
+            </InputAdornment>
+          }}
+        />
+        <TextField
+          style={{ maxWidth: '146px', margin: '0' }}
+          id="filled-adornment-extra-dense"
+          variant="outlined"
+          margin="dense"
+          label="Nazwa użytk."
+          placeholder='Nazwa użytk.'
+          value={this.props.searchUserName}
+          onChange={this.handleSearchUserName}
+          InputProps={{
+            endAdornment: <InputAdornment position="end" style={{ margin: '0 -8px' }}>
+              <IconButton edge="end" onClick={this.handleClickUserName}><ClearIcon /></IconButton>
             </InputAdornment>
           }}
         />

@@ -15,12 +15,12 @@ class ClassSearch extends Component {
   render(){
     return(
       <TextField
-        style={{ maxWidth: '150px', backgroundColor: '#ffffffbb' }}
+        style={{ maxWidth: '170px', backgroundColor: '#ffffffbb' }}
         id="filled-adornment-extra-dense"
         variant="outlined"
         margin="dense"
-        hiddenLabel
-        placeholder='Class'
+        label="Klasa"
+        placeholder='Klasa'
         value={this.props.searchClass}
         onChange={this.handleChange}
         InputProps={{

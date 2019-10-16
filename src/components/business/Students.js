@@ -39,8 +39,8 @@ export class Students extends Component {
       <div className='students'>
         <Card elevation={0} style={{ border: '1px solid #e0e0e0' }}>
           <CardContent>
-            <Box fontSize='h5.fontSize'>Students found: {students.length}</Box>
-            <Box fontSize='h6.fontSize' mt={2} mb={2}>Search students by:</Box>
+            <Box fontSize='h5.fontSize'>Liczba uczniów: {students.length}</Box>
+            <Box fontSize='h6.fontSize' mt={2} mb={2}>Wyszukaj uczniów według:</Box>
             <div className='student-search'>
               <StudentSearch />
             </div>
@@ -51,8 +51,8 @@ export class Students extends Component {
             <TableHead style={{ backgroundColor: '#eeffff' }}>
               {this.props.students.length !== 0 &&
                 <TableRow>
-                  <TableCell onClick={this.handleSortUserName}><Typography>Username</Typography></TableCell>
-                  <TableCell onClick={this.handleSortNameSurname}><Typography>Name Surname</Typography></TableCell>
+                  <TableCell onClick={this.handleSortNameSurname}><Typography>Imię i Nazwisko</Typography></TableCell>
+                  <TableCell onClick={this.handleSortUserName}><Typography>Nazwa użytk.</Typography></TableCell>
                 </TableRow>
               }
             </TableHead>
@@ -70,12 +70,12 @@ export class Students extends Component {
                     >
                       <TableCell>
                         <Typography color={`${student.querySelector('id').innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
-                          {student.querySelector('username').innerHTML}
+                          {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
                         </Typography>
                       </TableCell>
                       <TableCell>
                         <Typography color={`${student.querySelector('id').innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
-                          {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
+                          {student.querySelector('username').innerHTML}
                         </Typography>
                       </TableCell>
                     </TableRow>

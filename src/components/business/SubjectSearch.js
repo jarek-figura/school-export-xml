@@ -17,12 +17,12 @@ class SubjectSearch extends Component {
     return (
       <Box mt={-0.5} mb={-0.5}>
         <TextField
-          style={{ maxWidth: '150px', backgroundColor: '#ffffffbb' }}
+          style={{ maxWidth: '170px', backgroundColor: '#ffffffbb' }}
           id="filled-adornment-extra-dense"
           variant="outlined"
           margin="dense"
-          hiddenLabel
-          placeholder='Subject'
+          label="Przedmiot"
+          placeholder='Przedmiot'
           value={this.props.searchSubject}
           onChange={this.handleChange}
           InputProps={{

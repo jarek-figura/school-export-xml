@@ -19,12 +19,12 @@ class TeacherSearch extends Component {
     return(
       <Box mb={0.5}> 
         <TextField
-          style={{ maxWidth: '150px', backgroundColor: '#ffffffbb', marginRight: '8px' }}
+          style={{ maxWidth: '170px', backgroundColor: '#ffffffbb', marginRight: '8px' }}
           id="filled-adornment-extra-dense"
           variant="outlined"
           margin="dense"
-          label="Teacher"
-          placeholder='Name'
+          label="Nauczyciel"
+          placeholder='Imię'
           value={this.props.searchTeacherName}
           onChange={this.handleSearchName}
           InputProps={{
@@ -35,12 +35,12 @@ class TeacherSearch extends Component {
           }}
         />
         <TextField
-          style={{ maxWidth: '160px', backgroundColor: '#ffffffbb' }}
+          style={{ maxWidth: '170px', backgroundColor: '#ffffffbb' }}
           id="filled-adornment-extra-dense"
           variant="outlined"
           margin="dense"
-          label="Teacher"
-          placeholder='Surname'
+          label="Nauczyciel"
+          placeholder='Nazwisko'
           value={this.props.searchTeacherSurname}
           onChange={this.handleSearchSurname}
           InputProps={{

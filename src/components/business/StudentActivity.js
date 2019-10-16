@@ -23,17 +23,17 @@ export class StudentActivity extends Component {
 
   render() {
     const clickedId = this.props.studentClickedId;
-    const userName = clickedId ? `${this.props.studentUserName[clickedId]} - ${this.props.studentName[clickedId]} ${this.props.studentSurname[clickedId]}` : 'All students';
+    const userName = clickedId ? `${this.props.studentName[clickedId]} ${this.props.studentSurname[clickedId]} - ${this.props.studentUserName[clickedId]}` : 'Wszyscy';
     const semester = this.props.semester && Array.from(this.props.semester);
 
-    let showPresencesText = !this.props.showStudentPresences ? 'show student presences' : 'hide student presences';
+    let showPresencesText = !this.props.showStudentPresences ? 'Pokaż obecności' : 'Schowaj obecności';
 
     return (
       <span className='school'>
         <Card className='school-top' style={{ backgroundColor: '#ffeeff' }}>
           <CardContent>
-            <Box fontSize='h5.fontSize' mb={2}>Student Activities</Box>
-            <Box fontSize='h6.fontSize' mb={2}>Student: <span style={{ color: `${clickedId ? '#F2105A' : '#4054B2'}` }}>{userName}</span></Box>
+            <Box fontSize='h5.fontSize' mb={2}>Oceny i obecności uczniów</Box>
+            <Box fontSize='h6.fontSize' mb={2}>Uczeń: <span style={{ color: `${clickedId ? '#F2105A' : '#4054B2'}` }}>{userName}</span></Box>
             <Button
               variant="contained"
               color="primary"
@@ -49,7 +49,7 @@ export class StudentActivity extends Component {
                   component="span"
                   onClick={this.handleResetStudent}
                 >
-                  <Undo />&nbsp;Reset student
+                  <Undo />&nbsp;Pokaż wszystkich uczniów
                 </Button>
               : null
             }

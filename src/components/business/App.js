@@ -20,13 +20,13 @@ export class App extends Component {
   handleChange = event => {
     let file = event.target.files[0];
     if (!file || file.name.slice(-3) !== 'xml') {
-      this.setState({ formError: new Error('Please choose XML file') });
+      this.setState({ formError: new Error('Wybierz plik XML') });
       return;
     }
     this.setState({ fileName: file.name })
 
     this.props.resetSchool();
-    this.props.updateParsingTxt('Parsing XML ...');
+    this.props.updateParsingTxt('Parsowanie pliku XML...');
     this.props.handleShowStudentPresences(false);
     const reader = new FileReader();
     reader.readAsText(file);
@@ -55,7 +55,7 @@ export class App extends Component {
             <td style={{ verticalAlign: 'top' }}>
               <Card className='App' style={{ backgroundColor: '#ffffee', zIndex: 10 }}>
                 <CardContent>
-                  <Box fontSize='h5.fontSize' fontWeight='fontWeightBold' mb={1.4}>School archiv parser</Box>
+                  <Box fontSize='h5.fontSize' fontWeight='fontWeightBold' mb={1.4}>Archiwum Szkoły</Box>
                   <input
                     color="primary"
                     type="file"
@@ -69,12 +69,12 @@ export class App extends Component {
                       color="primary"
                       component="span"
                     >
-                      <Folder />&nbsp;Choose XML
+                      <Folder />&nbsp;Wybierz XML
                       </Button> {this.state.fileName}
                   </label>
                   {this.state.formError && <Typography color='secondary'>{this.state.formError.message}</Typography>}
                   <Box fontSize={18} mt={2}>
-                    Year: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}
+                    Rok szkolny: {this.props.year && `${yearStart.toLocaleDateString('pl-PL')} - ${yearEnd.toLocaleDateString('pl-PL')}`}
                   </Box>
                   <Typography color='secondary'>{this.props.parsingTxt}</Typography>
                 </CardContent>
