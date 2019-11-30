@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 
 import Box from '@material-ui/core/Box';
@@ -15,7 +15,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 // TODO: OK - Dodać imię i nazwisko ucznia obok 'user name' przy ocenach
 // TODO: OK - Kliknięcie ucznia powinno pokazać tylko te klasy, w któych miał oceny (w obu semestrach); wszystko inne ukryte, bo teraz jest nieintuicyjnie
 // TODO: OK - Dodać ocenę końcową/semestralną
-// TODO: line 111 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
+// TODO: line 157 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
 // TODO: OK - Dodać frekwencję + data + godzina lekcyjna
 // TODO: OK - Dodać tekst 'Parsing XML ...' na zmianę stanu komponentów
 // TODO: OK - Dodać filtrowanie przedmiotów
@@ -67,6 +67,11 @@ export class Grade extends Component {
     };
     // PRESENCES END ##########################
 
+    // LESSON ENTRIES START @@@@@@@@@@@@@@@@@@@
+    const entries = this.props.subject.querySelector('lessons_entries');
+    const entry = Array.from(entries.querySelectorAll('entry'));
+    // LESSON ENTRIES END @@@@@@@@@@@@@@@@@@@@@
+
     let gradesDescr = {};
     let gradesLabel = {};
     let gradesType = {};
@@ -91,7 +96,7 @@ export class Grade extends Component {
     let stdFinalGrade = '';
 
     return (
-
+      <Fragment>
       <Paper elevation={0} style={{ border: '1px solid #e0e0e0', display: 'inline-block' }}>
         <Table className='grades-table' size='small' style={{ width: 'auto' }}>
           <TableHead>
@@ -195,6 +200,39 @@ export class Grade extends Component {
           </TableBody>
         </Table>
       </Paper>
+        {
+          this.props.showLessonEntries && entry.length
+            ? <Box fontSize={18} style={{ padding: '8px' }}>Tematy lekcji</Box>
+            : null
+        }
+        {
+          this.props.showLessonEntries && entry.length
+            ?
+              <Table size='small' style={{ width: 'auto', marginBottom: '16px' }}>
+                <TableHead>
+                  <TableRow style={{ color: '#444' }}>
+                    <TableCell style={{ backgroundColor: '#e0e0e0' }}><Box fontSize={16}>Data</Box></TableCell>
+                    <TableCell style={{ backgroundColor: '#e0e0e0', borderRight: '1px solid #c0c0c0' }}><Box fontSize={16}>Lekcja</Box></TableCell>
+                    <TableCell style={{ backgroundColor: '#e0e0e0' }}><Box fontSize={16}>Temat lekcji</Box></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {
+                    entry.map(
+                      (obj, idx) => (
+                        <TableRow key={idx}>
+                          <TableCell>{obj.querySelector('date').innerHTML}</TableCell>
+                          <TableCell style={{ borderRight: '1px solid #e0e0e0' }}>{lessonsHours[obj.querySelector('lesson_hour_id').innerHTML]}</TableCell>
+                          <TableCell>{obj.querySelector('title').innerHTML}</TableCell>
+                        </TableRow>
+                      )
+                    )
+                  }
+                </TableBody>
+              </Table>
+            : null
+        }
+      </Fragment>
     )
   }
 }
