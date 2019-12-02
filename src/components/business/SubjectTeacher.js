@@ -8,9 +8,10 @@ export class SubjectTeacher extends Component {
   render() {
     const subject = this.props.subject;
     const teachersTable = Array.from(subject.querySelector('teachers').querySelectorAll('teacher'));
+    const color = this.props.color;
 
     return (
-      <Box fontSize={18} style={{ color: `${this.props.color}`, padding: '8px' }}>
+      <Box fontSize={18} style={{ color: color, padding: '8px', margin: '4px 0', backgroundColor: `${color !== 'silver' ? '#efefef' : 'transparent'}`, maxWidth: '984px' }}>
         {subject.querySelector('name').innerHTML} ({
           teachersTable && teachersTable.map(
             (teacher, idx) => (

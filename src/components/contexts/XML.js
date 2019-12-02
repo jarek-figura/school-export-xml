@@ -28,8 +28,8 @@ export class XMLProvider extends Component {
     parsingTxt: '',
     presencesTypes: [],
     showStudentPresences: false,
+    showLessonsEntries: false,
     // behaviors: [],
-    // lessons_entries: [],
 
     resetSchool: () => this.setState({ year: null }),
     updateSchool: school => {
@@ -86,7 +86,8 @@ export class XMLProvider extends Component {
     updateSearchTeacherName: text => this.setState({ searchTeacherName: text }),
     updateSearchTeacherSurname: text => this.setState({ searchTeacherSurname: text }),
     updateParsingTxt: text => this.setState({ parsingTxt: text }),
-    handleShowStudentPresences: flag => this.setState({ showStudentPresences: flag })
+    handleShowStudentPresences: flag => this.setState({ showStudentPresences: flag }),
+    handleShowLessonEntries: flag => this.setState({ showLessonEntries: flag })
   };
 
   render() {
