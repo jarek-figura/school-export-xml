@@ -22,6 +22,12 @@ export class Students extends Component {
   handleSortUserName = () => { };
   handleSortNameSurname = () => { };
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log(nextContext);
+    if (nextContext.students !== this.props.students) return true;
+    else return false;
+  };
+
   render() {
     const clickedId = this.props.studentClickedId;
     let colorName = {};
@@ -59,12 +65,12 @@ export class Students extends Component {
             <TableBody>
               {
                 students.map(
-                  (student, idx) => (
+                  student => (
                     // eslint-disable-next-line
                     personalData = student.querySelector('personal_data').innerHTML,
                     adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
                     <TableRow
-                      key={idx}
+                      key={student.querySelector('id').innerHTML}
                       onClick={() => this.handleClick(student.firstChild.innerHTML)}
                       className='student'
                     >
