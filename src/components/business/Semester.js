@@ -6,8 +6,6 @@ import ClasaTutor from './ClasaTutor';
 
 import Box from '@material-ui/core/Box';
 
-// TODO: OK - dodać wychowawcę klasy
-
 const isStudentInClass = (clickedId, clasa) => {
   const students = Array.from(clasa.querySelector('students').querySelectorAll('student'));
   let std;
