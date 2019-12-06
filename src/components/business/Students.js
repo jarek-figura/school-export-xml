@@ -14,8 +14,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-// TODO: OK - Wyszukiwanie ucznia po imieniu i nazwisku
-
 export class Students extends Component {
 
   handleClick = (id) => { this.props.handleStudentClick(id) };
