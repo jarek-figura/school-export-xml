@@ -13,21 +13,26 @@ import Person from '@material-ui/icons/Person';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Divider from '@material-ui/core/Divider';
 
 export class StudentActivity extends Component {
 
-  handleResetStudent = () => { this.props.handleStudentClick(null) };
-  handleClick = () => { this.props.handleShowStudentPresences(!this.props.showStudentPresences) };
-  handleEntriesClick = () => { this.props.handleShowLessonEntries(!this.props.showLessonEntries) };
+  handleResetStudent = () => {
+    this.props.handleStudentClick(null)
+  };
+  handlePresencesClick = () => {
+    this.props.handleShowStudentPresences(!this.props.showStudentPresences);
+    this.props.handleShowLessonEntries(false);
+  };
+  handleEntriesClick = () => {
+    this.props.handleShowLessonEntries(!this.props.showLessonEntries);
+    this.props.handleShowStudentPresences(false);
+  };
 
   render() {
+
     const clickedId = this.props.studentClickedId;
     const userName = clickedId ? `${this.props.studentName[clickedId]} ${this.props.studentSurname[clickedId]} - ${this.props.studentUserName[clickedId]}` : 'Wszyscy';
     const semester = this.props.semester && Array.from(this.props.semester);
-
-    let showPresencesText = !this.props.showStudentPresences ? 'Obecności' : 'Obecności';
-    let showEntriesText = !this.props.showLessonEntries ? 'Tematy lekcji' : 'Tematy lekcji';
 
     return (
       <span className='school'>
@@ -37,18 +42,18 @@ export class StudentActivity extends Component {
             <Box mb={2}>Uczeń: <span style={{ color: `${clickedId ? '#F2105A' : '#4054B2'}` }}><Person /> {userName}</span></Box>
             <Button
               variant="contained"
-              color="primary"
+              color={`${this.props.showStudentPresences ? 'primary' : 'default'}`}
               component="span"
-              onClick={this.handleClick}
+              onClick={this.handlePresencesClick}
             >
-              {!this.props.showStudentPresences ? <Visibility /> : <VisibilityOff />}&nbsp;{`${showPresencesText}`}
+              {!this.props.showStudentPresences ? <Visibility /> : <VisibilityOff />}&nbsp;Obecności
             </Button> <Button
               variant="contained"
-              color="default"
+              color={`${this.props.showLessonEntries ? 'primary' : 'default'}`}
               component="span"
               onClick={this.handleEntriesClick}
             >
-              {!this.props.showLessonEntries ? <Visibility /> : <VisibilityOff />}&nbsp;{`${showEntriesText}`}
+              {!this.props.showLessonEntries ? <Visibility /> : <VisibilityOff />}&nbsp;Tematy&nbsp;lekcji
             </Button> {clickedId 
               ? <Button
                   style={{ marginLeft: '10px' }}
@@ -62,7 +67,6 @@ export class StudentActivity extends Component {
               : null
             }
           </CardContent>
-          <Divider orientation='vertical' variant='middle' />
           <span>
             <div><ClassSearch/></div>
             <div><SubjectSearch/></div>
