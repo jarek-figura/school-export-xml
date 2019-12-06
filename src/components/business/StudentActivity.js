@@ -39,7 +39,7 @@ export class StudentActivity extends Component {
         <Card className='school-top' style={{ backgroundColor: '#ffeeff' }}>
           <CardContent>
             <Box fontSize='h5.fontSize' mb={2}>Oceny i obecności uczniów</Box>
-            <Box mb={2}>Uczeń: <span style={{ color: `${clickedId ? '#F2105A' : '#4054B2'}` }}><Person /> {userName}</span></Box>
+            <Box fontSize='h6.fontSize' mb={2}>Uczeń: <span style={{ color: `${clickedId ? '#F2105A' : '#4054B2'}` }}><Person style={{ marginBottom: '-4px' }} /> {userName}</span></Box>
             <Button
               variant="contained"
               color={`${this.props.showStudentPresences ? 'primary' : 'default'}`}
@@ -48,6 +48,7 @@ export class StudentActivity extends Component {
             >
               {!this.props.showStudentPresences ? <Visibility /> : <VisibilityOff />}&nbsp;Obecności
             </Button> <Button
+              style={{ marginLeft: '5px' }}
               variant="contained"
               color={`${this.props.showLessonEntries ? 'primary' : 'default'}`}
               component="span"
@@ -56,7 +57,7 @@ export class StudentActivity extends Component {
               {!this.props.showLessonEntries ? <Visibility /> : <VisibilityOff />}&nbsp;Tematy&nbsp;lekcji
             </Button> {clickedId 
               ? <Button
-                  style={{ marginLeft: '10px' }}
+                  style={{ marginLeft: '5px' }}
                   variant="contained"
                   color="secondary"
                   component="span"
