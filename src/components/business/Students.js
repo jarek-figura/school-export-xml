@@ -60,17 +60,17 @@ export class Students extends Component {
                     personalData = student.querySelector('personal_data').innerHTML,
                     adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
                     <TableRow
-                      key={student.querySelector('id').innerHTML}
+                      key={student.firstChild.innerHTML}
                       onClick={() => this.handleClick(student.firstChild.innerHTML)}
                       className='student'
                     >
                       <TableCell>
-                        <Typography color={`${student.querySelector('id').innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
+                        <Typography color={`${student.firstChild.innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
                           {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
                         </Typography>
                       </TableCell>
                       <TableCell>
-                        <Typography color={`${student.querySelector('id').innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
+                        <Typography color={`${student.firstChild.innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
                           {student.querySelector('username').innerHTML}
                         </Typography>
                       </TableCell>
