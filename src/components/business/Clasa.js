@@ -5,8 +5,7 @@ import filterSubjects from './SubjectFilter';
 import filterTeachers from './TeacherFilter';
 import SubjectTeacher from './SubjectTeacher';
 
-// TODO: OK - dodać więcej, niż jednego nauczyciela do przedmiotu
-// TODO: OK - dodać filtrowanie nauczycieli danych przedmiotów, wychowawców nie filtrować
+// INFO: wychowawcy nie są filtrowani
 
 export class Clasa extends Component {
 

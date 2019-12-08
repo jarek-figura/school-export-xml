@@ -78,7 +78,7 @@ export class XMLProvider extends Component {
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),
-    updateSearchUserName: text => this.setState({ searchUserName: text }),
+    updateSearchUser: text => this.setState({ searchUserName: text }),
     updateSearchName: text => this.setState({ searchName: text }),
     updateSearchSurname: text => this.setState({ searchSurname: text }),
     updateSearchSubject: text => this.setState({ searchSubject: text }),

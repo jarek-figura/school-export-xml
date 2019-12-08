@@ -15,42 +15,31 @@ class StudentSearch extends Component {
     user: ''
   };
 
-  handleResetName = () => {
-    this.setState({ name: '' });
-    this.props.updateSearchName('');
+  functionName = {
+    name: this.props.updateSearchName,
+    surname: this.props.updateSearchSurname,
+    user: this.props.updateSearchUser
   };
-  handleResetSurname = () => {
-    this.setState({ surname: '' });
-    this.props.updateSearchSurname('');
+  handleReset = event => {
+    this.setState({ [event.currentTarget.name]: '' });
+    (this.functionName[event.currentTarget.name])('');
   };
-  handleResetUsername = () => {
-    this.setState({ user: '' });
-    this.props.updateSearchUserName('');
-  };
-
-  handleSubmitName = event => {
+  handleSubmit = event => {
     event.preventDefault();
-    this.props.updateSearchName(this.state.name);
+    const name = event.target.getAttribute('name');
+    (this.functionName[name])(this.state[name]);
   };
-  handleSubmitSurname = event => {
-    event.preventDefault();
-    this.props.updateSearchSurname(this.state.surname);
-  };
-  handleSubmitUsername = event => {
-    event.preventDefault();
-    this.props.updateSearchUserName(this.state.user);
-  };
-
-  handleChangeName = event => this.setState({ name: event.target.value });
-  handleChangeSurname = event => this.setState({ surname: event.target.value });
-  handleChangeUsername = event => this.setState({ user: event.target.value });
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  }
 
   render(){
     return (
       <Box style={{ whiteSpace: 'nowrap' }}>
         <form
           style={{ display: 'inline-block', backgroundColor: 'transparent', padding: '0' }}
-          onSubmit={this.handleSubmitName}
+          name='name'
+          onSubmit={this.handleSubmit}
         >
           <TextField
             style={{ maxWidth: '80px', margin: '0 8px 0 0' }}
@@ -59,18 +48,20 @@ class StudentSearch extends Component {
             margin="dense"
             label="Imię"
             placeholder='Imię'
+            name='name'
             value={this.state.name}
-            onChange={this.handleChangeName}
+            onChange={this.handleChange}
             InputProps={{
               endAdornment: <InputAdornment position="end" style={{ margin: '0 -8px' }}>
-                <IconButton edge="end" onClick={this.handleResetName}><ClearIcon /></IconButton>
+                <IconButton edge='end' name='name' onClick={this.handleReset}><ClearIcon /></IconButton>
               </InputAdornment>
             }}
           />
         </form>
         <form
           style={{ display: 'inline-block', backgroundColor: 'transparent', padding: '0' }}
-          onSubmit={this.handleSubmitSurname}
+          name='surname'
+          onSubmit={this.handleSubmit}
         >
           <TextField
             style={{ maxWidth: '120px', margin: '0 8px 0 0' }}
@@ -79,18 +70,20 @@ class StudentSearch extends Component {
             margin="dense"
             label="Nazwisko"
             placeholder='Nazwisko'
+            name='surname'
             value={this.state.surname}
-            onChange={this.handleChangeSurname}
+            onChange={this.handleChange}
             InputProps={{
               endAdornment: <InputAdornment position="end" style={{ margin: '0 -8px' }}>
-                <IconButton edge="end" onClick={this.handleResetSurname}><ClearIcon /></IconButton>
+                <IconButton edge='end' name='surname' onClick={this.handleReset}><ClearIcon /></IconButton>
               </InputAdornment>
             }}
           />
         </form>
         <form
           style={{ display: 'inline-block', backgroundColor: 'transparent', padding: '0' }}
-          onSubmit={this.handleSubmitUsername}
+          name='user'
+          onSubmit={this.handleSubmit}
         >
           <TextField
             style={{ maxWidth: '146px', margin: '0' }}
@@ -99,11 +92,12 @@ class StudentSearch extends Component {
             margin="dense"
             label="Nazwa użytk."
             placeholder='Nazwa użytk.'
+            name='user'
             value={this.state.user}
-            onChange={this.handleChangeUsername}
+            onChange={this.handleChange}
             InputProps={{
               endAdornment: <InputAdornment position="end" style={{ margin: '0 -8px' }}>
-                <IconButton edge="end" onClick={this.handleResetUsername}><ClearIcon /></IconButton>
+                <IconButton edge='end' name='user' onClick={this.handleReset}><ClearIcon /></IconButton>
               </InputAdornment>
             }}
           />
