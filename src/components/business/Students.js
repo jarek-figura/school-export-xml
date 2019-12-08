@@ -16,15 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 export class Students extends Component {
 
-  handleClick = (id) => { this.props.handleStudentClick(id) };
-  handleSortUserName = () => { };
-  handleSortNameSurname = () => { };
-
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log(nextContext);
-    if (nextContext.students !== this.props.students) return true;
-    else return false;
-  };
+  handleClick = id => { this.props.handleStudentClick(id) };
 
   render() {
     const clickedId = this.props.studentClickedId;
@@ -55,8 +47,8 @@ export class Students extends Component {
             <TableHead style={{ backgroundColor: '#eeffff' }}>
               {this.props.students.length !== 0 &&
                 <TableRow>
-                  <TableCell onClick={this.handleSortNameSurname}><Typography>Imię i Nazwisko</Typography></TableCell>
-                  <TableCell onClick={this.handleSortUserName}><Typography>Nazwa użytk.</Typography></TableCell>
+                  <TableCell><Typography>Imię i Nazwisko</Typography></TableCell>
+                  <TableCell><Typography>Nazwa użytk.</Typography></TableCell>
                 </TableRow>
               }
             </TableHead>

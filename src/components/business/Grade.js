@@ -120,10 +120,10 @@ export class Grade extends Component {
             <TableBody>
               {
                 studentData && studentData.map(
-                  (student, idx) => (
+                  student => (
                     (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
                       ?
-                      <TableRow key={idx}>
+                      <TableRow key={student.student_id}>
                         {stdFinalGrade = null}
                         <TableCell>
                           <Typography color={`${colorName[clickedId]}`}>
