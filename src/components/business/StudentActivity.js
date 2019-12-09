@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
 import './Students.css';
 import Semester from './Semester';
-import SubjectSearch from './SubjectSearch';
-import ClassSearch from './ClassSearch';
-import TeacherSearch from './TeacherSearch';
+import SearchForm from './SearchForm';
 
+import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -68,10 +67,41 @@ export class StudentActivity extends Component {
               : null
             }
           </CardContent>
-          <span>
-            <div><ClassSearch/></div>
-            <div><SubjectSearch/></div>
-            <div><TeacherSearch/></div>
+          <span style={{ }}>
+            <div>
+              <SearchForm
+                icon={<SearchIcon />}
+                width={'170px'}
+                label={'Klasa'}
+                placeholder={'Klasa'}
+                startAdornment={true}
+                updateSearchFunction={this.props.updateSearchClass}
+              /> <SearchForm
+                icon={<SearchIcon />}
+                width={'170px'}
+                label={'Przedmiot'}
+                placeholder={'Przedmiot'}
+                startAdornment={true}
+                updateSearchFunction={this.props.updateSearchSubject}
+              />
+            </div>
+            <div>
+              <SearchForm
+                icon={<SearchIcon />}
+                width={'170px'}
+                label={'Nauczyciel'}
+                placeholder={'Imię'}
+                startAdornment={true}
+                updateSearchFunction={this.props.updateSearchTeacherName}
+              /> <SearchForm
+                icon={<SearchIcon />}
+                width={'170px'}
+                label={'Nauczyciel'}
+                placeholder={'Nazwisko'}
+                startAdornment={true}
+                updateSearchFunction={this.props.updateSearchTeacherSurname}
+              />
+            </div>
           </span>
         </Card>
         <div className='semester-column'>

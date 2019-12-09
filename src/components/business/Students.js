@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withXML } from '../contexts/XML';
-import StudentSearch from './StudentSearch';
 import filterStudents from './StudentsFilter';
+import SearchForm from './SearchForm';
 import './Students.css';
 
 import Typography from '@material-ui/core/Typography';
@@ -38,7 +38,28 @@ export class Students extends Component {
             <Box fontSize='h5.fontSize'>Liczba uczniów: {students.length}</Box>
             <Box fontSize='h6.fontSize' mt={2} mb={2}>Wyszukaj uczniów według:</Box>
             <div className='student-search'>
-              <StudentSearch />
+              <SearchForm
+                icon={null}
+                width={'84px'}
+                label={'Imię'}
+                placeholder={'Imię'}
+                startAdornment={null}
+                updateSearchFunction={this.props.updateSearchName}
+              /> <SearchForm
+                icon={null}
+                width={'120px'}
+                label={'Nazwisko'}
+                placeholder={'Nazwisko'}
+                startAdornment={null}
+                updateSearchFunction={this.props.updateSearchSurname}
+              /> <SearchForm
+                icon={null}
+                width={'148px'}
+                label={'Nazwa użytk.'}
+                placeholder={'Nazwa użytk.'}
+                startAdornment={null}
+                updateSearchFunction={this.props.updateSearchUser}
+              />
             </div>
           </CardContent>
         </Card>
