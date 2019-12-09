@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withXML } from '../contexts/XML';
 import filterStudents from './StudentsFilter';
 import SearchForm from './SearchForm';
@@ -14,11 +14,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-export class Students extends Component {
+export class Students extends PureComponent {
 
   handleClick = id => { this.props.handleStudentClick(id) };
 
   render() {
+
     const clickedId = this.props.studentClickedId;
     let colorName = {};
     if (clickedId) {
@@ -31,7 +32,9 @@ export class Students extends Component {
 
     let adres;
     let personalData;
+
     return (
+
       <div className='students'>
         <Card elevation={0} style={{ border: '1px solid #e0e0e0' }}>
           <CardContent>

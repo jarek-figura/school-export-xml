@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withXML } from '../contexts/XML';
 import './Students.css';
 import Semester from './Semester';
@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-export class StudentActivity extends Component {
+export class StudentActivity extends PureComponent {
 
   handleResetStudent = () => {
     this.props.handleStudentClick(null)
@@ -67,7 +67,7 @@ export class StudentActivity extends Component {
               : null
             }
           </CardContent>
-          <span style={{ }}>
+          <Box mt={3}>
             <div>
               <SearchForm
                 icon={<SearchIcon />}
@@ -102,7 +102,7 @@ export class StudentActivity extends Component {
                 updateSearchFunction={this.props.updateSearchTeacherSurname}
               />
             </div>
-          </span>
+          </Box>
         </Card>
         <div className='semester-column'>
         {

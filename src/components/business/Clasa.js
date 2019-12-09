@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import Grade from './Grade';
 import filterSubjects from './SubjectFilter';
@@ -7,7 +7,7 @@ import SubjectTeacher from './SubjectTeacher';
 
 // INFO: wychowawcy nie są filtrowani
 
-export class Clasa extends Component {
+export class Clasa extends PureComponent {
 
   render() {
     const clasa = this.props.clasa;

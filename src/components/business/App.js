@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withXML } from "../contexts/XML";
 import Students from './Students';
 import StudentActivity from './StudentActivity';
@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-export class App extends Component {
+export class App extends PureComponent {
   state = {
     formError: null,
     fileName: null
@@ -70,7 +70,7 @@ export class App extends Component {
                       component="span"
                     >
                       <Folder />&nbsp;Wybierz XML
-                      </Button> {this.state.fileName}
+                      </Button> <Box style={{ display: 'inline-block' }} ml={1}><Typography color='primary'>{this.state.fileName}</Typography></Box>
                   </label>
                   {this.state.formError && <Typography color='secondary'>{this.state.formError.message}</Typography>}
                   <Box fontSize={18} mt={2}>

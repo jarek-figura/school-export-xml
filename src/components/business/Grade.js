@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import LessonEntries from './LessonEntries';
 
@@ -19,7 +19,7 @@ const parsePresence = data => {
   return data && data.length && data.replace(/'/g, '"');
 };
 
-export class Grade extends Component {
+export class Grade extends PureComponent {
 
   componentDidMount() {
     this.props.updateParsingTxt('');
@@ -125,12 +125,12 @@ export class Grade extends Component {
                       ?
                       <TableRow key={student.student_id}>
                         {stdFinalGrade = null}
-                        <TableCell>
+                        <TableCell  style={{ textAlign: 'left' }}>
                           <Typography color={`${colorName[clickedId]}`}>
                             {this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]}
                           </Typography>
                         </TableCell>
-                        <TableCell style={{ borderRight: '1px solid #e0e0e0' }}>
+                        <TableCell style={{ borderRight: '1px solid #e0e0e0', textAlign: 'left' }}>
                           <Typography color={`${colorName[clickedId]}`}>
                             {this.props.studentUserName[student.student_id]}
                           </Typography>
@@ -162,7 +162,6 @@ export class Grade extends Component {
                             obj => (
                               obj.students && obj.students.map(
                                 (std, idx) => (
-                                  // this.props.studentUserName[std.student_id] - student.student_id
                                   student.student_id === std.student_id &&
                                   <TableCell key={idx}>{presTypeTransl[this.props.presencesTypes[std.presence]]}</TableCell>
                                 )

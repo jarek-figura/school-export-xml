@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 const XMLContext = React.createContext();
 
 export const XMLConsumer = XMLContext.Consumer;
 
-export class XMLProvider extends Component {
+export class XMLProvider extends PureComponent {
   state = {
     year: null,
     semester: null,

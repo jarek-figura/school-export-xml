@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withXML } from '../contexts/XML';
 
-export class ClasaTutor extends Component {
+export class ClasaTutor extends PureComponent {
 
   render() {
     const clasa = this.props.clasa;

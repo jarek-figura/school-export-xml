@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 
 import Box from '@material-ui/core/Box';
@@ -8,7 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-export class LessonEntries extends Component {
+export class LessonEntries extends PureComponent {
 
   render() {
 

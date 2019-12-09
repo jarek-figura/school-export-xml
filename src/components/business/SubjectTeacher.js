@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withXML } from '../contexts/XML';
 
 import Box from '@material-ui/core/Box';
 
-export class SubjectTeacher extends Component {
+export class SubjectTeacher extends PureComponent {
 
   render() {
     const subject = this.props.subject;

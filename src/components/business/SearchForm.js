@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withXML } from "../contexts/XML";
 
-// import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-class SearchForm extends Component {
+class SearchForm extends PureComponent {
 
   state = {
     name: ''

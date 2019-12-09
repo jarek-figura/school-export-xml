@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
 import filterClass from './ClassFilter';
@@ -17,7 +17,7 @@ const isStudentInClass = (clickedId, clasa) => {
   return false;
 }
 
-export class Semester extends Component {
+export class Semester extends PureComponent {
 
   render() {
     const clickedId = this.props.studentClickedId;
