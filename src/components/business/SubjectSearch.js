@@ -10,29 +10,47 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 class SubjectSearch extends Component {
 
-  handleChange = event => this.props.updateSearchSubject(event.target.value);
-  handleClick = () => this.props.updateSearchSubject('');
+  state = {
+    name: ''
+  };
+
+  handleChange = event => this.setState({ name: event.target.value });
+  handleReset = () => {
+    this.setState({ name: '' });
+    this.props.updateSearchSubject('');
+  };
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.updateSearchSubject(this.state.name);
+  };
 
   render(){
     return (
-      <Box mt={-0.5} mb={-0.5}>
-        <TextField
-          style={{ maxWidth: '170px', backgroundColor: '#ffffffbb' }}
-          id="filled-adornment-extra-dense"
-          variant="outlined"
-          margin="dense"
-          label="Przedmiot"
-          placeholder='Przedmiot'
-          value={this.props.searchSubject}
-          onChange={this.handleChange}
-          InputProps={{
-            startAdornment: <InputAdornment position="start" style={{ marginLeft: '-5px' }}><SearchIcon /></InputAdornment>,
-            endAdornment: <InputAdornment position="end" style={{ marginRight: '-5px' }}>
-              <IconButton edge="end" onClick={this.handleClick}><ClearIcon /></IconButton>
-            </InputAdornment>
-          }}
-        />
-      </Box>
+      <form
+          style={{ display: 'inline-block', backgroundColor: 'transparent', padding: '0' }}
+          name='name'
+          onSubmit={this.handleSubmit}
+      >
+        <Box mt={-0.5} mb={-0.5}>
+          <TextField
+            style={{ maxWidth: '170px', backgroundColor: '#ffffffbb' }}
+            id="filled-adornment-extra-dense"
+            variant="outlined"
+            margin="dense"
+            label="Przedmiot"
+            placeholder='Przedmiot'
+            name='name'
+            value={this.state.name}
+            onChange={this.handleChange}
+            InputProps={{
+              startAdornment: <InputAdornment position="start" style={{ marginLeft: '-8px' }}><SearchIcon /></InputAdornment>,
+              endAdornment: <InputAdornment position="end" style={{ marginRight: '-8px' }}>
+                <IconButton edge="end" name='name' onClick={this.handleReset}><ClearIcon /></IconButton>
+              </InputAdornment>
+            }}
+          />
+        </Box>
+      </form>
     );
   }
 }

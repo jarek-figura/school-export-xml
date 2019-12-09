@@ -29,7 +29,7 @@ class ClassSearch extends Component {
           style={{ display: 'inline-block', backgroundColor: 'transparent', padding: '0' }}
           name='name'
           onSubmit={this.handleSubmit}
-        >
+      >
         <TextField
           style={{ maxWidth: '170px', backgroundColor: '#ffffffbb' }}
           id="filled-adornment-extra-dense"
