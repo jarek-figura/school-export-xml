@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
-import LessonEntries from './LessonEntries';
 
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 
-// TODO: line 146 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
+// TODO: line 145 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
 
 const parsePresence = data => {
   data = data && data.length && data.replace(/u'/g, '\'');
@@ -177,7 +176,6 @@ export class Grade extends PureComponent {
             </TableBody>
           </Table>
         </Paper>
-        <LessonEntries lessonsHours={lessonsHours} subject={this.props.subject} />
       </Fragment>
     )
   }

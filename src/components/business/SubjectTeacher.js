@@ -11,7 +11,7 @@ export class SubjectTeacher extends PureComponent {
     const color = this.props.color;
 
     return (
-      <Box fontSize={18} style={{ color: color, padding: '8px', margin: '4px 0', backgroundColor: `${color !== 'silver' ? '#efefef' : 'transparent'}`, maxWidth: '984px' }}>
+      <Box fontSize={18} style={{ color: color, padding: '8px', margin: '4px 0', backgroundColor: '#ddd', maxWidth: '984px' }}>
         {subject.querySelector('name').innerHTML} ({
           teachersTable && teachersTable.map(
             (teacher, idx) => (

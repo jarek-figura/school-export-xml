@@ -29,9 +29,9 @@ export class LessonEntries extends PureComponent {
               <Table size='small' style={{ width: 'auto', marginBottom: '16px' }}>
                 <TableHead>
                   <TableRow style={{ color: '#444' }}>
-                    <TableCell style={{ backgroundColor: '#e0e0e0' }}><Box fontSize={16}>Data</Box></TableCell>
-                    <TableCell style={{ backgroundColor: '#e0e0e0', borderRight: '1px solid #c0c0c0' }}><Box fontSize={16}>Lekcja</Box></TableCell>
-                    <TableCell style={{ backgroundColor: '#e0e0e0' }}><Box fontSize={16}>Temat lekcji</Box></TableCell>
+                    <TableCell style={{ backgroundColor: '#f0f0f0' }}><Box fontSize={16}>Data</Box></TableCell>
+                    <TableCell style={{ backgroundColor: '#f0f0f0', borderRight: '1px solid #d0d0d0' }}><Box fontSize={16}>Lekcja</Box></TableCell>
+                    <TableCell style={{ backgroundColor: '#f0f0f0' }}><Box fontSize={16}>Temat lekcji</Box></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -39,7 +39,7 @@ export class LessonEntries extends PureComponent {
                     entry.map(
                       (obj, idx) => (
                         <TableRow key={idx}>
-                          <TableCell>{obj.querySelector('date').innerHTML}</TableCell>
+                          <TableCell style={{ whiteSpace: 'nowrap' }}>{obj.querySelector('date').innerHTML}</TableCell>
                           <TableCell style={{ borderRight: '1px solid #e0e0e0' }}>{lessonsHours[obj.querySelector('lesson_hour_id').innerHTML]}</TableCell>
                           <TableCell>{obj.querySelector('title').innerHTML}</TableCell>
                         </TableRow>

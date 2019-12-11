@@ -1,9 +1,10 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { withXML } from '../contexts/XML';
 import Grade from './Grade';
 import filterSubjects from './SubjectFilter';
 import filterTeachers from './TeacherFilter';
 import SubjectTeacher from './SubjectTeacher';
+import LessonEntries from './LessonEntries';
 
 // INFO: wychowawcy nie są filtrowani
 
@@ -19,14 +20,17 @@ export class Clasa extends PureComponent {
       <div>
       {
         subjects.map(
-          (subject, idx) => (
-            <span key={idx}>
-              {subject.querySelector('grades').innerHTML.length
-                ? <Fragment>
-                    <SubjectTeacher subject={subject} color='black' />
-                    <Grade subject={subject} lessonsHours={this.props.lessonsHours} />
-                  </Fragment>
-                : <SubjectTeacher subject={subject} color='silver' />
+          subject => ( 
+            <span key={subject.querySelector('id').innerHTML}>
+              <SubjectTeacher subject={subject} color={subject.querySelector('grades').innerHTML.length ? 'black' : '#888'} />
+              {
+                this.props.showLessonEntries && Array.from(subject.querySelector('lessons_entries').querySelectorAll('entry')).length
+                  ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
+                  : (
+                      subject.querySelector('grades').innerHTML.length
+                      ? <Grade subject={subject} lessonsHours={this.props.lessonsHours} />
+                      : null
+                    )
               }
             </span>
           )

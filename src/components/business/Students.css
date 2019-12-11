@@ -89,9 +89,8 @@
 }
 
 .clasa {
-  background-color: #ddd;
-  border-top: 1px solid #bbb;
-  border-bottom: 1px solid #bbb;
+  color: white;
+  background-color: #4154B3;
   padding: 10px;
   max-width: 980px;
   margin: 10px 0;
