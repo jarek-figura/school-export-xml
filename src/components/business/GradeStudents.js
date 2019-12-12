@@ -8,7 +8,7 @@ export class GradeStudents extends PureComponent {
 
   render() {
 
-    const clickedId = this.props.studentClickedId;
+    const clickedId = this.props.clickedIdFromGrade;
     const student = this.props.student;
 
     let colorName = {};

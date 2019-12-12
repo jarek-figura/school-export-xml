@@ -17,6 +17,7 @@ export class PresencesData extends PureComponent {
       'released': 'zwolniony(a)'
     };
 
+    const presencesTypes = this.props.presencesTypesFromGrade;
     const presenceData = this.props.presenceData;
     const student = this.props.student;
 
@@ -28,7 +29,7 @@ export class PresencesData extends PureComponent {
               obj.students && obj.students.map(
                 (std, idx) => (
                   student.student_id === std.student_id &&
-                  <TableCell key={idx}>{presTypeTransl[this.props.presencesTypes[std.presence]]}</TableCell>
+                  <TableCell key={idx}>{presTypeTransl[presencesTypes[std.presence]]}</TableCell>
                 )
               )
             )
