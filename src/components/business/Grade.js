@@ -1,17 +1,19 @@
 import React, { PureComponent, Fragment } from 'react';
 import { withXML } from '../contexts/XML';
+import GradeHeader from './GradeHeader';
+import GradeStudents from './GradeStudents';
+import PresencesHeader from './PresencesHeader';
+import PresencesData from './PresencesData';
 
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Tooltip from '@material-ui/core/Tooltip';
 
-// TODO: line 145 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
+// TODO: line 92 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
 
 const parsePresence = data => {
   data = data && data.length && data.replace(/u'/g, '\'');
@@ -32,12 +34,6 @@ export class Grade extends PureComponent {
     studentData = grade && JSON.parse(studentData.innerHTML);
 
     // PRESENCES START ##########################
-    let lessonsHours = {};
-    let lessHours = Array.from(this.props.lessonsHours.querySelectorAll('lesson_hour'));
-    let hour;
-    for (hour of lessHours) {
-      lessonsHours[hour.querySelector('id').innerHTML] = hour.querySelector('label').innerHTML;
-    }
     let presenceData;
     let presence = this.props.subject.querySelector('presences').querySelector('presence');
     if (presence) {
@@ -47,15 +43,6 @@ export class Grade extends PureComponent {
         presenceData = JSON.parse(presenceData);
       }
     }
-    const presTypeTransl = {
-      'present': 'obecny(a)',
-      'absent': 'nieobecny(a)',
-      'late': 'spóźniony(a)',
-      'absence_excused': 'nieobecność usprawiedliwiona',
-      'being_late_excused': 'spóźnienie usprawiedliwione',
-      'none': 'none',
-      'released': 'zwolniony(a)'
-    };
     // PRESENCES END ##########################
 
     let gradesDescr = {};
@@ -70,13 +57,6 @@ export class Grade extends PureComponent {
       }
     }
 
-    let colorName = {};
-    if (clickedId) {
-      colorName[clickedId] = 'secondary';
-    } else {
-      colorName[clickedId] = 'initial';
-    }
-
     let stdGrdObj = {};
     let stdFinalGrade = '';
 
@@ -88,32 +68,8 @@ export class Grade extends PureComponent {
               <TableRow style={{ color: '#444' }}>
                 <TableCell style={{ backgroundColor: '#eeffff' }}><Box fontSize={16}>Uczeń</Box></TableCell>
                 <TableCell style={{ backgroundColor: '#eeffff', borderRight: '1px solid #e0e0e0' }}><Box fontSize={16}>Nazwa użytk.</Box></TableCell>
-                {
-                  grades && grades.map(
-                    grade => (
-                      grade.type !== 2 &&
-                      <TableCell key={grade.id}>
-                        <Tooltip
-                          title={grade.label.length ? grade.description : '———'}
-                          placement='top'
-                        >
-                          <Box fontSize={16}>{grade.label.length ? grade.label : '———'}</Box>
-                        </Tooltip>
-                      </TableCell>
-                    )
-                  )
-                }
-                <TableCell style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0', color: 'maroon' }}><Box fontSize={16}>Ocena<br />semestralna</Box></TableCell>
-                {
-                  this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
-                    (obj, idx) => (
-                      obj.date &&
-                      <TableCell key={idx} style={{ backgroundColor: '#def' }}>
-                        <Box fontSize={16}>{new Date(obj.date * 1000).toLocaleDateString('pl-PL')}<br />{lessonsHours[obj.school_lesson_hour_id]}</Box>
-                      </TableCell>
-                    )
-                  )
-                }
+                <GradeHeader gradesFromGrade={grades} />
+                <PresencesHeader presenceData={presenceData} lessonsHours={this.props.lessonsHours} />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -124,16 +80,7 @@ export class Grade extends PureComponent {
                       ?
                       <TableRow key={student.student_id}>
                         {stdFinalGrade = null}
-                        <TableCell  style={{ textAlign: 'left' }}>
-                          <Typography color={`${colorName[clickedId]}`}>
-                            {this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]}
-                          </Typography>
-                        </TableCell>
-                        <TableCell style={{ borderRight: '1px solid #e0e0e0', textAlign: 'left' }}>
-                          <Typography color={`${colorName[clickedId]}`}>
-                            {this.props.studentUserName[student.student_id]}
-                          </Typography>
-                        </TableCell>
+                        <GradeStudents student={student} />
                         {
                           Object.keys(gradesLabel).map(
                             gradeId => (
@@ -156,18 +103,7 @@ export class Grade extends PureComponent {
                         <TableCell style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0', fontWeight: 'bold', color: 'maroon', whiteSpace: 'nowrap' }}>
                           {stdFinalGrade ? stdFinalGrade : '—'}
                         </TableCell>
-                        {
-                          this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
-                            obj => (
-                              obj.students && obj.students.map(
-                                (std, idx) => (
-                                  student.student_id === std.student_id &&
-                                  <TableCell key={idx}>{presTypeTransl[this.props.presencesTypes[std.presence]]}</TableCell>
-                                )
-                              )
-                            )
-                          )
-                        }
+                        <PresencesData presenceData={presenceData} student={student} />
                       </TableRow>
                     : null
                   )
