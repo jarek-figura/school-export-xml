@@ -12,6 +12,7 @@ export class Clasa extends PureComponent {
 
   render() {
     const clasa = this.props.clasa;
+    const classStudents = clasa.querySelector('students');
 
     let subjects = filterSubjects(clasa, this.props.searchSubject);
     subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
@@ -26,11 +27,7 @@ export class Clasa extends PureComponent {
               {
                 this.props.showLessonEntries && Array.from(subject.querySelector('lessons_entries').querySelectorAll('entry')).length
                   ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
-                  : (
-                      subject.querySelector('grades').innerHTML.length
-                      ? <Grade subject={subject} lessonsHours={this.props.lessonsHours} />
-                      : null
-                    )
+                  : <Grade classStudents={classStudents} subject={subject} lessonsHours={this.props.lessonsHours} />
               }
             </span>
           )

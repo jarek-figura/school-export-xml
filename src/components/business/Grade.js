@@ -14,9 +14,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-// TODO: dodać `studentPresencesData` - inna lista studentów, niz dla `studentGradeData`
-// TODO: albo raczej zawsze wyświetlać listę studentów w klasie
-
 const parsePresence = data => {
   data = data && data.length && data.replace(/u'/g, '\'');
   return data && data.length && data.replace(/'/g, '"');
@@ -29,20 +26,31 @@ export class Grade extends PureComponent {
   }
 
   render() {
-    const clickedId = this.props.studentClickedId;
-    const grade = this.props.subject.querySelector('columns');
-    const grades = grade && JSON.parse(grade.innerHTML);
-    let studentGradeData = this.props.subject.querySelector('students');
-    studentGradeData = grade && JSON.parse(studentGradeData.innerHTML);
 
+    const clickedId = this.props.studentClickedId;
+    const subject = this.props.subject;
+    let studentGradeData;
+    let studentPresence;
     let presenceData;
-    let presence = this.props.subject.querySelector('presences').querySelector('presence');
-    if (presence) {
+    let grades;
+
+    if (!this.props.showStudentPresences) {
+      if (!subject.querySelector('grades').innerHTML.length)
+        return null;
+      const grade = subject.querySelector('columns');
+      grades = grade && JSON.parse(grade.innerHTML);
+      studentGradeData = subject.querySelector('students');
+      studentGradeData = grade && JSON.parse(studentGradeData.innerHTML);
+    } else {
+      let presence = subject.querySelector('presences').querySelector('presence');
+      if (!presence)
+        return null;
       presenceData = presence.querySelector('data').innerHTML;
       presenceData = parsePresence(presenceData);
-      if (presenceData.length > 2) {
-        presenceData = JSON.parse(presenceData);
-      }
+      if (presenceData.length <= 2)
+        return null;
+      presenceData = JSON.parse(presenceData);
+      studentPresence = JSON.parse(presence.querySelector('students').innerHTML);
     }
     
     return (
@@ -62,26 +70,36 @@ export class Grade extends PureComponent {
             </TableHead>
             <TableBody>
               {
-                studentGradeData && studentGradeData.map(
-                  student => (
-                    (clickedId === null) || (student.grades.length && student.student_id.toString() === clickedId)
-                      ?
-                      <TableRow key={student.student_id}>
-                        {
-                          this.props.showStudentPresences
-                            ? <Fragment>
-                                <GradeStudents student={student} clickedIdFromGrade={clickedId} />
-                                <PresencesData presenceData={presenceData} student={student} presencesTypesFromGrade={this.props.presencesTypes} />
-                              </Fragment>
-                            : <Fragment>
-                                <GradeStudents student={student} clickedIdFromGrade={clickedId} />
+                this.props.showStudentPresences
+                  ? studentPresence && studentPresence.map(
+                      studentId => (
+                        clickedId === null || studentId.toString() === clickedId
+                          ? <TableRow key={studentId}>
+                              {
+                                <Fragment>
+                                  <GradeStudents studentId={studentId} clickedIdFromGrade={clickedId} />
+                                  <PresencesData presenceData={presenceData} studentId={studentId} presencesTypesFromGrade={this.props.presencesTypes} />
+                                </Fragment>
+                              }
+                            </TableRow>
+                          : null
+                      )
+                    )
+                  : studentGradeData && studentGradeData.map(
+                      student => (
+                        clickedId === null || student.student_id.toString() === clickedId
+                          ?
+                          <TableRow key={student.student_id}>
+                            {
+                              <Fragment>
+                                <GradeStudents studentId={student.student_id} clickedIdFromGrade={clickedId} />
                                 <GradeData gradesFromGrade={grades} student={student} />
                               </Fragment>
-                        }
-                      </TableRow>
-                    : null
-                  )
-                )
+                            }
+                          </TableRow>
+                        : null
+                      )
+                    )
               }
             </TableBody>
           </Table>

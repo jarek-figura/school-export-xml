@@ -19,17 +19,17 @@ export class PresencesData extends PureComponent {
 
     const presencesTypes = this.props.presencesTypesFromGrade;
     const presenceData = this.props.presenceData;
-    const student = this.props.student;
+    const studentId = this.props.studentId;
 
     return (
       <Fragment>
         {
-          this.props.showStudentPresences && presenceData && Array.from(presenceData).map(
+          presenceData && Array.from(presenceData).map(
             obj => (
               obj.students && obj.students.map(
-                (std, idx) => (
-                  student.student_id === std.student_id &&
-                  <TableCell key={idx}>{presTypeTransl[presencesTypes[std.presence]]}</TableCell>
+                std => (
+                  studentId === std.student_id &&
+                  <TableCell key={std.student_id}>{presTypeTransl[presencesTypes[std.presence]]}</TableCell>
                 )
               )
             )

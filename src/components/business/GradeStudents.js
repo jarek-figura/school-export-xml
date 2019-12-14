@@ -9,7 +9,7 @@ export class GradeStudents extends PureComponent {
   render() {
 
     const clickedId = this.props.clickedIdFromGrade;
-    const student = this.props.student;
+    const studentId = this.props.studentId;
 
     let colorName = {};
     if (clickedId) {
@@ -23,12 +23,12 @@ export class GradeStudents extends PureComponent {
       <Fragment>
         <TableCell  style={{ textAlign: 'left' }}>
           <Typography color={`${colorName[clickedId]}`}>
-            {this.props.studentName[student.student_id]} {this.props.studentSurname[student.student_id]}
+            {this.props.studentName[studentId]} {this.props.studentSurname[studentId]}
           </Typography>
         </TableCell>
         <TableCell style={{ borderRight: '1px solid #e0e0e0', textAlign: 'left' }}>
           <Typography color={`${colorName[clickedId]}`}>
-            {this.props.studentUserName[student.student_id]}
+            {this.props.studentUserName[studentId]}
           </Typography>
         </TableCell>
       </Fragment>

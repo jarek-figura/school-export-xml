@@ -3,7 +3,7 @@ import { withXML } from '../contexts/XML';
 
 import TableCell from '@material-ui/core/TableCell';
 
-// TODO: line 41 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
+// TODO: line 40 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
 
 export class GradeData extends PureComponent {
 
@@ -11,7 +11,6 @@ export class GradeData extends PureComponent {
 
     const grades = this.props.gradesFromGrade;
     const student = this.props.student;
-    console.log(grades);
     let gradesDescr = {};
     let gradesLabel = {};
     let gradesType = {};
