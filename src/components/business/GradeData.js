@@ -1,16 +1,12 @@
-import React, { PureComponent, Fragment } from 'react';
-import { withXML } from '../contexts/XML';
+import React, { Fragment } from 'react';
 
 import TableCell from '@material-ui/core/TableCell';
 
-// TODO: line 40 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
+// TODO: line 37 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
 
-export class GradeData extends PureComponent {
+function GradeData(props) {
 
-  render() {
-
-    const grades = this.props.gradesFromGrade;
-    const student = this.props.student;
+    const grades = props.gradesFromGrade;
     let gradesDescr = {};
     let gradesLabel = {};
     let gradesType = {};
@@ -32,7 +28,7 @@ export class GradeData extends PureComponent {
         {
           Object.keys(gradesLabel).map(
             gradeId => (
-              stdGrdObj = student.grades.filter(
+              stdGrdObj = props.student.grades.filter(
                 stdGrade => (stdGrade.column_id === Number(gradeId))
                 // eslint-disable-next-line
               )[0],
@@ -53,7 +49,6 @@ export class GradeData extends PureComponent {
         </TableCell>
       </Fragment>
     )
-  }
 }
 
-export default withXML(GradeData);
+export default GradeData;
