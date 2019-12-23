@@ -5,6 +5,7 @@ import GradeStudents from './GradeStudents';
 import PresencesHeader from './PresencesHeader';
 import PresencesData from './PresencesData';
 import GradeData from './GradeData';
+import * as L from 'list';
 
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -29,6 +30,7 @@ export class Grade extends PureComponent {
 
     const clickedId = this.props.studentClickedId;
     const subject = this.props.subject;
+
     let studentGradeData;
     let studentPresence;
     let presenceData;
@@ -38,9 +40,10 @@ export class Grade extends PureComponent {
       if (!subject.querySelector('grades').innerHTML.length)
         return null;
       const grade = subject.querySelector('columns');
-      grades = grade && JSON.parse(grade.innerHTML);
+      grades = grade && L.from(JSON.parse(grade.innerHTML));
       studentGradeData = subject.querySelector('students');
-      studentGradeData = grade && JSON.parse(studentGradeData.innerHTML);
+      studentGradeData = grade && L.from(JSON.parse(studentGradeData.innerHTML));
+      // console.log(studentGradeData);
     } else {
       let presence = subject.querySelector('presences').querySelector('presence');
       if (!presence)
@@ -85,20 +88,20 @@ export class Grade extends PureComponent {
                           : null
                       )
                     )
-                  : studentGradeData && studentGradeData.map(
+                  : studentGradeData.length && L.map(
                       student => (
                         clickedId === null || student.student_id.toString() === clickedId
-                          ?
-                          <TableRow key={student.student_id}>
+                          ? <TableRow key={student.student_id}>
                             {
                               <Fragment>
                                 <GradeStudents studentId={student.student_id} clickedIdFromGrade={clickedId} />
                                 <GradeData gradesFromGrade={grades} student={student} />
                               </Fragment>
                             }
-                          </TableRow>
-                        : null
-                      )
+                            </TableRow>
+                          : null
+                      ),
+                      studentGradeData
                     )
               }
             </TableBody>

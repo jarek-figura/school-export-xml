@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withXML } from '../contexts/XML';
+import * as L from 'list';
 
 import Box from '@material-ui/core/Box';
 
@@ -7,19 +8,21 @@ export class SubjectTeacher extends PureComponent {
 
   render() {
     const subject = this.props.subject;
-    const teachersTable = Array.from(subject.querySelector('teachers').querySelectorAll('teacher'));
+    const teachersTable = L.from(subject.querySelector('teachers').querySelectorAll('teacher'));
     const color = this.props.color;
 
+    let idx = 0;
     return (
       <Box fontSize={18} style={{ color: color, padding: '8px', margin: '4px 0', backgroundColor: '#ddd', maxWidth: '984px' }}>
-        {subject.querySelector('name').innerHTML} ({
-          teachersTable && teachersTable.map(
-            (teacher, idx) => (
-              <span key={idx}>
+        { subject.querySelector('name').innerHTML } ({
+          teachersTable && L.map(
+            teacher => (
+              <span key={teacher.querySelector('id').innerHTML}>
                 {this.props.teacherName[teacher.querySelector('id').innerHTML]}&nbsp;{this.props.teacherSurname[teacher.querySelector('id').innerHTML]}
-                {teachersTable.length > 1 && idx < teachersTable.length - 1 ? ', ' : ''}
+                {teachersTable.length > 1 && idx++ < teachersTable.length - 1 ? ', ' : ''}
               </span>
-            )
+            ),
+            teachersTable
           )
         })
       </Box>

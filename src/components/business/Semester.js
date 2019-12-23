@@ -3,6 +3,7 @@ import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
 import filterClass from './ClassFilter';
 import ClasaTutor from './ClasaTutor';
+// eslint-disable-next-line
 import * as L from 'list/methods';
 
 import Box from '@material-ui/core/Box';
