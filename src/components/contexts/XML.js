@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import * as L from 'list';
 
 const XMLContext = React.createContext();
 
@@ -8,15 +9,15 @@ export class XMLProvider extends PureComponent {
   state = {
     year: null,
     semester: null,
-    students: [],
-    studentUserName: {},
-    studentName: {},
-    studentSurname: {},
-    teachers: [],
-    teacherUserName: {},
-    teacherName: {},
-    teacherSurname: {},
-    grades: [],
+    students: L.empty(),
+    studentUserName: L.empty(),
+    studentName: L.empty(),
+    studentSurname: L.empty(),
+    teachers: L.empty(),
+    teacherUserName: L.empty(),
+    teacherName: L.empty(),
+    teacherSurname: L.empty(),
+    grades: L.empty(),
     searchUserName: '',
     searchName: '',
     searchSurname: '',
@@ -26,7 +27,7 @@ export class XMLProvider extends PureComponent {
     searchClass: '',
     studentClickedId: null,
     parsingTxt: '',
-    presencesTypes: [],
+    presencesTypes: L.empty(),
     showStudentPresences: false,
     showLessonsEntries: false,
     // behaviors: [],
@@ -38,28 +39,36 @@ export class XMLProvider extends PureComponent {
       const semester = year.querySelectorAll('semester');
       this.setState({ semester: semester });
 
-      const students = Array.from(school.children[1].children);
+      const students = L.from(school.children[1].children);
       this.setState({ students: students });
-      let studentId = {};
-      let studentNm = {};
-      let studentSn = {};
+
+      let studentId = L.empty();
+      let studentNm = L.empty();
+      let studentSn = L.empty();
       let personalData = '';
       let el;
-      for (el of students) {
+      L.forEach(el => {
         personalData = el.querySelector('personal_data').innerHTML;
         studentId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
         studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
         studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
-      }
+      }, students);
+      // for (el of students) {
+      //   personalData = el.querySelector('personal_data').innerHTML;
+      //   studentId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
+      //   studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
+      //   studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
+      // }
       this.setState({ studentUserName: studentId });
       this.setState({ studentName: studentNm });
       this.setState({ studentSurname: studentSn });
+      return null;
 
-      const teachers = Array.from(school.children[2].children);
+      const teachers = L.list(school.children[2].children);
       this.setState({ teachers: teachers });
-      let teacherId = {};
-      let teacherNm = {};
-      let teacherSn = {};
+      let teacherId = L.empty();
+      let teacherNm = L.empty();
+      let teacherSn = L.empty();
       for (el of teachers) {
         teacherId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
         teacherNm[el.firstChild.innerHTML] = el.querySelector('first_name').innerHTML;
@@ -69,8 +78,8 @@ export class XMLProvider extends PureComponent {
       this.setState({ teacherName: teacherNm });
       this.setState({ teacherSurname: teacherSn });
 
-      let presencesTypes = [];
-      let presType = Array.from(school.querySelector('presences_types').children);
+      let presencesTypes = L.empty();
+      let presType = L.list(school.querySelector('presences_types').children);
       for (el of presType) {
         presencesTypes.push(el.firstChild.innerHTML);
       }

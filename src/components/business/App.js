@@ -82,7 +82,7 @@ export class App extends PureComponent {
               {this.props.year && <Students />}
             </td>
             <td style={{ verticalAlign: 'top' }}>
-              {this.props.year && <StudentActivity />}
+              {/* {this.props.year && <StudentActivity />} */}
             </td>
           </tr>
         </tbody>

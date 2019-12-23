@@ -3,6 +3,7 @@ import { withXML } from '../contexts/XML';
 import filterStudents from './StudentsFilter';
 import SearchForm from './SearchForm';
 import './Students.css';
+import * as L from 'list';
 
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -29,6 +30,7 @@ export class Students extends PureComponent {
     }
 
     const students = filterStudents.apply(this);
+    return null;
 
     let adres;
     let personalData;
