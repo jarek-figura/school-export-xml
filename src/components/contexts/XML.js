@@ -6,7 +6,9 @@ const XMLContext = React.createContext();
 export const XMLConsumer = XMLContext.Consumer;
 
 export class XMLProvider extends PureComponent {
+
   state = {
+
     year: null,
     semester: null,
     students: L.empty(),
@@ -32,58 +34,52 @@ export class XMLProvider extends PureComponent {
     showLessonsEntries: false,
     // behaviors: [],
 
-    resetSchool: () => this.setState({ year: null }),
+    resetSchool: () => { this.setState({ year: null }) },
     updateSchool: school => {
       const year = school.querySelector('year');
-      this.setState({ year: year });
       const semester = year.querySelectorAll('semester');
-      this.setState({ semester: semester });
 
       const students = L.from(school.children[1].children);
-      this.setState({ students: students });
-
       let studentId = L.empty();
       let studentNm = L.empty();
       let studentSn = L.empty();
       let personalData = '';
-      let el;
       L.forEach(el => {
         personalData = el.querySelector('personal_data').innerHTML;
         studentId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
         studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
         studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
       }, students);
-      // for (el of students) {
-      //   personalData = el.querySelector('personal_data').innerHTML;
-      //   studentId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
-      //   studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
-      //   studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
-      // }
-      this.setState({ studentUserName: studentId });
-      this.setState({ studentName: studentNm });
-      this.setState({ studentSurname: studentSn });
-      return null;
 
-      const teachers = L.list(school.children[2].children);
-      this.setState({ teachers: teachers });
+      const teachers = L.from(school.children[2].children);
       let teacherId = L.empty();
       let teacherNm = L.empty();
       let teacherSn = L.empty();
-      for (el of teachers) {
+      L.forEach(el => {
         teacherId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
         teacherNm[el.firstChild.innerHTML] = el.querySelector('first_name').innerHTML;
         teacherSn[el.firstChild.innerHTML] = el.querySelector('last_name').innerHTML;
-      }
-      this.setState({ teacherUserName: teacherId });
-      this.setState({ teacherName: teacherNm });
-      this.setState({ teacherSurname: teacherSn });
+      }, teachers);
 
       let presencesTypes = L.empty();
-      let presType = L.list(school.querySelector('presences_types').children);
-      for (el of presType) {
-        presencesTypes.push(el.firstChild.innerHTML);
-      }
-      this.setState({ presencesTypes: presencesTypes });
+      let presType = L.from(school.querySelector('presences_types').children);
+      L.forEach(el => {
+        L.append(el.firstChild.innerHTML, presencesTypes);
+      }, presType);
+
+      this.setState({
+        year: year,
+        semester: semester,
+        students: students,
+        studentUserName: studentId,
+        studentName: studentNm,
+        studentSurname: studentSn,
+        teachers: teachers,
+        teacherUserName: teacherId,
+        teacherName: teacherNm,
+        teacherSurname: teacherSn,
+        presencesTypes: presencesTypes
+      });
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),

@@ -1,9 +1,12 @@
+import * as L from 'list';
+
 export default function filterSubjects(clasa, searchSubject) {
 
-  let subjects = Array.from(clasa.querySelectorAll('subject'));
+  let subjects = L.from(clasa.querySelectorAll('subject'));
 
-  subjects = subjects.filter(
-    sbj => sbj.querySelector('name').innerHTML.toLowerCase().includes(searchSubject)
+  subjects = L.filter(
+    sbj => sbj.querySelector('name').innerHTML.toLowerCase().includes(searchSubject),
+    subjects
   );
 
   return subjects;

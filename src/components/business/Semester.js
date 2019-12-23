@@ -3,6 +3,7 @@ import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
 import filterClass from './ClassFilter';
 import ClasaTutor from './ClasaTutor';
+import * as L from 'list/methods';
 
 import Box from '@material-ui/core/Box';
 
@@ -31,6 +32,7 @@ export class Semester extends PureComponent {
 
     const classes = filterClass(semester, this.props.searchClass.toLowerCase());
 
+    let idx = 0;
     return (
       <Fragment>
         <Box fontSize={22} className='semester'>
@@ -38,9 +40,9 @@ export class Semester extends PureComponent {
         </Box>
         {
           classes.map(
-            (clasa, idx) => (
-              clickedId === null || isStudentInClass(clickedId, clasa)
-              ? <span key={idx}>
+            (clasa) => (
+            clickedId === null || isStudentInClass(clickedId, clasa)
+              ? <span key={idx++}>
                   <Box fontSize={18} className='clasa'>
                     klasa: <ClasaTutor clasa={clasa} />
                   </Box>

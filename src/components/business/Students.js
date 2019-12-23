@@ -30,7 +30,6 @@ export class Students extends PureComponent {
     }
 
     const students = filterStudents.apply(this);
-    return null;
 
     let adres;
     let personalData;
@@ -80,7 +79,7 @@ export class Students extends PureComponent {
             </TableHead>
             <TableBody>
               {
-                students.map(
+                L.map(
                   student => (
                     // eslint-disable-next-line
                     personalData = student.querySelector('personal_data').innerHTML,
@@ -101,8 +100,7 @@ export class Students extends PureComponent {
                         </Typography>
                       </TableCell>
                     </TableRow>
-                  )
-                )
+                ), students)
               }
             </TableBody>
           </Table>
