@@ -9,47 +9,41 @@ export class GradeData extends PureComponent {
   render() {
 
     const grades = this.props.gradesFromGrade;
-    const gradesLen = grades && grades.length;
-    if (!gradesLen) return null;
+    const gradesId = grades && L.pluck('id', grades);
+    // const gradesLen = grades && grades.length;
+    // if (!gradesLen) return null;
 
     const student = this.props.student;
     const stdGrades = L.from(student.grades);
+    // console.log(stdGrades);
 
-    const studentId = student.student_id
-    // console.log(studentId); // student_id, grades
-    // console.log(student); // student_id, grades
-    // console.log(grades);  // grades header ids
-
-    //<grades><columns>
-    const gradesDescr = L.pluck('description', grades);
-    const gradesLabel = L.pluck('label', grades);
-    const gradesType = L.pluck('type', grades);
-    const gradesId = L.pluck('id', grades);
+    let gradesType = {};
     L.forEach(el => {
-
+      gradesType[el.id] = el.type;
     }, grades);
 
-    let stdGrdObj;
     let stdFinalGrade = null;
+    let stdObj;
 
     return (
       <Fragment>
         {stdFinalGrade = null}
         {
-          L.map(
+          gradesId && L.map(
             gradeId => (    // grade header id
               // eslint-disable-next-line
-              stdGrdObj = L.filter(stdGrade => stdGrade.column_id === gradeId, stdGrades),
-              console.log(gradesType),
-              gradesType && gradesType[gradeId] === 2
-              ? (stdFinalGrade = `${L.pluck('label', stdGrdObj).length ? L.pluck('label', stdGrdObj) : '0'} | ${L.pluck('percentage', stdGrdObj)}%`)
-              : <TableCell key={gradeId}>
-                {
-                  stdGrdObj && gradesType && gradesType[gradeId] !== 2
-                  ? `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%`
-                  : '—'
-                }
+              [stdObj] = L.filter(stdGrade => stdGrade.column_id === gradeId, stdGrades),
+              // console.log(stdObj && stdObj.label),
+              gradesType[gradeId] !== 2
+              ? <TableCell key={gradeId}>
+                  {
+                    stdObj && gradesType[gradeId] !== 2
+                    ? `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`
+                    : '—'
+                  }
                 </TableCell>
+              : (stdFinalGrade = stdObj && `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`, null)
+              // : null
             ), gradesId
           )
         }
@@ -62,21 +56,3 @@ export class GradeData extends PureComponent {
 }
 
 export default withXML(GradeData);
-
-        // Object.keys(gradesLabel).map(
-        //   gradeId => (
-        //     stdGrdObj = student.grades.filter(
-        //       stdGrade => (stdGrade.column_id === Number(gradeId))
-        //       // eslint-disable-next-line
-        //     )[0],
-        //     gradesType && gradesType[gradeId] === 2
-        //     ? (stdGrdObj && (stdFinalGrade = `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%`), console.log())
-        //     : <TableCell key={gradeId}>
-        //       {
-        //         stdGrdObj && gradesType && gradesType[gradeId] !== 2
-        //         ? `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%`
-        //         : '—'
-        //       }
-        //       </TableCell>
-        //   )
-        // )

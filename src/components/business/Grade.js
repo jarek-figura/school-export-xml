@@ -55,7 +55,7 @@ export class Grade extends PureComponent {
       presenceData = JSON.parse(presenceData);
       studentPresence = JSON.parse(presence.querySelector('students').innerHTML);
     }
-    
+
     return (
       <Fragment>
         <Paper elevation={0} style={{ border: '1px solid #e0e0e0', display: 'inline-block' }}>
@@ -88,7 +88,7 @@ export class Grade extends PureComponent {
                           : null
                       )
                     )
-                  : studentGradeData.length && L.map(
+                  : L.map(
                       student => (
                         clickedId === null || student.student_id.toString() === clickedId
                           ? <TableRow key={student.student_id}>
