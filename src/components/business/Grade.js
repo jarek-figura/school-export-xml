@@ -43,7 +43,6 @@ export class Grade extends PureComponent {
       grades = grade && L.from(JSON.parse(grade.innerHTML));
       studentGradeData = subject.querySelector('students');
       studentGradeData = grade && L.from(JSON.parse(studentGradeData.innerHTML));
-      // console.log(studentGradeData);
     } else {
       let presence = subject.querySelector('presences').querySelector('presence');
       if (!presence)
