@@ -6,9 +6,8 @@ import TableCell from '@material-ui/core/TableCell';
 function GradeData(props) {
 
   const grades = props.gradesFromGrade;
-  const gradesId = grades && L.pluck('id', grades);
-  const gradesLen = grades && grades.length;
-  if (!gradesLen) return null;
+  const gradesId = L.pluck('id', grades);
+  console.log(gradesId); return null;
 
   const student = props.student;
   const stdGrades = L.from(student.grades);
@@ -19,25 +18,26 @@ function GradeData(props) {
   }, grades);
 
   let stdFinalGrade = null;
-  let stdObj;
+  let stdObj = 0;
 
   return (
     <Fragment>
-      {stdFinalGrade = null}
+      {/* { stdFinalGrade = null } */}
       {
-        gradesId && L.map(
+        L.map(
           gradeId => (    // grade header id
+            console.log(gradeId)
             // eslint-disable-next-line
-            [stdObj] = L.filter(stdGrade => stdGrade.column_id === gradeId, stdGrades),
-            gradesType[gradeId] !== 2
-              ? <TableCell key={gradeId}>
-                {
-                  stdObj && gradesType[gradeId] !== 2
-                    ? `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`
-                    : '—'
-                }
-                </TableCell>
-              : (stdFinalGrade = stdObj && `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`, null)
+            // [stdObj] = L.filter(stdGrade => stdGrade.column_id === gradeId, stdGrades),
+            // gradesType[gradeId] !== 2
+            //   ? <TableCell key={gradeId}>
+            //     {
+            //       stdObj && gradesType[gradeId] !== 2
+            //         ? `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`
+            //         : '—'
+            //     }
+            //     </TableCell>
+            //   : (stdFinalGrade = stdObj && `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`, null)
           ), gradesId
         )
       }
