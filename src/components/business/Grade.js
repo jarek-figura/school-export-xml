@@ -51,7 +51,7 @@ export class Grade extends PureComponent {
       presenceData = parsePresence(presenceData);
       if (presenceData.length <= 2)
         return null;
-      presenceData = JSON.parse(presenceData);
+      presenceData = L.from(JSON.parse(presenceData));
       studentPresence = JSON.parse(presence.querySelector('students').innerHTML);
     }
 
@@ -74,9 +74,9 @@ export class Grade extends PureComponent {
               {
                 this.props.showStudentPresences
                   ? studentPresence && studentPresence.map(
-                      studentId => (
+                      (studentId, idx) => (
                         clickedId === null || studentId.toString() === clickedId
-                          ? <TableRow key={studentId}>
+                          ? <TableRow key={idx}>
                               {
                                 <Fragment>
                                   <GradeStudents studentId={studentId} clickedIdFromGrade={clickedId} />

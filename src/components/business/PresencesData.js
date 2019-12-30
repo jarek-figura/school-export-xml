@@ -1,4 +1,5 @@
 import React from 'react';
+import * as L from 'list';
 
 import TableCell from '@material-ui/core/TableCell';
 
@@ -19,7 +20,7 @@ function PresencesData(props) {
   const studentId = props.studentId;
 
   return (
-    presenceData && Array.from(presenceData).map(
+    presenceData && L.map(
       obj => (
         obj.students && obj.students.map(
           std => (
@@ -27,7 +28,8 @@ function PresencesData(props) {
             <TableCell key={std.student_id}>{presTypeTransl[presencesTypes[std.presence]]}</TableCell>
           )
         )
-      )
+      ),
+      presenceData
     )
   )
 }

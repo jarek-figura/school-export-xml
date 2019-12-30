@@ -29,7 +29,7 @@ export class XMLProvider extends PureComponent {
     searchClass: '',
     studentClickedId: null,
     parsingTxt: '',
-    presencesTypes: L.empty(),
+    presencesTypes: {},
     showStudentPresences: false,
     showLessonsEntries: false,
     // behaviors: [],
@@ -61,10 +61,10 @@ export class XMLProvider extends PureComponent {
         teacherSn[el.firstChild.innerHTML] = el.querySelector('last_name').innerHTML;
       }, teachers);
 
-      let presencesTypes = L.empty();
+      let presencesTypes = {};
       let presType = L.from(school.querySelector('presences_types').children);
       L.forEach(el => {
-        L.append(el.firstChild.innerHTML, presencesTypes);
+        presencesTypes[el.querySelector('value').innerHTML] = el.querySelector('name').innerHTML;
       }, presType);
 
       this.setState({

@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 export class LessonEntries extends PureComponent {
 
   render() {
-    return null;
 
     const lessonsHours = this.props.lessonsHours;
     const entries = this.props.subject.querySelector('lessons_entries');
