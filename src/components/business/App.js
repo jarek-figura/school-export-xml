@@ -27,7 +27,7 @@ export class App extends PureComponent {
 
     this.props.resetSchool();
     this.props.updateParsingTxt('Parsowanie pliku XML...');
-    this.props.handleShowStudentPresences(false);
+    this.props.handleMutualPresLessClick(false, false);
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onloadend = evt => {

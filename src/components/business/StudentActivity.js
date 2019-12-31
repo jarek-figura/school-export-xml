@@ -15,17 +15,9 @@ import CardContent from '@material-ui/core/CardContent';
 
 export class StudentActivity extends PureComponent {
 
-  handleResetStudent = () => {
-    this.props.handleStudentClick(null)
-  };
-  handlePresencesClick = () => {
-    this.props.handleShowStudentPresences(!this.props.showStudentPresences);
-    this.props.handleShowLessonEntries(false);
-  };
-  handleEntriesClick = () => {
-    this.props.handleShowLessonEntries(!this.props.showLessonEntries);
-    this.props.handleShowStudentPresences(false);
-  };
+  handleResetStudent = () => this.props.handleStudentClick(null);
+  handlePresencesClick = () => this.props.handleMutualPresLessClick(!this.props.showStudentPresences, false);
+  handleEntriesClick = () => this.props.handleMutualPresLessClick(false, !this.props.showLessonEntries);
 
   render() {
 
