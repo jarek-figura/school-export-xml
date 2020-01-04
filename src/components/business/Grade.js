@@ -35,15 +35,15 @@ export class Grade extends PureComponent {
     let studentPresence;
     let presenceData;
     let grades;
-    return null;
 
     if (!this.props.showStudentPresences) {
-      if (!subject.grades.length)
+      if (!subject.grades)
         return null;
-      const grade = subject.querySelector('columns');
-      grades = grade && L.from(JSON.parse(grade.innerHTML));
-      studentGradeData = subject.querySelector('students');
-      studentGradeData = grade && L.from(JSON.parse(studentGradeData.innerHTML));
+      const grade = subject.grades.columns;
+      grades = grade && L.from(JSON.parse(grade));
+      studentGradeData = subject.grades.students;
+      studentGradeData = grade && L.from(JSON.parse(studentGradeData));
+      // console.log(studentGradeData);
     } else {
       let presence = subject.querySelector('presences').querySelector('presence');
       if (!presence)
@@ -55,6 +55,8 @@ export class Grade extends PureComponent {
       presenceData = L.from(JSON.parse(presenceData));
       studentPresence = JSON.parse(presence.querySelector('students').innerHTML);
     }
+
+    // return null;
 
     return (
       <Fragment>

@@ -42,8 +42,8 @@ export class Semester extends PureComponent {
         </Box>
         {
           classes.map(
-            (clasa) => (
-            clickedId === null || isStudentInClass(clickedId, clasa)
+            clasa => (
+              clickedId === null || isStudentInClass(clickedId, clasa)
               ? <span key={idx++}>
                   <Box fontSize={18} className='clasa'>
                     klasa: <ClasaTutor clasa={clasa} />

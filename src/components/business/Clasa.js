@@ -16,10 +16,7 @@ export class Clasa extends PureComponent {
     const classStudents = clasa.students.student;
 
     let subjects = filterSubjects(clasa, this.props.searchSubject);
-    // console.log('fiterSubjects\n', subjects);
     subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
-    // console.log('filterTeachers - after\n', subjects);
-    // return null;
 
     return (
       <div>
@@ -27,7 +24,7 @@ export class Clasa extends PureComponent {
         L.map(
           subject => ( 
             <span key={subject.id}>
-              <SubjectTeacher subject={subject} color={subject.grades.length ? 'black' : '#888'} />
+              <SubjectTeacher subject={subject} color={subject.grades !== '' ? 'black' : '#888'} />
               {
                 this.props.showLessonEntries && L.from(subject.lessons_entries.entry).length
                   ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
