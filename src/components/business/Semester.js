@@ -3,16 +3,15 @@ import { withXML } from '../contexts/XML';
 import Clasa from './Clasa';
 import filterClass from './ClassFilter';
 import ClasaTutor from './ClasaTutor';
-// eslint-disable-next-line
 import * as L from 'list/methods';
 
 import Box from '@material-ui/core/Box';
 
 const isStudentInClass = (clickedId, clasa) => {
-  const students = Array.from(clasa.students.student);
+  const students = clasa.students.student;
   let std;
   for (std of students) {
-    if (std.firstChild.innerHTML === clickedId) {
+    if (std.id === clickedId) {
       return true;
     }
   }
@@ -41,7 +40,7 @@ export class Semester extends PureComponent {
           {`${semLabel}: ${semStart.toLocaleDateString('pl-PL')} - ${semEnd.toLocaleDateString('pl-PL')}`}
         </Box>
         {
-          classes.map(
+          L.map(
             clasa => (
               clickedId === null || isStudentInClass(clickedId, clasa)
               ? <span key={idx++}>
@@ -51,7 +50,7 @@ export class Semester extends PureComponent {
                   <Clasa clasa={clasa} lessonsHours={semester.lessons_hours.lesson_hour} />
                 </span>
               : null
-            )
+            ), classes
           )
         }
       </Fragment>

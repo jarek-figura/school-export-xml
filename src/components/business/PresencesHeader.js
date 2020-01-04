@@ -6,10 +6,10 @@ import TableCell from '@material-ui/core/TableCell';
 function PresencesHeader(props) {
 
   let lessonsHours = {};
-  let lessHours = Array.from(props.lessonsHours.querySelectorAll('lesson_hour'));
+  let lessHours = props.lessonsHours;
   let hour;
   for (hour of lessHours) {
-    lessonsHours[hour.querySelector('id').innerHTML] = hour.querySelector('label').innerHTML;
+    lessonsHours[hour.id] = hour.label;
   }
 
   const presenceData = props.presenceData;

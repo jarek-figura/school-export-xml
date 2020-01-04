@@ -15,6 +15,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+// TODO: always show all students in the class, regardless they have `grades` or not (the same for `presences`)
+
 const parsePresence = data => {
   data = data && data.length && data.replace(/u'/g, '\'');
   return data && data.length && data.replace(/'/g, '"');
@@ -43,20 +45,18 @@ export class Grade extends PureComponent {
       grades = grade && L.from(JSON.parse(grade));
       studentGradeData = subject.grades.students;
       studentGradeData = grade && L.from(JSON.parse(studentGradeData));
-      // console.log(studentGradeData);
     } else {
-      let presence = subject.querySelector('presences').querySelector('presence');
+      let presence = subject.presences.presence;
       if (!presence)
         return null;
-      presenceData = presence.querySelector('data').innerHTML;
+      presenceData = presence.data;
       presenceData = parsePresence(presenceData);
       if (presenceData.length <= 2)
         return null;
-      presenceData = L.from(JSON.parse(presenceData));
-      studentPresence = JSON.parse(presence.querySelector('students').innerHTML);
+      presenceData = JSON.parse(presenceData);
+      presenceData = L.from(presenceData);
+      studentPresence = JSON.parse(presence.students);
     }
-
-    // return null;
 
     return (
       <Fragment>
@@ -78,7 +78,7 @@ export class Grade extends PureComponent {
                 this.props.showStudentPresences
                   ? studentPresence && studentPresence.map(
                       (studentId, idx) => (
-                        clickedId === null || studentId.toString() === clickedId
+                        clickedId === null || studentId === clickedId
                           ? <TableRow key={idx}>
                               {
                                 <Fragment>
@@ -92,7 +92,7 @@ export class Grade extends PureComponent {
                     )
                   : L.map(
                       student => (
-                        clickedId === null || student.student_id.toString() === clickedId
+                        clickedId === null || student.student_id === clickedId
                           ? <TableRow key={student.student_id}>
                             {
                               <Fragment>

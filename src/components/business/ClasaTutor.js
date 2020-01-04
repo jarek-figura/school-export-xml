@@ -8,7 +8,6 @@ export class ClasaTutor extends PureComponent {
     const teachersTable = Object.values(clasa.tutors).flat();
 
     return (
-      console.log(`KLASA ${clasa.name}`),
       <span style={{ color: `${this.props.color}` }}>
         {clasa.name} ({
           teachersTable && teachersTable.map(
