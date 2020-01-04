@@ -13,7 +13,7 @@ export class Clasa extends PureComponent {
 
   render() {
     const clasa = this.props.clasa;
-    const classStudents = clasa.querySelector('students');
+    const classStudents = clasa.students.student;
 
     let subjects = filterSubjects(clasa, this.props.searchSubject);
     subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
@@ -23,10 +23,10 @@ export class Clasa extends PureComponent {
       {
         L.map(
           subject => ( 
-            <span key={subject.querySelector('id').innerHTML}>
-              <SubjectTeacher subject={subject} color={subject.querySelector('grades').innerHTML.length ? 'black' : '#888'} />
+            <span key={subject.id}>
+              <SubjectTeacher subject={subject} color={subject.grades.length ? 'black' : '#888'} />
               {
-                this.props.showLessonEntries && L.from(subject.querySelector('lessons_entries').querySelectorAll('entry')).length
+                this.props.showLessonEntries && L.from(subject.lessons_entries.entry).length
                   ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
                   : <Grade classStudents={classStudents} subject={subject} lessonsHours={this.props.lessonsHours} />
               }

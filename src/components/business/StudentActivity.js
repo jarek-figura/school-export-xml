@@ -31,7 +31,7 @@ export class StudentActivity extends PureComponent {
 
     const clickedId = this.props.studentClickedId;
     const userName = clickedId ? `${this.props.studentName[clickedId]} ${this.props.studentSurname[clickedId]} - ${this.props.studentUserName[clickedId]}` : 'Wszyscy';
-    const semester = this.props.semester && Array.from(this.props.semester);
+    const semester = this.props.semester;
 
     return (
       <span className='school'>

@@ -11,6 +11,8 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+var parser = require('fast-xml-parser');
+
 export class App extends PureComponent {
   state = {
     formError: null,
@@ -32,9 +34,21 @@ export class App extends PureComponent {
     reader.readAsText(file);
     reader.onloadend = evt => {
       const readerData = evt.target.result;
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(readerData, 'text/xml');
-      const school = xml.querySelector('school');
+      var jsonObj = parser.parse(readerData);
+      jsonObj = jsonObj.root.school;
+      delete jsonObj.lesson_plans;
+      const school = jsonObj;
+      // const year = school.years.year;
+      // const semesters = year.semesters;
+      // console.log(semesters);
+      // const students = school.students;
+      // console.log(students);
+      // const teachers = school.teachers;
+      // console.log(teachers);
+      // const presencesTypes = school.presences_types;
+      // console.log(presencesTypes);
+      // const gradeColumnTypes = school.grade_column_types;
+      // console.log(gradeColumnTypes);
       this.props.updateSchool(school);
     };
     this.setState({ formError: null });
@@ -44,8 +58,8 @@ export class App extends PureComponent {
 
     let yearStart, yearEnd;
     if (this.props.year) {
-      yearStart = new Date(this.props.year.querySelector('start').innerHTML);
-      yearEnd = new Date(this.props.year.querySelector('end').innerHTML);
+      yearStart = new Date(this.props.year.start);
+      yearEnd = new Date(this.props.year.end);
     }
 
     return (

@@ -36,46 +36,46 @@ export class XMLProvider extends PureComponent {
 
     resetSchool: () => { this.setState({ year: null }) },
     updateSchool: school => {
-      const year = school.querySelector('year');
-      const semester = year.querySelectorAll('semester');
+      const year = school.years.year;
+      const semester = year.semesters.semester;
 
-      const students = L.from(school.children[1].children);
-      let studentId = L.empty();
-      let studentNm = L.empty();
-      let studentSn = L.empty();
+      const students = L.from(school.students.student);
+      let studentUn = {};
+      let studentNm = {};
+      let studentSn = {};
       let personalData = '';
       L.forEach(el => {
-        personalData = el.querySelector('personal_data').innerHTML;
-        studentId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
-        studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
-        studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
+        personalData = el.personal_data;
+        studentUn[el.id] = el.username;
+        studentNm[el.id] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
+        studentSn[el.id] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
       }, students);
 
-      const teachers = L.from(school.children[2].children);
-      let teacherId = L.empty();
-      let teacherNm = L.empty();
-      let teacherSn = L.empty();
+      const teachers = L.from(school.teachers.teacher);
+      let teacherUn = {};
+      let teacherNm = {};
+      let teacherSn = {};
       L.forEach(el => {
-        teacherId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
-        teacherNm[el.firstChild.innerHTML] = el.querySelector('first_name').innerHTML;
-        teacherSn[el.firstChild.innerHTML] = el.querySelector('last_name').innerHTML;
+        teacherUn[el.id] = el.username;
+        teacherNm[el.id] = el.first_name;
+        teacherSn[el.id] = el.last_name;
       }, teachers);
 
       let presencesTypes = {};
-      let presType = L.from(school.querySelector('presences_types').children);
+      let presType = L.from(school.presences_types.presence_type);
       L.forEach(el => {
-        presencesTypes[el.querySelector('value').innerHTML] = el.querySelector('name').innerHTML;
+        presencesTypes[el.value] = el.name;
       }, presType);
 
       this.setState({
         year: year,
         semester: semester,
         students: students,
-        studentUserName: studentId,
+        studentUserName: studentUn,
         studentName: studentNm,
         studentSurname: studentSn,
         teachers: teachers,
-        teacherUserName: teacherId,
+        teacherUserName: teacherUn,
         teacherName: teacherNm,
         teacherSurname: teacherSn,
         presencesTypes: presencesTypes
