@@ -16,7 +16,10 @@ export class Clasa extends PureComponent {
     const classStudents = clasa.students.student;
 
     let subjects = filterSubjects(clasa, this.props.searchSubject);
+    // console.log('fiterSubjects\n', subjects);
     subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
+    // console.log('filterTeachers - after\n', subjects);
+    // return null;
 
     return (
       <div>

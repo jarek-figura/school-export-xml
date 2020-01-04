@@ -35,9 +35,10 @@ export class Grade extends PureComponent {
     let studentPresence;
     let presenceData;
     let grades;
+    return null;
 
     if (!this.props.showStudentPresences) {
-      if (!subject.querySelector('grades').innerHTML.length)
+      if (!subject.grades.length)
         return null;
       const grade = subject.querySelector('columns');
       grades = grade && L.from(JSON.parse(grade.innerHTML));
