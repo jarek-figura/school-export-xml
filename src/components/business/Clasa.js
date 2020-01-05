@@ -26,7 +26,7 @@ export class Clasa extends PureComponent {
             <span key={subject.id}>
               <SubjectTeacher subject={subject} color={subject.grades !== '' ? 'black' : '#888'} />
               {
-                this.props.showLessonEntries && L.from(subject.lessons_entries.entry).length
+                this.props.showLessonEntries && subject.lessons_entries.entry
                   ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
                   : <Grade classStudents={classStudents} subject={subject} lessonsHours={this.props.lessonsHours} />
               }
