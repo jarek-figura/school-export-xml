@@ -1,31 +1,40 @@
+import * as L from 'list';
+
 export default function filterTeachers(subjects, teacherName, teacherSurname, searchTeacherName, searchTeacherSurname) {
 
   let teacher = '';
-  let teachersTable = [];
-  subjects = subjects.filter(
+  let teachersTable = L.empty();
+
+  subjects = L.filter(
     sbj => (
       // eslint-disable-next-line
-      teachersTable = Array.from(sbj.querySelector('teachers').querySelectorAll('teacher')),
-      teachersTable && teachersTable.filter(
+      teachersTable = L.from(Object.values(sbj.teachers).flat()),
+      teachersTable.length && L.filter(
         teach => (
           // eslint-disable-next-line
-          teacher = teacherName[teach.querySelector('id').innerHTML],
+          teacher = teacherName[teach.id],
           teacher && teacher.toLowerCase().includes(searchTeacherName.toLowerCase())
-        )
+        ),
+        teachersTable
       ).length
-    )
-  ).filter(
+    ),
+    subjects
+  )
+
+  subjects = L.filter(
     sbj => (
       // eslint-disable-next-line
-      teachersTable = Array.from(sbj.querySelector('teachers').querySelectorAll('teacher')),
-      teachersTable && teachersTable.filter(
+      teachersTable = L.from(Object.values(sbj.teachers).flat()),
+      teachersTable.length && L.filter(
         teach => (
           // eslint-disable-next-line
-          teacher = teacherSurname[teach.querySelector('id').innerHTML],
+          teacher = teacherSurname[teach.id],
           teacher && teacher.toLowerCase().includes(searchTeacherSurname.toLowerCase())
-        )
+        ),
+        teachersTable
       ).length
-    )
+    ),
+    subjects
   );
 
   return subjects;

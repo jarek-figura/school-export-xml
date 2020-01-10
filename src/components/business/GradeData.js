@@ -1,59 +1,49 @@
-import React, { PureComponent, Fragment } from 'react';
-import { withXML } from '../contexts/XML';
+import React, { Fragment } from 'react';
+import * as L from 'list';
 
 import TableCell from '@material-ui/core/TableCell';
 
-// TODO: line 40 - dlaczego oceny 'Final' działa z console.log, a bez tego nie działa dobrze?
+function GradeData(props) {
 
-export class GradeData extends PureComponent {
+  const grades = props.gradesFromGrade;
+  const gradesId = L.toArray(L.pluck('id', grades));
 
-  render() {
+  const student = props.student;
+  const stdGrades = L.from(student.grades);
 
-    const grades = this.props.gradesFromGrade;
-    const student = this.props.student;
-    let gradesDescr = {};
-    let gradesLabel = {};
-    let gradesType = {};
-    let gradesLen = grades && grades.length;
-    if (gradesLen) {
-      for (let i = 0; i < gradesLen; i++) {
-        gradesDescr[grades[i].id] = grades[i].description;
-        gradesLabel[grades[i].id] = grades[i].label;
-        gradesType[grades[i].id] = grades[i].type;
-      }
-    }
+  let gradesType = {};
+  L.forEach(el => {
+    gradesType[el.id] = el.type;
+  }, grades);
 
-    let stdGrdObj = {};
-    let stdFinalGrade = '';
+  let stdFinalGrade = null;
+  let stdObj = 0;
 
-    return (
-      <Fragment>
-        {stdFinalGrade = null}
-        {
-          Object.keys(gradesLabel).map(
-            gradeId => (
-              stdGrdObj = student.grades.filter(
-                stdGrade => (stdGrade.column_id === Number(gradeId))
-                // eslint-disable-next-line
-              )[0],
-              gradesType && gradesType[gradeId] === 2
-              ? (stdGrdObj && (stdFinalGrade = `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%`), console.log())
-              : <TableCell key={gradeId}>
+  return (
+    <Fragment>
+      { stdFinalGrade = null }
+      {
+        gradesId.map(
+          gradeId => (    // grade header id
+            // eslint-disable-next-line
+            [stdObj] = L.filter(stdGrade => stdGrade.column_id === gradeId, stdGrades),
+            gradesType[gradeId] !== 2
+              ? <TableCell key={gradeId}>
                 {
-                  stdGrdObj && gradesType && gradesType[gradeId] !== 2
-                  ? `${stdGrdObj.label ? stdGrdObj.label : '0'} | ${stdGrdObj.percentage}%`
-                  : '—'
+                  stdObj && gradesType[gradeId] !== 2
+                    ? `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`
+                    : '—'
                 }
                 </TableCell>
-            )
+              : (stdFinalGrade = stdObj && `${stdObj.label ? stdObj.label : '0'} | ${stdObj.percentage}%`, null)
           )
-        }
-        <TableCell style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0', fontWeight: 'bold', color: 'maroon', whiteSpace: 'nowrap' }}>
-          {stdFinalGrade ? stdFinalGrade : '—'}
-        </TableCell>
-      </Fragment>
-    )
-  }
+        )
+      }
+      <TableCell style={{ borderLeft: '1px solid #e0e0e0', borderRight: '1px solid #e0e0e0', fontWeight: 'bold', color: 'maroon', whiteSpace: 'nowrap' }}>
+        {stdFinalGrade ? stdFinalGrade : '—'}
+      </TableCell>
+    </Fragment>
+  )
 }
 
-export default withXML(GradeData);
+export default GradeData;

@@ -3,6 +3,7 @@ import { withXML } from '../contexts/XML';
 import filterStudents from './StudentsFilter';
 import SearchForm from './SearchForm';
 import './Students.css';
+import * as L from 'list';
 
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -78,29 +79,28 @@ export class Students extends PureComponent {
             </TableHead>
             <TableBody>
               {
-                students.map(
+                L.map(
                   student => (
                     // eslint-disable-next-line
-                    personalData = student.querySelector('personal_data').innerHTML,
+                    personalData = student.personal_data,
                     adres = personalData !== '' && 'adres' in JSON.parse(personalData) ? JSON.parse(personalData).adres : null,
                     <TableRow
-                      key={student.firstChild.innerHTML}
-                      onClick={() => this.handleClick(student.firstChild.innerHTML)}
+                      key={student.id}
+                      onClick={() => this.handleClick(student.id)}
                       className='student'
                     >
                       <TableCell>
-                        <Typography color={`${student.firstChild.innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
+                        <Typography color={`${student.id === clickedId ? colorName[clickedId] : 'initial'}`}>
                           {adres && 'name' in adres && adres.name} {adres && 'surname' in adres && adres.surname}
                         </Typography>
                       </TableCell>
                       <TableCell>
-                        <Typography color={`${student.firstChild.innerHTML === clickedId ? colorName[clickedId] : 'initial'}`}>
-                          {student.querySelector('username').innerHTML}
+                        <Typography color={`${student.id === clickedId ? colorName[clickedId] : 'initial'}`}>
+                          {student.username}
                         </Typography>
                       </TableCell>
                     </TableRow>
-                  )
-                )
+                ), students)
               }
             </TableBody>
           </Table>

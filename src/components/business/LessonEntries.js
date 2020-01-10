@@ -13,8 +13,7 @@ export class LessonEntries extends PureComponent {
   render() {
 
     const lessonsHours = this.props.lessonsHours;
-    const entries = this.props.subject.querySelector('lessons_entries');
-    const entry = Array.from(entries.querySelectorAll('entry'));
+    const entry = Object.values(this.props.subject.lessons_entries).flat();
 
     return (
       <Fragment>
@@ -39,9 +38,9 @@ export class LessonEntries extends PureComponent {
                     entry.map(
                       (obj, idx) => (
                         <TableRow key={idx}>
-                          <TableCell style={{ whiteSpace: 'nowrap' }}>{obj.querySelector('date').innerHTML}</TableCell>
-                          <TableCell style={{ borderRight: '1px solid #e0e0e0' }}>{lessonsHours[obj.querySelector('lesson_hour_id').innerHTML]}</TableCell>
-                          <TableCell>{obj.querySelector('title').innerHTML}</TableCell>
+                          <TableCell style={{ whiteSpace: 'nowrap' }}>{obj.date}</TableCell>
+                          <TableCell style={{ borderRight: '1px solid #e0e0e0' }}>{lessonsHours[obj.lesson_hour_id]}</TableCell>
+                          <TableCell>{obj.title}</TableCell>
                         </TableRow>
                       )
                     )

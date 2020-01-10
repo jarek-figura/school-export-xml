@@ -5,6 +5,7 @@ import GradeStudents from './GradeStudents';
 import PresencesHeader from './PresencesHeader';
 import PresencesData from './PresencesData';
 import GradeData from './GradeData';
+import * as L from 'list';
 
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -13,6 +14,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
+// TODO: always show all students in the class, regardless they have `grades` or not (the same for `presences`)
 
 const parsePresence = data => {
   data = data && data.length && data.replace(/u'/g, '\'');
@@ -29,30 +32,32 @@ export class Grade extends PureComponent {
 
     const clickedId = this.props.studentClickedId;
     const subject = this.props.subject;
+
     let studentGradeData;
     let studentPresence;
     let presenceData;
     let grades;
 
     if (!this.props.showStudentPresences) {
-      if (!subject.querySelector('grades').innerHTML.length)
+      if (!subject.grades)
         return null;
-      const grade = subject.querySelector('columns');
-      grades = grade && JSON.parse(grade.innerHTML);
-      studentGradeData = subject.querySelector('students');
-      studentGradeData = grade && JSON.parse(studentGradeData.innerHTML);
+      const grade = subject.grades.columns;
+      grades = grade && L.from(JSON.parse(grade));
+      studentGradeData = subject.grades.students;
+      studentGradeData = grade && L.from(JSON.parse(studentGradeData));
     } else {
-      let presence = subject.querySelector('presences').querySelector('presence');
+      let presence = subject.presences.presence;
       if (!presence)
         return null;
-      presenceData = presence.querySelector('data').innerHTML;
+      presenceData = presence.data;
       presenceData = parsePresence(presenceData);
       if (presenceData.length <= 2)
         return null;
       presenceData = JSON.parse(presenceData);
-      studentPresence = JSON.parse(presence.querySelector('students').innerHTML);
+      presenceData = L.from(presenceData);
+      studentPresence = JSON.parse(presence.students);
     }
-    
+
     return (
       <Fragment>
         <Paper elevation={0} style={{ border: '1px solid #e0e0e0', display: 'inline-block' }}>
@@ -72,9 +77,9 @@ export class Grade extends PureComponent {
               {
                 this.props.showStudentPresences
                   ? studentPresence && studentPresence.map(
-                      studentId => (
-                        clickedId === null || studentId.toString() === clickedId
-                          ? <TableRow key={studentId}>
+                      (studentId, idx) => (
+                        clickedId === null || studentId === clickedId
+                          ? <TableRow key={idx}>
                               {
                                 <Fragment>
                                   <GradeStudents studentId={studentId} clickedIdFromGrade={clickedId} />
@@ -85,20 +90,20 @@ export class Grade extends PureComponent {
                           : null
                       )
                     )
-                  : studentGradeData && studentGradeData.map(
+                  : L.map(
                       student => (
-                        clickedId === null || student.student_id.toString() === clickedId
-                          ?
-                          <TableRow key={student.student_id}>
+                        clickedId === null || student.student_id === clickedId
+                          ? <TableRow key={student.student_id}>
                             {
                               <Fragment>
                                 <GradeStudents studentId={student.student_id} clickedIdFromGrade={clickedId} />
                                 <GradeData gradesFromGrade={grades} student={student} />
                               </Fragment>
                             }
-                          </TableRow>
-                        : null
-                      )
+                            </TableRow>
+                          : null
+                      ),
+                      studentGradeData
                     )
               }
             </TableBody>

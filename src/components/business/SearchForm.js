@@ -34,7 +34,7 @@ class SearchForm extends PureComponent {
       >
         <TextField
           style={{ maxWidth: this.props.width, backgroundColor: '#ffffffbb' }}
-          id='filled-adornment-extra-dense'
+          // id='filled-adornment-extra-dense'
           variant='outlined'
           margin='dense'
           label={this.props.label}

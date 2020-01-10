@@ -1,22 +1,25 @@
 import React, { PureComponent } from 'react';
+import * as L from 'list';
 
 const XMLContext = React.createContext();
 
 export const XMLConsumer = XMLContext.Consumer;
 
 export class XMLProvider extends PureComponent {
+
   state = {
+
     year: null,
     semester: null,
-    students: [],
-    studentUserName: {},
-    studentName: {},
-    studentSurname: {},
-    teachers: [],
-    teacherUserName: {},
-    teacherName: {},
-    teacherSurname: {},
-    grades: [],
+    students: L.empty(),
+    studentUserName: L.empty(),
+    studentName: L.empty(),
+    studentSurname: L.empty(),
+    teachers: L.empty(),
+    teacherUserName: L.empty(),
+    teacherName: L.empty(),
+    teacherSurname: L.empty(),
+    grades: L.empty(),
     searchUserName: '',
     searchName: '',
     searchSurname: '',
@@ -26,53 +29,52 @@ export class XMLProvider extends PureComponent {
     searchClass: '',
     studentClickedId: null,
     parsingTxt: '',
-    presencesTypes: [],
+    presencesTypes: {},
     showStudentPresences: false,
     showLessonsEntries: false,
 
-    resetSchool: () => this.setState({ year: null }),
+    resetSchool: () => { this.setState({ year: null }) },
     updateSchool: school => {
-      const year = school.querySelector('year');
-      const semester = year.querySelectorAll('semester');
+      const year = school.years.year;
+      const semester = year.semesters.semester;
 
-      const students = Array.from(school.children[1].children);
-      let studentId = {};
+      const students = L.from(school.students.student);
+      let studentUn = {};
       let studentNm = {};
       let studentSn = {};
       let personalData = '';
-      let el;
-      for (el of students) {
-        personalData = el.querySelector('personal_data').innerHTML;
-        studentId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
-        studentNm[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
-        studentSn[el.firstChild.innerHTML] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
-      }
+      L.forEach(el => {
+        personalData = el.personal_data;
+        studentUn[el.id] = el.username;
+        studentNm[el.id] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.name : '';
+        studentSn[el.id] = personalData && JSON.parse(personalData).hasOwnProperty('adres') ? JSON.parse(personalData).adres.surname : '';
+      }, students);
 
-      const teachers = Array.from(school.children[2].children);
-      let teacherId = {};
+      const teachers = L.from(school.teachers.teacher);
+      let teacherUn = {};
       let teacherNm = {};
       let teacherSn = {};
-      for (el of teachers) {
-        teacherId[el.firstChild.innerHTML] = el.querySelector('username').innerHTML;
-        teacherNm[el.firstChild.innerHTML] = el.querySelector('first_name').innerHTML;
-        teacherSn[el.firstChild.innerHTML] = el.querySelector('last_name').innerHTML;
-      }
+      L.forEach(el => {
+        teacherUn[el.id] = el.username;
+        teacherNm[el.id] = el.first_name;
+        teacherSn[el.id] = el.last_name;
+      }, teachers);
 
-      let presencesTypes = [];
-      let presType = Array.from(school.querySelector('presences_types').children);
-      for (el of presType) {
-        presencesTypes.push(el.firstChild.innerHTML);
-      }
+      let presencesTypes = {};
+      let presType = L.from(school.presences_types.presence_type);
+      L.forEach(el => {
+        presencesTypes[el.value] = el.name;
+      }, presType);
 
       this.setState({
         year: year,
         semester: semester,
         students: students,
-        studentUserName: studentId,
+        studentUserName: studentUn,
         studentName: studentNm,
         studentSurname: studentSn,
         teachers: teachers,
-        teacherUserName: teacherId,
+        teacherUserName: teacherUn,
         teacherName: teacherNm,
         teacherSurname: teacherSn,
         presencesTypes: presencesTypes
