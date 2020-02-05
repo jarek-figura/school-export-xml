@@ -28,12 +28,31 @@ export class XMLProvider extends PureComponent {
     searchSubject: '',
     searchClass: '',
     studentClickedId: null,
+    subjectClickedId: null,
     parsingTxt: '',
     presencesTypes: {},
     showStudentPresences: false,
     showLessonsEntries: false,
 
-    resetSchool: () => { this.setState({ year: null }) },
+    resetSchool: () => {
+      this.setState({
+        year: null,
+        semester: null,
+        searchUserName: '',
+        searchName: '',
+        searchSurname: '',
+        searchTeacherName: '',
+        searchTeacherSurname: '',
+        searchSubject: '',
+        searchClass: '',
+        studentClickedId: null,
+        subjectClickedId: null,
+        presencesTypes: {},
+        showStudentPresences: false,
+        showLessonsEntries: false
+      })
+    },
+
     updateSchool: school => {
       const year = school.years.year;
       const semester = year.semesters.semester;
@@ -82,6 +101,7 @@ export class XMLProvider extends PureComponent {
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),
+    handleSubjectClick: id => this.setState({ subjectClickedId: id }),
     updateSearchUser: text => this.setState({ searchUserName: text }),
     updateSearchName: text => this.setState({ searchName: text }),
     updateSearchSurname: text => this.setState({ searchSurname: text }),

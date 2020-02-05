@@ -28,7 +28,7 @@ export class App extends PureComponent {
     this.setState({ fileName: file.name })
 
     this.props.resetSchool();
-    this.props.updateParsingTxt('Parsowanie pliku XML...');
+    // this.props.updateParsingTxt('Parsowanie pliku XML...');
     this.props.handleMutualPresLessClick(false, false);
     const reader = new FileReader();
     reader.readAsText(file);
@@ -38,17 +38,6 @@ export class App extends PureComponent {
       jsonObj = jsonObj.root.school;
       delete jsonObj.lesson_plans;
       const school = jsonObj;
-      // const year = school.years.year;
-      // const semesters = year.semesters;
-      // console.log(semesters);
-      // const students = school.students;
-      // console.log(students);
-      // const teachers = school.teachers;
-      // console.log(teachers);
-      // const presencesTypes = school.presences_types;
-      // console.log(presencesTypes);
-      // const gradeColumnTypes = school.grade_column_types;
-      // console.log(gradeColumnTypes);
       this.props.updateSchool(school);
     };
     this.setState({ formError: null });

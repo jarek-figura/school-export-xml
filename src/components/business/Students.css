@@ -24,6 +24,30 @@
   background-color: #cde;
 }
 
+.subject, .subject-clicked {
+  padding: 8px;
+  margin: 4px 0;
+  max-width: 984px;
+}
+
+.subject {
+  background-color: #ddd;
+}
+
+.subject:hover {
+  cursor: pointer;
+  background-color: #def !important;
+}
+
+.subject-clicked:hover {
+  cursor: pointer;
+  background-color: rgb(98, 165, 233) !important;
+}
+
+.subject-clicked {
+  background-color: rgb(135, 187, 240);
+}
+
 .student-clicked {
   background-color: #bcd;
 }
