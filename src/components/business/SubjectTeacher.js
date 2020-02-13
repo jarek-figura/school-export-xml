@@ -4,7 +4,10 @@ import * as L from 'list';
 
 export class SubjectTeacher extends PureComponent {
 
-  handleClick = id => { this.props.handleSubjectClick(id) };
+  handleClick = (id) => {
+    this.props.handleSubjectClick(id);
+    this.props.handleSecondClick();
+  };
 
   render() {
     const subject = this.props.subject;
@@ -16,7 +19,6 @@ export class SubjectTeacher extends PureComponent {
     return (
       <div
         style={{ color: color }}
-        // className='subject'
         className={`${clickedId && clickedId === this.props.id ? 'subject-clicked' : 'subject'}`}
         onClick={() => this.handleClick(this.props.id)}
       >

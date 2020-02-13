@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Person from '@material-ui/icons/Person';
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -18,6 +19,7 @@ export class StudentActivity extends PureComponent {
   handleResetStudent = () => this.props.handleStudentClick(null);
   handlePresencesClick = () => this.props.handleMutualPresLessClick(!this.props.showStudentPresences, false);
   handleEntriesClick = () => this.props.handleMutualPresLessClick(false, !this.props.showLessonEntries);
+  handleEverythingClick = () => this.props.handleShowEverything(!this.props.showEverything);
 
   render() {
 
@@ -29,7 +31,12 @@ export class StudentActivity extends PureComponent {
       <span className='school'>
         <Card className='school-top' style={{ backgroundColor: '#ffeeff' }}>
           <CardContent>
-            <Box fontSize='h5.fontSize' mb={2}>Oceny i obecności uczniów</Box>
+            <Box fontSize='h5.fontSize' mb={2}>Oceny i obecności uczniów&nbsp;&nbsp;<Button
+              variant="contained"
+              onClick={this.handleEverythingClick}
+              color={`${this.props.showEverything ? 'secondary' : 'default'}`}
+            ><ReportProblemIcon />&nbsp;{`${this.props.showEverything ? 'SCHOWAJ' : 'POKAŻ'}`}</Button>
+            </Box>
             <Box fontSize='h6.fontSize' mb={2}>Uczeń: <span style={{ color: `${clickedId ? '#F2105A' : '#4054B2'}` }}><Person style={{ marginBottom: '-4px' }} /> {userName}</span></Box>
             <Button
               variant="contained"

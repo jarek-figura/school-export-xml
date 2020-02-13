@@ -33,11 +33,21 @@ export class XMLProvider extends PureComponent {
     presencesTypes: {},
     showStudentPresences: false,
     showLessonsEntries: false,
+    showEverything: false,
 
     resetSchool: () => {
       this.setState({
         year: null,
         semester: null,
+        students: L.empty(),
+        studentUserName: L.empty(),
+        studentName: L.empty(),
+        studentSurname: L.empty(),
+        teachers: L.empty(),
+        teacherUserName: L.empty(),
+        teacherName: L.empty(),
+        teacherSurname: L.empty(),
+        grades: L.empty(),
         searchUserName: '',
         searchName: '',
         searchSurname: '',
@@ -47,16 +57,17 @@ export class XMLProvider extends PureComponent {
         searchClass: '',
         studentClickedId: null,
         subjectClickedId: null,
+        parsingTxt: '',
         presencesTypes: {},
         showStudentPresences: false,
-        showLessonsEntries: false
+        showLessonsEntries: false,
+        showEverything: false
       })
     },
 
     updateSchool: school => {
       const year = school.years.year;
       const semester = year.semesters.semester;
-
       const students = L.from(school.students.student);
       let studentUn = {};
       let studentNm = {};
@@ -110,6 +121,7 @@ export class XMLProvider extends PureComponent {
     updateSearchTeacherName: text => this.setState({ searchTeacherName: text }),
     updateSearchTeacherSurname: text => this.setState({ searchTeacherSurname: text }),
     updateParsingTxt: text => this.setState({ parsingTxt: text }),
+    handleShowEverything: flag => this.setState({ showEverything: flag }),
     handleMutualPresLessClick: (flag1, flag2) => this.setState({
       showStudentPresences: flag1,
       showLessonEntries: flag2
