@@ -11,9 +11,22 @@ import * as L from 'list/methods';
 
 export class Clasa extends PureComponent {
 
+  state = {
+    isClicked: true
+  };
+
+  handleSecondClick = () => {
+    this.setState({ isClicked: !this.state.isClicked });
+    if (!this.state.isClicked) {
+      this.props.handleSubjectClick(null);
+    }
+  }
+
   render() {
     const clasa = this.props.clasa;
     const classStudents = clasa.students.student;
+    const clickedId = this.props.subjectClickedId;
+    const everything = this.props.showEverything;
 
     let subjects = filterSubjects(clasa, this.props.searchSubject);
     subjects = filterTeachers(subjects, this.props.teacherName, this.props.teacherSurname, this.props.searchTeacherName, this.props.searchTeacherSurname);
@@ -24,11 +37,26 @@ export class Clasa extends PureComponent {
         L.map(
           subject => ( 
             <span key={subject.id}>
-              <SubjectTeacher subject={subject} color={subject.grades !== '' ? 'black' : '#888'} />
+              <SubjectTeacher
+                id={subject.id}
+                subject={subject}
+                color={subject.grades !== '' ? 'black' : '#888'}
+                handleSecondClick={this.handleSecondClick}
+              />
               {
-                this.props.showLessonEntries && subject.lessons_entries.entry
-                  ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
-                  : <Grade classStudents={classStudents} subject={subject} lessonsHours={this.props.lessonsHours} />
+                everything
+                ? (
+                  this.props.showLessonEntries && subject.lessons_entries.entry
+                    ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
+                    : <Grade classStudents={classStudents} subject={subject} lessonsHours={this.props.lessonsHours} />
+                  )
+                : clickedId && !this.state.isClicked && clickedId === subject.id
+                  ? (
+                      this.props.showLessonEntries && subject.lessons_entries.entry
+                        ? <LessonEntries lessonsHours={this.props.lessonsHours} subject={subject} />
+                        : <Grade classStudents={classStudents} subject={subject} lessonsHours={this.props.lessonsHours} />
+                    )
+                  : null
               }
             </span>
           ),

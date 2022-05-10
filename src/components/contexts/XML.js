@@ -28,10 +28,12 @@ export class XMLProvider extends PureComponent {
     searchSubject: '',
     searchClass: '',
     studentClickedId: null,
+    subjectClickedId: null,
     parsingTxt: '',
     presencesTypes: {},
     showStudentPresences: false,
     showLessonsEntries: false,
+    showEverything: false,
 
     resetSchool: () => {
         this.setState({
@@ -110,6 +112,7 @@ export class XMLProvider extends PureComponent {
     },
 
     handleStudentClick: id => this.setState({ studentClickedId: id }),
+    handleSubjectClick: id => this.setState({ subjectClickedId: id }),
     updateSearchUser: text => this.setState({ searchUserName: text }),
     updateSearchName: text => this.setState({ searchName: text }),
     updateSearchSurname: text => this.setState({ searchSurname: text }),
@@ -118,6 +121,7 @@ export class XMLProvider extends PureComponent {
     updateSearchTeacherName: text => this.setState({ searchTeacherName: text }),
     updateSearchTeacherSurname: text => this.setState({ searchTeacherSurname: text }),
     updateParsingTxt: text => this.setState({ parsingTxt: text }),
+    handleShowEverything: flag => this.setState({ showEverything: flag }),
     handleMutualPresLessClick: (flag1, flag2) => this.setState({
       showStudentPresences: flag1,
       showLessonEntries: flag2

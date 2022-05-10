@@ -2,18 +2,26 @@ import React, { PureComponent } from 'react';
 import { withXML } from '../contexts/XML';
 import * as L from 'list';
 
-import Box from '@material-ui/core/Box';
-
 export class SubjectTeacher extends PureComponent {
+
+  handleClick = (id) => {
+    this.props.handleSubjectClick(id);
+    this.props.handleSecondClick();
+  };
 
   render() {
     const subject = this.props.subject;
     const teachersTable = L.from(Object.values(subject.teachers).flat());
     const color = this.props.color;
+    const clickedId = this.props.subjectClickedId;
 
     let idx = 0;
     return (
-      <Box fontSize={18} style={{ color: color, padding: '8px', margin: '4px 0', backgroundColor: '#ddd', maxWidth: '984px' }}>
+      <div
+        style={{ color: color }}
+        className={`${clickedId && clickedId === this.props.id ? 'subject-clicked' : 'subject'}`}
+        onClick={() => this.handleClick(this.props.id)}
+      >
         { subject.name } ({
           teachersTable && L.map(
             teacher => (
@@ -25,7 +33,7 @@ export class SubjectTeacher extends PureComponent {
             teachersTable
           )
         })
-      </Box>
+      </div>
     );
   }
 }
