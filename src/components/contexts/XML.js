@@ -34,30 +34,33 @@ export class XMLProvider extends PureComponent {
     showLessonsEntries: false,
 
     resetSchool: () => {
-      this.setState({
-        year: null,
-        semester: null,
-        students: L.empty(),
-        studentUserName: L.empty(),
-        studentName: L.empty(),
-        studentSurname: L.empty(),
-        teachers: L.empty(),
-        teacherUserName: L.empty(),
-        teacherName: L.empty(),
-        teacherSurname: L.empty(),
-        grades: L.empty(),
-        searchName: '',
-        searchSurname: '',
-        searchTeacherName: '',
-        searchTeacherSurname: '',
-        searchSubject: '',
-        searchClass: '',
-        studentClickedId: null,
-        parsingTxt: '',
-        presencesTypes: {},
-        showStudentPresences: false,
-        showLessonsEntries: false
-      })
+        this.setState({
+          year: null,
+          semester: null,
+          students: L.empty(),
+          studentUserName: L.empty(),
+          studentName: L.empty(),
+          studentSurname: L.empty(),
+          teachers: L.empty(),
+          teacherUserName: L.empty(),
+          teacherName: L.empty(),
+          teacherSurname: L.empty(),
+          grades: L.empty(),
+          searchUserName: '',
+          searchName: '',
+          searchSurname: '',
+          searchTeacherName: '',
+          searchTeacherSurname: '',
+          searchSubject: '',
+          searchClass: '',
+          studentClickedId: null,
+          subjectClickedId: null,
+          parsingTxt: '',
+          presencesTypes: {},
+          showStudentPresences: false,
+          showLessonsEntries: false,
+          showEverything: false
+        })
     },
 
     updateSchool: school => {
